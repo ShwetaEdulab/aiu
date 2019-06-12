@@ -214,7 +214,9 @@ export class AttestationPageComponent implements OnInit {
   pass_info: any;
   permCountry: any;
   permcountryValidation = true;
-
+  show_payment_button : boolean = false ;
+  payment_data: any;
+  application_id: any;
 
   constructor(protected api : ApiService,
     private route: ActivatedRoute, 
@@ -356,6 +358,17 @@ export class AttestationPageComponent implements OnInit {
         this.transcript_completed = false;
       }
     });
+    this.api.checkPayment().subscribe(
+      data =>{
+        if(data['status'] == 200){
+          this.show_payment_button = false;
+          this.payment_data = data['data'];
+          this.application_id = data['application_id'];
+        }else if(data['status'] == 400){
+          this.show_payment_button = true;
+        }
+      }
+    )
     this.api.getInstituteStatus().subscribe(data =>{
       if(data['status'] == 200){
         this.show_institution_card = true;
@@ -1243,6 +1256,22 @@ export class AttestationPageComponent implements OnInit {
 				
 			}
 		)
+  }
+
+  async downloadReceipt(transaction_id,amount,order_status,application_id,payment_date_time,user_id){
+    var generatereceipt = await this.api.OnlinePaymentChallan(transaction_id,amount,order_status,application_id,payment_date_time,user_id);
+    generatereceipt.subscribe(
+      data => {
+        var value = data['data'].split('/').pop();
+        this.api.downloadFiles(value)
+          .subscribe(data => {
+            saveAs(data, value);
+          });
+      },
+      error => {
+          console.error("Error", error);
+      }
+    ); 
   }
 }
 

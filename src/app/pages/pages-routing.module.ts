@@ -12,6 +12,7 @@ import { RoleGuardService as RoleGuard  } from '../shared/role-guard.service';
 import { AttestationPageComponent } from './attestation-page/attestation-page.component';
 import { CartComponent } from './cart/cart.component';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
+import { PaymentCancelComponent } from './payment-cancel/payment-cancel.component';
 import { MyapplicationsComponent } from './myapplications/myapplications.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ErrataComponent } from './errata/errata.component';
@@ -41,6 +42,10 @@ const routes: Routes = [{
   {
     path: 'PaymentSuccess',
     component: PaymentSuccessComponent,
+  },
+  {
+    path: 'PaymentCancel',
+    component: PaymentCancelComponent,
   },
   {
     path: 'settings',

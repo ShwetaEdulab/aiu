@@ -909,11 +909,20 @@
             </div>
           </div>
 
-          <div class=" form-group row" *ngIf="transcript_completed==true">
+          <div class=" form-group row" *ngIf="transcript_completed==true && show_payment_button == true">
             <div class="col-xl-4">
             </div>
             <div class="col-xl-4" style="text-align: center">
               <button nbButton type='button' size="medium" (click)="proceedForPayment()" hero status="info">Proceed For Payment</button>
+            </div>
+            <div class="col-xl-4">
+            </div>
+          </div>
+          <div class=" form-group row" *ngIf="transcript_completed==true && show_payment_button == false">
+            <div class="col-xl-4">
+            </div>
+            <div class="col-xl-4" style="text-align: center">
+              <button nbButton type='button' size="medium" (click)="downloadReceipt(payment_data?.merchant_param5,payment_data?.amount,payment_data?.order_status,application_id,payment_data?.created_at,payment_data?.user_id)" hero status="info">Download Payment Receipt</button>
             </div>
             <div class="col-xl-4">
             </div>

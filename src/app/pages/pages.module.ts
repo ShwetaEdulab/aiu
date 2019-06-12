@@ -73,6 +73,9 @@ import {
   PaymentSuccessModule
 } from './payment-success/payment-success.module';
 import {
+  PaymentCancelModule
+} from './payment-cancel/payment-cancel.module';
+import {
   MyapplicationsModule
 } from './myapplications/myapplications.module';
 import {
@@ -118,6 +121,7 @@ const PAGES_COMPONENTS = [
     AttestationPageModule,
     CartModule,
     PaymentSuccessModule,
+    PaymentCancelModule,
     MyapplicationsModule,
     NbButtonModule,
     ChartModule,

@@ -40,7 +40,7 @@ template: `
         <div class="col-md-2">
         </div>
         <div class="col-md-9">
-          <button nbButton type='button' size="medium" (click)="proceedForPayment('20000')" hero status="info">Within 7 days(INR 20,000)</button>
+          <button nbButton type='button' size="medium" (click)="proceedForPayment('22058')" hero status="info">Within 7 days(INR 20,000)</button>
         </div>
         <div class="col-md-1">
         </div>
@@ -60,7 +60,7 @@ template: `
         <div class="col-md-2">
         </div>
         <div class="col-md-9">
-          <button nbButton type='button' size="medium" (click)="proceedForPayment('15000')" hero status="info">Within 31 days(INR 15,000)</button>
+          <button nbButton type='button' size="medium" (click)="proceedForPayment('16010')" hero status="info">Within 31 days(INR 15,000)</button>
         </div>
         <div class="col-md-1">
         </div>
