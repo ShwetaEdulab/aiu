@@ -1,0 +1,53 @@
+
+  <nb-card status="success">
+      <nb-card-header style="text-align:center;"><h3>My Applications</h3></nb-card-header>
+      <nb-card-body>
+        <!-- <table>
+          <tbody> -->
+              <div class="row" style="margin-bottom: 10px;">
+                  <div class="col-md-3">
+                    <b><label style="font-size: 130%;">University Name</label></b><br>
+                  </div>
+                  <div class="col-md-2">
+                    <b><label style="font-size: 130%;">Fees</label><br></b>
+                  </div>
+                  <div class="col-md-3">
+                    <b><label style="font-size: 130%;">Email</label></b><br>
+                  </div>
+                  <div class="col-md-2">
+                      <b><label style="font-size: 130%;">Application Date</label></b><br>
+                    </div>
+                  <div class="col-md-2">
+                    <b><label style="font-size: 130%;">Status</label></b><br>
+                  </div>                    
+              </div>
+
+              <div class="row" *ngFor="let singleappdata of my_app_data" style="margin-bottom: 10px;">
+                  <div class=" col-md-3">    
+                    <label>{{singleappdata.university_name}}</label>    
+                  </div>
+    
+                  <div class="col-md-2">
+                    <label>{{singleappdata.fees}}</label><br>
+                  </div>
+    
+                  <div class="col-md-3">    
+                    <label>{{singleappdata.email}}</label>
+                  </div>
+
+                  <div class="col-md-2">    
+                    <label>{{singleappdata.application_date}}</label>
+                  </div>
+
+                  <div class="col-md-2">    
+                    <label>{{singleappdata.status}}</label>
+                  </div>  
+              </div>
+          <!-- </tbody>
+        </table> -->
+      </nb-card-body>
+  
+  </nb-card>
+    <!-- <nb-card-footer>
+      <button nbButton style="float:right; right: 0;" (click)="Procced()">Procced for Payment</button>
+    </nb-card-footer> -->

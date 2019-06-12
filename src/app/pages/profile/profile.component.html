@@ -1,0 +1,168 @@
+<div class="row">
+  <div class="col-md-12">
+    <nb-card status="success">
+      <nb-card-header>
+        <div class="row">
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-5 text-align: center">
+            <h3>
+              Profile
+            </h3>
+          </div>
+          <div class="col-md-3">
+          </div>
+        </div>
+      </nb-card-header>
+      <nb-card-body>
+        <div class="row" style="margin-bottom: 10px;margin-left: 10px">
+          <h5><span style="color:red;margin-left: 10px">Note :- Mandatory fields are marked with an *.</span></h5>
+        </div>
+        <div class="row">
+          <form [formGroup]="profileForm">
+            <div class=" form-group row" style="margin-left:50px;margin-bottom: 30px;">
+              <div class="col-xl-3">
+                <div class="form-group" style="margin-left:20px;">
+                  <label for="lastFirstName">Full Name <span style="color:red;">*</span></label>
+                  <input type="text" class="form-control" formControlName="profile_username" ngModel="{{profile?.name}}"
+                    placeholder="Name of the University/Board" [ngClass]="{'form-control-danger': profileForm.controls.profile_username.invalid && (profileForm.controls.profile_username.dirty ||  profileForm.controls.profile_username.touched)}">
+                    <div *ngIf="form_submitted && profileForm.controls.profile_username.errors" class="error_class">
+                        <div *ngIf="profileForm.controls.profile_username.errors.required">Name required</div>
+                        <div *ngIf="profileForm.controls.profile_username.errors.minlength">Name should be more than 3 characters</div>
+                        <div *ngIf="profileForm.controls.profile_username.errors.maxlength">Name should not be more than 200 characters</div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-xl-3">
+                <div class="form-group" style="margin-left:20px;">
+                  <label for="lastFirstName">Last Name/ Surname <span style="color:red;">*</span></label>
+                  <input type="text" class="form-control" id="lastFirstName" formControlName="profile_surname" ngModel="{{profile?.surname}}"
+                    placeholder="Last Name" [ngClass]="{'form-control-danger': profileForm.controls.profile_surname.invalid && (profileForm.controls.profile_surname.dirty ||  profileForm.controls.profile_surname.touched)}">
+                    <div *ngIf="form_submitted && profileForm.controls.profile_surname.errors" class="error_class">
+                        <div *ngIf="profileForm.controls.profile_surname.errors.required">Surname required</div>
+                        <div *ngIf="profileForm.controls.profile_surname.errors.minlength">Surname should be more than 3 characters</div>
+                        <div *ngIf="profileForm.controls.profile_surname.errors.maxlength">Surname should not be more than 200 characters</div>
+                      </div>
+                </div>
+              </div>
+              <div class="col-xl-3">
+                <div class="form-group" style="margin-left:20px;">
+                  <label for="inputGender">Gender <span style="color:red;">*</span></label>
+                  <nb-select placeholder="Gender" ngModel="{{ profile?.gender}}" formControlName="genderCtrl"
+                    [(selected)]="selectedGender" outline status="success">
+                    <nb-option value="Male">Male</nb-option>
+                    <nb-option value="Female">Female</nb-option>
+                  </nb-select>
+                  <div *ngIf="form_submitted && profileForm.controls.genderCtrl.errors" class="error_class">
+                      <div *ngIf="profileForm.controls.genderCtrl.errors.required">Gender required</div>
+                      <!-- <div *ngIf="profileForm.controls.genderCtrl.errors.minlength">Surname should be more than 3 characters</div>
+                      <div *ngIf="profileForm.controls.genderCtrl.errors.maxlength">Surname should not be more than 200 characters</div> -->
+                    </div>
+                </div>
+
+              </div>
+              <div class="col-xl-3">
+                <div class="form-group" style="margin-left:20px;">
+                  <label for="inputDob">Date of Birth <span style="color:red;">*</span></label>
+                  <input readonly class="form-control" id="inputDob" formControlName="dobCtrl" nbInput placeholder="Date of birth"
+                    [(ngModel)]="firstdob" [nbDatepicker]="picker">
+                  <nb-datepicker #picker [(date)]="date" [max]="max"></nb-datepicker>
+                  <div *ngIf="form_submitted && profileForm.controls.dobCtrl.errors" class="error_class">
+                      <div *ngIf="profileForm.controls.dobCtrl.errors.required">Date of Birth required</div>
+                      <!-- <div *ngIf="profileForm.controls.genderCtrl.errors.minlength">Surname should be more than 3 characters</div>
+                      <div *ngIf="profileForm.controls.genderCtrl.errors.maxlength">Surname should not be more than 200 characters</div> -->
+                    </div>
+                </div>
+              </div>
+            </div>
+
+            <div class=" form-group row" style="margin-left:50px;margin-bottom: 30px;">
+              <div class="col-xl-3">
+                <div class="form-group" style="margin-left:20px;">
+                  <label for="inputEmail">Email <span style="color:red;">*</span></label>
+                  <input type="text" disabled class="form-control" ngModel="{{profile?.email}}" id="inputEmail"
+                    formControlName="emailCtrl" placeholder="Email">
+                  
+                </div>
+              </div>
+              <div class="col-xl-3">
+                <label for="inputCountry text-center" style="margin-left: 30px">Country <span style="color:red;">*</span></label>
+                <div class="form-group" style="margin-left: 30px">
+                  <mat-form-field style="width:135px;">
+                    <mat-select [(ngModel)]="Country_id_personal" formControlName="countryidCtrl" (ngModelChange)="onValueChange_PhoneCode($event)"
+                      name="selectedCountry">
+                      <mat-option *ngFor="let country of Countries" [value]="country.id">
+                        {{country.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+              <div class="col-xl-3">
+                <div class="form-group" style="margin-left:20px;">
+                  <label for="inputCountryCode">Country Code <span style="color:red;">*</span></label>
+                  <br>
+                  <div class="input-group">
+                    <div class="dropdown input-group-prepend input-group-btn" ngbDropdown>
+                      <input disabled class="form-control" ngModel="{{mobile_country_code}}" formControlName="phonecodeCtrl"
+                        id="inputPhonecode" nbInput placeholder="Phonecode" [ngClass]="{'form-control-danger': profileForm.controls.phonecodeCtrl.invalid && (profileForm.controls.phonecodeCtrl.dirty ||  profileForm.controls.phonecodeCtrl.touched)}">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3">
+                <div class="form-group" style="margin-left:20px;">
+                  <label for="inputMobile">Mobile number <span style="color:red;">*</span></label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" ngModel="{{profile?.mobile}}" formControlName="phoneCtrl"
+                      nbInput placeholder="Mobile number" [ngClass]="{'form-control-danger': profileForm.controls.phoneCtrl.invalid && (profileForm.controls.phoneCtrl.dirty ||  profileForm.controls.phoneCtrl.touched)}">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class=" form-group row" style="margin-left:50px;margin-bottom: 30px;">
+                <div class="col-xl-3">
+                    <div class="form-group"style="margin-left:20px;">
+                      <label for="inputPermAdd">Permanent Address(Optional)</label>
+                      <textarea ngModel="{{profile?.address}}" class="form-control" id="inputPermAdd" formControlName="permAddCtrl"
+                        [ngClass]="{'form-control-danger': profileForm.controls.permAddCtrl.invalid && (profileForm.controls.permAddCtrl.dirty )}"
+                        placeholder="Permanent Address"></textarea>
+                    </div>
+                  </div>
+
+              <div class="col-xl-3">
+                <div class="form-group"style="margin-left:20px;">
+                  <label for="inputPremPost">Postal Code <span style="color:red;">*</span></label>
+                  <input ngModel="{{profile?.postal_code}}" type="text" class="form-control" id="inputPremPost"
+                    formControlName="permPostCodeCtrl" placeholder="Postal Code" [ngClass]="{'form-control-danger': profileForm.controls.permPostCodeCtrl.invalid && (profileForm.controls.permPostCodeCtrl.dirty ||  profileForm.controls.permPostCodeCtrl.touched)}">
+                </div>
+              </div>
+              <div class="col-xl-3" >
+                <div class="form-group" style="margin-left: 20px">
+                  <label for="inputCity">City</label>
+                  <input ngModel="{{profile?.city}}" type="text" class="form-control" id="inputAlterCity"
+                    formControlName="CityCtrl" placeholder="City">
+                </div>
+              </div>
+              <div class="col-xl-2" >
+                <div class="form-group"style="margin-left: 20px">
+                  <label for="application">Application<span style="color:red;">*</span></label>
+                  <input disabled ngModel="{{profile?.user_option}}" type="text" class="form-control" id="user_option"
+                    formControlName="user_OptionCtrl" placeholder="application">
+                </div>
+              </div>  
+            </div>
+
+            <div class="text-center">
+              <!-- <button nbButton type='button' size="medium" (click)="onSubmit()" hero status="info">Submit</button> -->
+              <button nbButton size="medium" hero status="info" type="button" (click)="update()" [disabled]="!profileForm.dirty">UPDATE</button>
+            </div>
+          </form>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

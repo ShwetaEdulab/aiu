@@ -1,0 +1,16 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+:host {
+  .title {
+    margin-bottom: 2rem;
+  }
+}
+.inset {border-style: inset;}
+.label {
+  display: block;
+  padding-left: 15px;
+  text-indent: -15px;
+}

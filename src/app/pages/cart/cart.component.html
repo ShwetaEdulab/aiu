@@ -1,0 +1,63 @@
+<nb-card status="success">
+  <nb-card-header style="text-align:center;"><h3>Application in your cart</h3></nb-card-header>
+  <nb-card-body>
+    <div *ngIf="coursecartdata?.length == 0" style="text-align: center">
+      <h3>No Record Found !!!!!!</h3>
+    </div>
+    <div *ngIf="coursecartdata?.length > 0">
+      <div class="row" style="margin-bottom: 10px">
+          <div class="col-md-3">
+            <b><label style="font-size: 130%;">University Name</label></b><br>
+          </div>
+          <div class="col-md-2">
+            <b><label style="font-size: 130%;">Fees</label><br></b>
+          </div>
+          <div class="col-md-3">
+            <b><label style="font-size: 130%;">Email</label></b><br>
+          </div>
+          <div class="col-md-2">
+    
+            <b><label style="font-size: 130%;">Edit</label></b>
+          </div><br><br>
+          <div class="col-md-2">
+            <b><label style="font-size: 130%;">Remove</label></b><br>
+          </div>
+      </div>
+      <div class="row" *ngFor="let singlecoursecartdata of coursecartdata" style="margin-bottom: 10px">
+        <div class="col-md-3">
+          <label>{{singlecoursecartdata.university_name}}</label>
+        </div>
+        <div class="col-md-2">
+          <label>INR {{singlecoursecartdata.fees}}</label><br>
+        </div>
+        <div class="col-md-3">
+          <label>{{singlecoursecartdata.email}}</label>
+        </div>
+        <div class="col-md-2">
+          <button nbButton (click)="openDialog(singlecoursecartdata.email)">Edit</button>
+        </div>
+        <br><br>
+        <div class="col-md-2">
+          <button nbButton (click)="remove(singlecoursecartdata.id,singlecoursecartdata.institute_id)">Remove</button>
+        </div>
+        <br> 
+        <br>
+      </div>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <div *ngIf="coursecartdata?.length > 0">
+      <div class="row">
+        <div class="col-md-5">
+
+        </div>
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-3">
+          <button nbButton (click)="Procced()">Procced for Payment</button>
+        </div>
+      </div>
+    </div>
+  </nb-card-footer>
+</nb-card>

@@ -1,0 +1,221 @@
+<h1 id="title" class="title">Register</h1>
+<nb-card status="success">
+  <nb-card-body>
+    <form [formGroup]="RegisterForm">
+
+      <nb-alert status="danger" closable (close)="onClose()" *ngIf="messgealertflag == 1">
+        Email Already Exists !!!!
+      </nb-alert>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="form-group">
+            <label for="inputFirstName">First Name <span style="color:red;">*</span>
+              <!-- <i class="fa fa-info-circle" nbPopover="Enter name exactly as it appears on official documents(fullname as on marksheet). Do not use nicknames."  nbPopoverMode="hover"></i> -->
+            </label>
+            <span> ( Enter name exactly as it appears on official documents. Do not use nicknames.)</span>
+            <input type="text" class="form-control" name="fname" id="inputFirstName" formControlName="firstNameCtrl"
+              [ngClass]="{'form-control-danger': RegisterForm.controls.firstNameCtrl.invalid && (RegisterForm.controls.firstNameCtrl.dirty || RegisterForm.controls.firstNameCtrl.touched)}"
+              placeholder="First Name">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="form-group">
+            <label for="lastFirstName">Last Name/ Surname <span style="color:red;">*</span></label>
+            <input type="text" class="form-control" id="lastFirstName" formControlName="LastNameCtrl" [ngClass]="{'form-control-danger': RegisterForm.controls.LastNameCtrl.invalid && (RegisterForm.controls.LastNameCtrl.dirty || RegisterForm.controls.LastNameCtrl.touched)}"
+              placeholder="Last Name">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="form-group">
+            <label for="inputEmail">Email <span style="color:red;">*</span></label>
+            <input type="text" class="form-control" id="inputEmail" formControlName="emailCtrl" [ngClass]="{'form-control-danger': RegisterForm.controls.emailCtrl.invalid && (RegisterForm.controls.emailCtrl.dirty || RegisterForm.controls.emailCtrl.touched)}"
+              placeholder="Email">
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="form-group">
+            <label for="inputPassWord">Password <span style="color:red;">*</span> </label>
+            <span> (Use 6 or more characters,numbers or symbols .)</span>
+            <input type="password" class="form-control" id="inputPassWord" formControlName="passwordCtrl" [ngClass]="{'form-control-danger': RegisterForm.controls.passwordCtrl.invalid && (RegisterForm.controls.passwordCtrl.dirty || RegisterForm.controls.passwordCtrl.touched)}"
+              placeholder="Password">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="form-group">
+            <label for="inputRePassWord">Confirm Password <span style="color:red;">*</span></label>
+            <input type="password" class="form-control" id="inputRePassWord" (change)="checkpassword(3000,'danger')"
+              formControlName="repasswordCtrl" [ngClass]="{'form-control-danger': RegisterForm.controls.repasswordCtrl.invalid && (RegisterForm.controls.repasswordCtrl.dirty || RegisterForm.controls.repasswordCtrl.touched)}"
+              placeholder="Re- Type Password">
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="row">
+       <div class="col-md-6">
+          <div class="form-group">
+            <label for="inputEmail">City <span style="color:red;">*</span></label>
+            <input type="text" class="form-control" id="inputCity" formControlName="cityCtrl" placeholder="City"
+              [ngClass]="{'form-control-danger': RegisterForm.controls.cityCtrl.invalid && (RegisterForm.controls.cityCtrl.dirty || RegisterForm.controls.cityCtrl.touched)}">
+          </div>
+        </div>
+     
+     
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="inputEmail">Postal Code <span style="color:red;">*</span></label>
+            <input type="text" class="form-control" id="inputPostalCode" formControlName="PostCodeCtrl" placeholder="Postal Code"
+              [ngClass]="{'form-control-danger': RegisterForm.controls.PostCodeCtrl.invalid && (RegisterForm.controls.PostCodeCtrl.dirty || RegisterForm.controls.PostCodeCtrl.touched)}">
+          </div>
+        </div>
+      </div> -->
+      <!-- <div class="row">
+          <div class="col-md-6">
+             <label for="inputPermCountry">Country<span style="color:red;">*</span></label>
+             <mat-form-field>
+                 <mat-select [(ngModel)]="selectedCountry" name="selectedCountry" formControlName="countryCtrl">
+                     <mat-option *ngFor="let country of Countries" [value]="country.id" [ngClass]="{'form-control-danger': RegisterForm.controls.countryCtrl.invalid && (RegisterForm.controls.countryCtrl.dirty || RegisterForm.controls.countryCtrl.touched)}">
+                       {{country.name}}
+                     </mat-option>
+                 </mat-select>
+             </mat-form-field>
+           </div>
+           <div class="col-md-6">
+             <label for="inputGender">Gender <span style="color:red;">*</span></label>
+             <mat-form-field>
+               <mat-select [(ngModel)]="selectedGender" name="gender" formControlName="genderCtrl">
+                 <mat-option value="Male">Male</mat-option>
+                 <mat-option value="Female">Female</mat-option>
+               </mat-select>
+             </mat-form-field>
+           </div>
+      </div> -->
+      <div class="row">
+        <div class="col-md-4">
+          <label for="inputPermCountry">Country(for mobile) <span style="color:red;">*</span></label>
+          <mat-form-field>
+            <mat-select [(ngModel)]="permCountry" name="selectedCountry" formControlName="moCountryCtrl" (ngModelChange)="onValueChange($event)">
+              <mat-option *ngFor="let country of Countries" [value]="country.id">
+                {{country.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <label for="inputCountry">Country Code <span style="color:red;">*</span></label>
+          <div class="input-group">
+            <div class="dropdown input-group-prepend input-group-btn" ngbDropdown>
+              <input readonly class="form-control" ngModel="{{profile_info}}" id="inputPhonecode" formControlName="mophonecodeCtrl"
+                [ngClass]="{'form-control-danger': RegisterForm.controls.mophonecodeCtrl.invalid && (RegisterForm.controls.mophonecodeCtrl.dirty ||  RegisterForm.controls.mophonecodeCtrl.touched)}"
+                nbInput placeholder="Phonecode">
+            </div>
+          </div>
+         </div>
+         <div class="col-md-4">
+          <label for="inputMobile"> Mobile number <span style="color:red;">*</span></label>
+          <div class="input-group">
+            <input type="text" class="form-control" formControlName="phoneCtrl" nbInput placeholder="Mobile number"
+              [ngClass]="{'form-control-danger': RegisterForm.controls.phoneCtrl.invalid && (RegisterForm.controls.phoneCtrl.dirty ||  RegisterForm.controls.phoneCtrl.touched)}">
+          </div>
+        </div>
+      </div>
+      <!-- <div class="row">
+        
+        <div class="col-md-6">
+            <label for="inputEmail">Date Of Birth <span style="color:red;">*</span></label>
+            <input readonly nbInput class="form-control" id="inputDOB" placeholder="Date Of Birth" formControlName="dobCtrl"
+              [nbDatepicker]="formpicker" [ngClass]="{'form-control-danger': RegisterForm.controls.dobCtrl.invalid && (RegisterForm.controls.dobCtrl.dirty || RegisterForm.controls.dobCtrl.touched)}">
+            <nb-datepicker #formpicker  [(date)]="date" [max]="max"></nb-datepicker>
+        </div>
+      </div>
+      <br><br> -->
+      <!-- <div class="row">
+        <div>
+         <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-12">
+                <label for="inputOption"> Please select the document which needs to be attested :<span style="color:red;">*</span> {{
+                  RegisterForm.controls.my_radio_option.value}}</label>
+                <div class="input-group">
+                  <div class="col-lg-6">
+                    <nb-radio-group formControlName="my_radio_option">
+                      <nb-radio value="Degree">Degree</nb-radio>
+                      <nb-radio value="Masters">Masters</nb-radio>
+                      <nb-radio value="Ph.D">Ph.D</nb-radio>
+                    </nb-radio-group>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+         
+        
+
+      <br><br>
+      <div class="row">
+        <div class="offset-lg-1"></div>
+        <div class="col-lg-4 inset" [innerHTML]="svg"></div>
+        <div class="col-md-1" style="margin-top: 18px;" (click)="reloadcaptcha();"><i style="font-size: 25px;" class="icon ion-loop"></i></div>
+        <div class="col-lg-5">
+          <input type="text" class="form-control" (change)="checkcaptcha(3000,'danger')" shape="round" formControlName="captchaCtrl"
+            nbInput placeholder="Enter Captcha Here" [ngClass]="{'form-control-danger': RegisterForm.controls.captchaCtrl.invalid && (RegisterForm.controls.captchaCtrl.dirty ||  RegisterForm.controls.captchaCtrl.touched)}">
+        </div>
+
+      </div><br>
+      <div class="row">
+        <div class="col-lg-12">
+          <nb-alert status="danger" closable (close)="close()" *ngIf="alertflag == 1">
+            {{validation_messages}}
+          </nb-alert>
+        </div>
+      </div>
+      <br><br>
+      <div class="row">
+        <div class="offset-lg-4"></div>
+
+        <button nbButton shape="round" size="small" outline status="danger" (click)="onSubmit(3000,'danger')" class="col-lg-4">
+          Proceed
+        </button>
+      </div>
+
+
+
+    </form>
+
+    <p-confirmDialog [style]="{width: '425px'}"></p-confirmDialog>
+
+    <section class="another-action" aria-label="Sign in">
+      Already have an account? <a style="color:DodgerBlue;" class="text-link" routerLink="../login">Log in</a>
+    </section>
+  </nb-card-body>
+</nb-card>
+
+<p-dialog [(visible)]="display" [modal]="true" [responsive]="true" [style]="{width: '350px', minWidth: '200px'}" [minY]="70"
+  [baseZIndex]="10000">
+  <span>You can now login on this portal using email id : - {{ emailValue }}</span>
+  <p-footer>
+    <button type="button" pButton icon="pi pi-check" routerLink="../login" label="LOGIN"></button>
+  </p-footer>
+</p-dialog>
+
+<p-dialog [(visible)]="displayNo" [modal]="true" [responsive]="true" [style]="{width: '350px', minWidth: '200px'}"
+  [minY]="70" [baseZIndex]="10000">
+  <span>You can not use {{ emailValue }} for registration.You have to use different email id.You can directly login on
+    this portal using email id : - {{ emailValue }}</span>
+  <p-footer>
+    <button type="button" pButton icon="pi pi-check" routerLink="../login" label="LOGIN"></button>
+  </p-footer>
+</p-dialog>

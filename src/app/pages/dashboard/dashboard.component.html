@@ -1,0 +1,84 @@
+<div class="row" >
+  <nb-card class="col-lg-6 col-md-5" [size]="'small'">
+   <nb-card-body>
+     <div>
+       <nb-card-header>Apply for new Attestation</nb-card-header><br /><br />
+       
+        <button nbButton  status="success" (click)="dashboardRoutes('attestation_page')">Go</button>
+     </div>
+   </nb-card-body>
+  </nb-card> 
+  
+  <nb-card class="col-lg-6 col-md-5" [size]="'small'">
+      <nb-card-body>
+        <div>
+          <nb-card-header>Payment details and History</nb-card-header><br /><br />
+          <button nbButton  status="success" (click)="dashboardRoutes('payment_details')">View</button>
+        </div>
+      </nb-card-body>
+     </nb-card> 
+  </div> 
+ 
+  <div>
+  <div>
+    <nb-card-header *ngIf = "!dropdownFlag">Progress of Application</nb-card-header>
+    <nb-card-header *ngIf = "dropdownFlag">For which Application do you want to see progress</nb-card-header><br /><br /><br />
+    <div lass="col-md-12" *ngIf="length > 1">  <!-- *ngIf="length > 1 && status"> (ngModelChange)="setStepper($event)"  -->
+      <mat-form-field class="col-xl-6"> 
+        <mat-select placeholder="Select Application Date" [(ngModel)]="spec" name="spec" *ngIf = "dropdownFlag == true" >
+          <mat-option *ngFor="let spec of applicationData" [value]="spec.id" (click)="setAPP_id(spec.id);ngOnInit()">
+            {{spec.created_at | date:'dd-MM-yyyy'}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <!-- //////////////////////////onClose function -->
+  <div  *ngIf="!processing">
+  <mat-horizontal-stepper  *ngIf="stepperFlag; else notStepperFlag" [linear]="isLinear" (click)="selectStep();" #progressStepper >
+    <!-- [selectedIndex]="currentStep"  [selectedIndex]="selectStep" linear="statusflag5"  color="purple" color="accent" move('selectStep') -->
+    <div *ngIf="allDataFetched">
+    <mat-step   [completed]="preapplyFlag" editable="false" (click)="move(selectStep);">
+      <ng-template matStepLabel  matStepperIcon="done">preapply</ng-template>
+    </mat-step>
+    <mat-step  [completed]="applyFlag" [completed]="preapplyFlag"  editable="false" (click)="move(selectStep);">
+      <ng-template matStepLabel matStepperIcon="done">apply</ng-template>
+    </mat-step>
+    <mat-step   [completed]="verificationFlag" [completed]="applyFlag" [completed]="preapplyFlag"  editable="false" (click)="move(selectStep);">
+      <ng-template matStepLabel matStepperIcon="done">verification</ng-template>
+    </mat-step>
+    <mat-step   [completed]="verifiedFlag" [completed]="verificationFlag"  [completed]="applyFlag" [completed]="preapplyFlag"   editable="false" (click)="move(selectStep);">
+      <ng-template matStepLabel matStepperIcon="done">verified</ng-template>
+    </mat-step>
+    <mat-step  [completed]="doneFlag"[completed]="verifiedFlag" [completed]="verificationFlag"  [completed]="applyFlag" [completed]="preapplyFlag"  editable="false" (click)="move(selectStep);">
+      <ng-template matStepLabel matStepperIcon="done">done</ng-template>
+    </mat-step>
+    </div>
+  </mat-horizontal-stepper>
+</div>
+
+    <mat-horizontal-stepper *ngIf="length==1" [linear]="isLinear" (click)="selectStep2();" #progress2Stepper >
+      <!-- [selectedIndex]="currentStep"  [selectedIndex]="selectStep" linear="statusflag5"  color="purple" color="accent" move('selectStep') -->
+      <mat-step   [completed]="preapplyFlag" editable="false">
+        <ng-template matStepLabel  matStepperIcon="done">preapply</ng-template>
+      </mat-step>
+      <mat-step  [completed]="applyFlag" [completed]="preapplyFlag"  editable="false">
+        <ng-template matStepLabel matStepperIcon="done">apply</ng-template>
+      </mat-step>
+      <mat-step   [completed]="verificationFlag" [completed]="applyFlag" [completed]="preapplyFlag"  editable="false">
+        <ng-template matStepLabel matStepperIcon="done">verification</ng-template>
+      </mat-step>
+      <mat-step   [completed]="verifiedFlag" [completed]="verificationFlag"  [completed]="applyFlag" [completed]="preapplyFlag"   editable="false">
+        <ng-template matStepLabel matStepperIcon="done">verified</ng-template>
+      </mat-step>
+      <mat-step  [completed]="doneFlag"[completed]="verifiedFlag" [completed]="verificationFlag"  [completed]="applyFlag" [completed]="preapplyFlag"  editable="false">
+        <ng-template matStepLabel matStepperIcon="done">done</ng-template>
+      </mat-step> 
+    </mat-horizontal-stepper>
+
+  <div lass="col-md-12">
+      <nb-alert status="danger" closable (close)="onClose()" *ngIf="alertFlag == 1">
+        {{message}}
+      </nb-alert>
+  </div>
+  </div>

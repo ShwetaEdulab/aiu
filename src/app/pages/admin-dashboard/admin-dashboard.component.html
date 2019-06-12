@@ -1,0 +1,47 @@
+<nb-card>
+  <nb-card-body>
+
+    <nb-tabset (changeTab)="onChangeTab($event)" fullWidth>
+      <nb-tab tabTitle="Total Applications" active="{{total}}">
+        <!-- <p>List of <strong>Total Applications</strong>.</p> -->
+        <ngx-total></ngx-total>
+      </nb-tab>
+      <!-- pending Application's code -->
+
+
+      <nb-tab tabTitle="Pending Applications" active="{{pending}}">
+        <!-- <p>List of <strong>Unsigned Applications</strong>.</p> -->
+        <ngx-pending></ngx-pending>
+      </nb-tab>
+
+      <!-- verified Application's code -->
+
+      <nb-tab tabTitle="Verified Applications" active="{{verified}}">
+        <!-- <p>List of <strong>Signed Applications</strong>.</p> -->
+
+        <ngx-verified></ngx-verified>
+
+      </nb-tab>
+
+      <!-- Signed Application's code -->
+
+      <nb-tab tabTitle="Signed Applications" active="{{signed}}">
+        <!-- <p>List of <strong>Signed Applications</strong>.</p> -->
+
+        <ngx-signed></ngx-signed>
+
+      </nb-tab>
+
+      <!-- Signed_namrata Application's code -->
+
+      <nb-tab tabTitle="Email Tracker" active="{{signed_namrata}}">
+        <!-- <p>List of <strong>Signed Applications</strong>.</p> -->
+
+        <ngx-signed-namrata></ngx-signed-namrata>
+
+      </nb-tab>
+
+
+    </nb-tabset>
+  </nb-card-body>
+</nb-card>

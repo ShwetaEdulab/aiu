@@ -1,0 +1,36 @@
+<nb-card>
+    <nb-card-header>Payment Details</nb-card-header>
+    <nb-card-body>
+        <div class="row">
+            <table class="" border="1" bordercolor="#c4c4c4" style="width:100%" *ngFor='let data of paymentData'>
+                <thead>
+                    <tr>
+                        <th style="width: 30%;padding: 8px;">Date of Payment :</th>
+                        <td style="width: 60%;padding: 8px;"><span id="date_of_payment">{{data?.payment_date}}</span></td>
+                    </tr>
+                    <tr>
+                        <th style="width: 30%;padding: 8px;">Transaction Id :</th>
+                        <td style="width: 60%;padding: 8px;"><span id="t_transaction_id">{{data?.transaction_id}}</span></td>
+                    </tr>
+                    <tr>
+                        <th style="width: 30%;padding: 8px;">Application Id :</th>
+                        <td style="width: 60%;padding: 8px;"><span id="app_id">{{data?.application_id}}</span></td>
+                    </tr>
+                    <tr>
+                        <th style="width: 30%;padding: 8px;">Order Id :</th>
+                        <td style="width: 60%;padding: 8px;"><span id="order_id">{{data?.order_id}}</span></td>
+                    </tr>
+                    <tr>
+                        <th style="width: 30%;padding: 8px;">Currency :</th>
+                        <td style="width: 60%;padding: 8px;"><span id="t_currency">{{data?.currency}}</span></td>
+                    </tr>
+                    <tr>
+                        <th style="width: 30%;padding: 8px;">Total Amount :</th>
+                        <td style="width: 60%;padding: 8px;"><span id="amount">{{data?.amount}}</span></td>
+                    </tr>
+                </thead>
+                <br>
+            </table>
+        </div>
+    </nb-card-body>
+</nb-card>

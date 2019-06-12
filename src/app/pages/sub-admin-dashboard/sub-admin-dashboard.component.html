@@ -1,0 +1,30 @@
+<nb-card>
+  <nb-card-body>
+
+    <nb-tabset (changeTab)="onChangeTab($event)" fullWidth>
+      <nb-tab  tabTitle="Total Applications">
+        <!-- <p>List of <strong>Total Applications</strong>.</p> -->
+        <ngx-total></ngx-total>
+      </nb-tab>
+        <!-- pending Application's code -->
+
+
+        <nb-tab tabTitle="Pending Applications">
+          <!-- <p>List of <strong>Unsigned Applications</strong>.</p> -->
+          <ngx-pending></ngx-pending>
+        </nb-tab>
+      <!-- Signed Application's code -->
+
+      <nb-tab tabTitle="Verified Applications">
+        <!-- <p>List of <strong>Signed Applications</strong>.</p> -->
+        
+          <ngx-verified></ngx-verified>
+
+      </nb-tab> -->
+
+  
+
+     
+    </nb-tabset>
+  </nb-card-body>
+</nb-card>
