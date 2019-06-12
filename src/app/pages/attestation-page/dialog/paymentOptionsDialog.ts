@@ -40,7 +40,7 @@ template: `
         <div class="col-md-2">
         </div>
         <div class="col-md-9">
-          <button nbButton type='button' size="medium" (click)="proceedForPayment('22058')" hero status="info">Within 7 days(INR 22,058)</button>
+          <button nbButton type='button' size="medium" (click)="proceedForPayment('22085')" hero status="info">Within 7 days(INR 22,085)</button>
         </div>
         <div class="col-md-1">
         </div>
