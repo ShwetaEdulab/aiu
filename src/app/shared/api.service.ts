@@ -618,7 +618,26 @@ private messages = [];
     }
   }
 
-    private handleError(error){
-      console.error(error);
-      }
+  
+  //Admin request 
+
+  downloadApplicationLetter(email, user_id){
+    try{
+      return this.httpClient.post(`${this.baseUrl}/api/admin/adminDashboard/checkLetterGenerate`,{"email":email,"user_id":user_id});
+    }catch(error) {
+      this.handleError("login from api : "+error);
+    }
+  }
+
+  generatepreviewLetter(user_id){
+    try{
+      return this.httpClient.post(`${this.baseUrl}/api/admin/adminDashboard/preview`,{"user_id":user_id});
+    }catch(error) {
+      this.handleError("previewLetter : "+error);
+    }
+  }
+
+  private handleError(error){
+    console.error(error);
+  }
 }

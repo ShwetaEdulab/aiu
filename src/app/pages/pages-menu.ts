@@ -45,16 +45,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
           resource: 'adminDashboard'
         },
       },   
-      {
-        title: 'Signed Applications',
-        icon: 'ion-filing',
-        link: '/pages/admin-dashboard',
-        queryParams: {tab: 'signed'},
-        data: {
-          permission: 'view',
-          resource: 'adminDashboard'
-        },
-      },
+      // {
+      //   title: 'Signed Applications',
+      //   icon: 'ion-filing',
+      //   link: '/pages/admin-dashboard',
+      //   queryParams: {tab: 'signed'},
+      //   data: {
+      //     permission: 'view',
+      //     resource: 'adminDashboard'
+      //   },
+      // },
     ],
     data: {
       permission: 'view',

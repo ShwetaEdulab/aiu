@@ -1,4 +1,13 @@
-<div class="row" >
+
+<nb-card status="success">
+    <nb-card-header><h4>Get AIU certification online</h4></nb-card-header>
+    <nb-card-body>
+        <h2>Welcome to Get AIU certification online!!!</h2> <br/>
+        This is the Get AIU certification Dashboard, the place to monitor your applications, including deadlines, requirements and progress. The menu across the top will take you to different parts of the system to complete each section of your application.
+        <br/><br/>
+    </nb-card-body>
+</nb-card>
+<!-- <div class="row" >
   <nb-card class="col-lg-6 col-md-5" [size]="'small'">
    <nb-card-body>
      <div>
@@ -23,7 +32,7 @@
   <div>
     <nb-card-header *ngIf = "!dropdownFlag">Progress of Application</nb-card-header>
     <nb-card-header *ngIf = "dropdownFlag">For which Application do you want to see progress</nb-card-header><br /><br /><br />
-    <div lass="col-md-12" *ngIf="length > 1">  <!-- *ngIf="length > 1 && status"> (ngModelChange)="setStepper($event)"  -->
+    <div lass="col-md-12" *ngIf="length > 1">
       <mat-form-field class="col-xl-6"> 
         <mat-select placeholder="Select Application Date" [(ngModel)]="spec" name="spec" *ngIf = "dropdownFlag == true" >
           <mat-option *ngFor="let spec of applicationData" [value]="spec.id" (click)="setAPP_id(spec.id);ngOnInit()">
@@ -33,10 +42,8 @@
       </mat-form-field>
     </div>
   </div>
-  <!-- //////////////////////////onClose function -->
   <div  *ngIf="!processing">
   <mat-horizontal-stepper  *ngIf="stepperFlag; else notStepperFlag" [linear]="isLinear" (click)="selectStep();" #progressStepper >
-    <!-- [selectedIndex]="currentStep"  [selectedIndex]="selectStep" linear="statusflag5"  color="purple" color="accent" move('selectStep') -->
     <div *ngIf="allDataFetched">
     <mat-step   [completed]="preapplyFlag" editable="false" (click)="move(selectStep);">
       <ng-template matStepLabel  matStepperIcon="done">preapply</ng-template>
@@ -58,7 +65,6 @@
 </div>
 
     <mat-horizontal-stepper *ngIf="length==1" [linear]="isLinear" (click)="selectStep2();" #progress2Stepper >
-      <!-- [selectedIndex]="currentStep"  [selectedIndex]="selectStep" linear="statusflag5"  color="purple" color="accent" move('selectStep') -->
       <mat-step   [completed]="preapplyFlag" editable="false">
         <ng-template matStepLabel  matStepperIcon="done">preapply</ng-template>
       </mat-step>
@@ -81,4 +87,4 @@
         {{message}}
       </nb-alert>
   </div>
-  </div>
+  </div> -->

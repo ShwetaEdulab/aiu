@@ -547,6 +547,8 @@
             </div>
             <div class="col-xl-2" style="text-align: center">
               <div *ngIf="degree_lock == true || degree_document == false" [nbSpinner]="loadingdegreebutton" nbSpinnerStatus="primary">
+                <i class="fa fa-info-circle" style="text-align:center;font-size: large;" nbPopover="Club Marksheets of all the years in a single pdf document."
+                  nbPopoverMode="hover"></i> 
                 <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'"
                   mode="basic" 
                   name="file"
@@ -637,6 +639,8 @@
             </div>
             <div class="col-xl-2" style="text-align: center">
               <div *ngIf="master_lock == true || master_document == false " [nbSpinner]="loadingmasterbutton" nbSpinnerStatus="primary">
+                <i class="fa fa-info-circle" style="text-align:center;font-size: large;" nbPopover="Club Marksheets of all the years in a single pdf document."
+                  nbPopoverMode="hover"></i> 
                 <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'"
                   mode="basic" 
                   name="file" 

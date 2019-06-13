@@ -12,6 +12,7 @@ import {
 import {
   ActivatedRoute
 } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -29,8 +30,12 @@ export class AdminDashboardComponent implements OnInit {
   verified: boolean = false;
   signed: boolean = false;
   signed_namrata: boolean = false;
-  constructor(private userService: UserService,
-    private snackBar: MatSnackBar, private route: ActivatedRoute) {}
+  constructor(
+    private userService: UserService,
+    private snackBar: MatSnackBar,
+    private route: ActivatedRoute,
+    protected router : Router,
+  ) {}
 
   ngOnInit() {
     this.route.queryParams
@@ -80,6 +85,11 @@ export class AdminDashboardComponent implements OnInit {
 
   onChangeTab(event) {
     console.log("event " + JSON.stringify(event.tabTitle));
+    if(event.tabTitle == "Total Applications"){
+      //this.router.navigate(['pages/admin-dashboard/total']);
+    }else if(event.tabTitle == "Pending Applications"){
+
+    }
   }
 }
 

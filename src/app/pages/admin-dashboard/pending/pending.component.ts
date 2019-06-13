@@ -11,6 +11,9 @@ import { NbDialogService } from '@nebular/theme';
 import {
 	ShowTranscriptComponent
 } from '../total/dialog/show-transcript.component';
+import {
+	UploadCertificateComponent
+} from '../total/dialog/upload_certificate';
 import { config } from '../../../../../config';
 import * as io from 'socket.io-client';
 
@@ -21,7 +24,7 @@ import * as io from 'socket.io-client';
 })
 export class pendingComponent implements AfterViewInit {
 
-  displayedColumns: string[] = ['id', 'name','email','view','verify'];
+  displayedColumns: string[] = ['id', 'name','email','view','Download','Upload']; //,'verify'
   data: application[] = [];
   dataSource: MatTableDataSource<application>;
   selection = new SelectionModel<application>(true, []);
@@ -33,6 +36,7 @@ export class pendingComponent implements AfterViewInit {
   user: any;
   socket: SocketIOClient.Socket;
   isDisabled : boolean = false;
+  loading = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -198,6 +202,53 @@ export class pendingComponent implements AfterViewInit {
     this.changeDetectorRefs.detectChanges();
   }
 
+  
+  downloadApplicationLetter(email,user_id) {
+    this.loading = true;
+    this.api.downloadApplicationLetter(email, user_id)
+      .subscribe(result =>{ 
+          console.log(JSON.stringify(result));
+          if(result['status'] == 200){
+            var filename = 'Preview_data.pdf'
+            this.api.downloadFilesAdmin(filename,user_id)
+            .subscribe(data => {
+              this.loading = false;
+              saveAs(data, filename);
+            });
+          }else if(result['status'] == 400){
+            this.api.generatepreviewLetter(user_id)
+            .subscribe(data =>{
+              if(data['status'] == 200){
+                var filename = 'Preview_data.pdf'
+                this.api.downloadFilesAdmin(data['data'],user_id)
+                .subscribe(data => {
+                  this.loading = false;
+                  saveAs(data, filename);
+                });
+              }else if(data['status'] == 400){
+                this.loading = false;
+                alert(data['message']);
+              }
+            })
+          }
+    });
+   }
+
+  uploadCertificate(email,user_id,application_id){
+    this.dialogService.open(UploadCertificateComponent, {
+			context: {
+        user_id : user_id,
+        email : email,
+        application_id : application_id
+			},
+		}).onClose
+		.subscribe(
+			(data: any) => {
+        this.ngAfterViewInit();
+				
+			}
+		)
+  }
 }
 
 

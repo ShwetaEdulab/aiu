@@ -405,7 +405,7 @@ export class AttestationPageComponent implements OnInit {
             this.phd_upload = true;
           }else if(data['data']['profile']['applying_for'] == "Ph.D"){
             this.master_upload = false;
-            this.phd_upload = false;
+            this.phd_upload = true;
           }
 
           this.profile = data['data']['profile'];
@@ -502,7 +502,12 @@ export class AttestationPageComponent implements OnInit {
     this.api.getApplyingEducation().subscribe(data => {
       this.applying_for = data['data']['applying_for'];
       if(this.applying_for == "Ph.D"){
-         
+        this.educationalForm.get('phd_UnivName').disable();
+        this.educationalForm.get('phd_InputSchool').disable();
+        this.educationalForm.get('phd_InputMarks').disable();
+        this.educationalForm.get('phd_OutofMarks').disable();  
+        this.educationalForm.get('phdDocument').disable();
+
       }else if(this.applying_for == "Masters"){ 
         this.educationalForm.get('phd_UnivName').disable();
         this.educationalForm.get('phd_InputSchool').disable();

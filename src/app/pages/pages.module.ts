@@ -52,6 +52,9 @@ import {
   ShowPreviewComponent
 } from './admin-dashboard/total/dialog/show-preview.component';
 import {
+  UploadCertificateComponent
+} from './admin-dashboard/total/dialog/upload_certificate';
+import {
   pendingComponent
 } from './admin-dashboard/pending/pending.component';
 import {
@@ -95,6 +98,8 @@ import { MatDatepickerModule , MatNativeDateModule } from '@angular/material';
 import { ErrataModule } from './errata/errata.module';
 import { SettingsComponent } from './settings/settings.component';
 import { DownloadModule } from './download/download.module';
+import { NbSpinnerModule } from '@nebular/theme';
+import {FileUploadModule} from 'primeng/fileupload'; 
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -130,8 +135,8 @@ const PAGES_COMPONENTS = [
     ErrataModule,
     paymentDetailsModule,
     DownloadModule,
-    
-
+    NbSpinnerModule,
+    FileUploadModule,
   ],
   exports: [
     MatFormFieldModule
@@ -140,7 +145,8 @@ const PAGES_COMPONENTS = [
     AdminSnackComponent,
     SubAdminSnackComponent,
     ShowTranscriptComponent,
-    ShowPreviewComponent
+    ShowPreviewComponent,
+    UploadCertificateComponent,
   ],
   declarations: [
     ...PAGES_COMPONENTS,
@@ -157,6 +163,7 @@ const PAGES_COMPONENTS = [
     ProfileComponent,
     ShowTranscriptComponent,
     ShowPreviewComponent,
+    UploadCertificateComponent,
     
   ],
 })
