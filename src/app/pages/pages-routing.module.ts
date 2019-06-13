@@ -13,6 +13,7 @@ import { AttestationPageComponent } from './attestation-page/attestation-page.co
 import { CartComponent } from './cart/cart.component';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 import { PaymentCancelComponent } from './payment-cancel/payment-cancel.component';
+import { PaymentFailureComponent } from './payment-failure/payment-failure.component';
 import { MyapplicationsComponent } from './myapplications/myapplications.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ErrataComponent } from './errata/errata.component';
@@ -46,6 +47,10 @@ const routes: Routes = [{
   {
     path: 'PaymentCancel',
     component: PaymentCancelComponent,
+  },
+  {
+    path: 'PaymentFailure',
+    component: PaymentFailureComponent,
   },
   {
     path: 'settings',
