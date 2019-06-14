@@ -24,3 +24,19 @@
           </nb-card-body>
      </nb-card-body>
 </nb-card>
+
+
+<div class="row" *ngIf="CertificateDetails?.certi_exist == true">
+    <div class="col-xl-6">
+        <nb-card status="success">
+            <nb-card-header style="text-align:center;"><h3>Download AIU Certificate</h3></nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-xl-12" style="text-align: center">
+                        <button size="x-small" status="info" nbPopover="Click here to Download Certificate" nbPopoverMode="hover"  (click)="DownloadTranscript(CertificateDetails?.certi_name);" nbButton>Download Certificate</button>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

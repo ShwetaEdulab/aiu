@@ -17,12 +17,13 @@ import {
 import {
 	paymentOptionsDialog
 } from './dialog/paymentOptionsDialog';
+import { HeaderComponent } from '../../@theme/components/header/header.component';
 
 @Component({
   selector: 'ngx-attestation-page',
   templateUrl: './attestation-page.component.html',
   styleUrls: ['./attestation-page.component.scss'],
-  providers: [MessageService,ConfirmationService]
+  providers: [MessageService,ConfirmationService,HeaderComponent],
 })
 export class AttestationPageComponent implements OnInit {
 
@@ -229,6 +230,7 @@ export class AttestationPageComponent implements OnInit {
     private confirmationService: ConfirmationService,
     protected countries: CountriesService,
     private dialogService: NbDialogService,
+    private comp: HeaderComponent,
     ){
       this.Countries = this.countries.getData();
   }

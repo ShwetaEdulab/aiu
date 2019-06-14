@@ -4,11 +4,13 @@ import { Router } from '@angular/router';
 import { UserService } from '../../@core/data/users.service';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { NbThemeService } from '@nebular/theme/services/theme.service';
+import { HeaderComponent } from '../../@theme/components/header/header.component';
 
 @Component({
   selector: 'ngx-myapplications',
   templateUrl: './myapplications.component.html',
-  styleUrls: ['./myapplications.component.scss']
+  styleUrls: ['./myapplications.component.scss'],
+  providers:[HeaderComponent],
 })
 export class MyapplicationsComponent implements OnInit {
   email;
@@ -18,7 +20,9 @@ export class MyapplicationsComponent implements OnInit {
     protected router : Router,
     private fb: FormBuilder,
     private userService: UserService,
-    public themeService: NbThemeService) { }
+    public themeService: NbThemeService,
+    private comp: HeaderComponent,
+  ) { }
 
   ngOnInit() {
 

@@ -24,7 +24,7 @@ import * as io from 'socket.io-client';
 })
 export class pendingComponent implements AfterViewInit {
 
-  displayedColumns: string[] = ['id', 'name','email','view','Download','Upload']; //,'verify'
+  displayedColumns: string[] = ['id', 'name','email','view','Download','Upload','Uploaded_Download']; //,'verify'
   data: application[] = [];
   dataSource: MatTableDataSource<application>;
   selection = new SelectionModel<application>(true, []);
@@ -234,12 +234,13 @@ export class pendingComponent implements AfterViewInit {
     });
    }
 
-  uploadCertificate(email,user_id,application_id){
+   uploadCertificate(email,user_id,application_id,aiu_certificate){
     this.dialogService.open(UploadCertificateComponent, {
 			context: {
         user_id : user_id,
         email : email,
-        application_id : application_id
+        application_id : application_id,
+        aiu_certificate : aiu_certificate
 			},
 		}).onClose
 		.subscribe(
@@ -248,6 +249,19 @@ export class pendingComponent implements AfterViewInit {
 				
 			}
 		)
+  }
+
+  downloadCertificate(email,user_id,id,certificate_name){
+    console.log("certificate_name========>"+certificate_name);
+    if(certificate_name==null){
+      alert("You Have Not uploaded Certificate.");
+    }else{
+      this.api.downloadFilesAdmin(certificate_name,user_id)
+        .subscribe(data => {
+          this.loading = false;
+          saveAs(data, certificate_name);
+        });
+    }
   }
 }
 

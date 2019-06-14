@@ -31,11 +31,13 @@ import {
   jsonpCallbackContext
 } from '@angular/common/http/src/module';
 import { config } from '../../../../config';
+import { HeaderComponent } from '../../@theme/components/header/header.component';
 
 @Component({
   selector: 'ngx-dashboard',
   styleUrls: ['./dashboard.component.scss'],
   templateUrl: './dashboard.component.html',
+  providers:[HeaderComponent],
 })
 @Injectable()
 export class DashboardComponent implements OnInit {
@@ -82,7 +84,8 @@ export class DashboardComponent implements OnInit {
     protected router: Router,
     public authService: NbAuthService,
     private userService: UserService,
-    private changeDetectorRefs: ChangeDetectorRef
+    private changeDetectorRefs: ChangeDetectorRef,
+    private comp: HeaderComponent,
     // private socket : SocketService,
   ) {
     this.authService.onTokenChange()

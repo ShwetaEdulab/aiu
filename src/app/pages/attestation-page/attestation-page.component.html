@@ -253,7 +253,7 @@
             </div>
           </div>
 
-          <div class=" form-group row" style="margin-left: 5px">
+          <div class=" form-group row">
             <div class="col-xl-2">
               <b>
                 <h4>
@@ -338,7 +338,7 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="ssc_passing_document == true && ssc_passing_lock == false">
-                <button nbButton  status="info" (click)="downloadDoc('SSC_Passing',this.educationalForm.controls.SSCPassingDocument.value)">Download SSC Passing <i class="fas fa-download"></i></button>
+                <button nbButton  status="info" (click)="downloadDoc('SSC_Passing',this.educationalForm.controls.SSCPassingDocument.value)">Download <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.SSCPassingDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.SSCPassingDocument.errors.required">Grade Xth Passing Certificate required</div>
@@ -346,7 +346,7 @@
             </div>
           </div>
 
-          <div class=" form-group row" style="margin-left: 5px">
+          <div class=" form-group row">
             <div class="col-xl-2">
               <b>
                 <h4>
@@ -407,7 +407,7 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="fyjc_document == true && fyjc_lock == false">
-                <button nbButton  status="info" (click)="downloadDoc('FYJC',this.educationalForm.controls.FYJCDocument.value)">Download Marksheet <i class="fas fa-download"></i></button>
+                <button nbButton  status="info" (click)="downloadDoc('FYJC',this.educationalForm.controls.FYJCDocument.value)">Download <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.FYJCDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.FYJCDocument.errors.required">Grade XIth Marksheet required</div>
@@ -415,7 +415,7 @@
             </div>
           </div>
           
-          <div class=" form-group row mt-4" style="margin-left: 5px">
+          <div class=" form-group row">
             <div class="col-xl-2">
               <b>
                 <h4>
@@ -477,7 +477,7 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="hsc_document == true && hsc_lock == false">
-                <button nbButton  status="info" (click)="downloadDoc('HSC',this.educationalForm.controls.HSCDocument.value)">Marksheet <i class="fas fa-download"></i></button>
+                <button nbButton  status="info" (click)="downloadDoc('HSC',this.educationalForm.controls.HSCDocument.value)">Download <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.HSCDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.HSCDocument.errors.required">Grade XII Marksheet required</div>
@@ -501,7 +501,7 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="hsc_passing_document == true && hsc_passing_lock == false">
-                <button nbButton  status="info" (click)="downloadDoc('HSC_Passing',this.educationalForm.controls.HSCPassingDocument.value)">Passing Certificate <i class="fas fa-download"></i></button>
+                <button nbButton  status="info" (click)="downloadDoc('HSC_Passing',this.educationalForm.controls.HSCPassingDocument.value)">Download <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.HSCPassingDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.HSCPassingDocument.errors.required">Grade XII Passing Certificate required</div>
@@ -509,7 +509,7 @@
             </div>
           </div>
 
-          <div class=" form-group row mt-4" style="margin-left: 5px">
+          <div class=" form-group row">
             <div class="col-xl-2">
               <b>
                 <h4>Graduation Details</h4>
@@ -567,6 +567,8 @@
               </div>
               
               <div *ngIf="degree_document == true && degree_lock == false">
+                  <i class="fa fa-info-circle" style="text-align:center;font-size: large;" nbPopover="Club Marksheets of all the years in a single pdf document."
+                  nbPopoverMode="hover"></i> 
                 <button nbButton  status="info" (click)="downloadDoc('Graduation',this.educationalForm.controls.GraduationDocument.value)">Download <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.GraduationDocument.errors" class="error_class">
@@ -593,7 +595,7 @@
               </div>
               
               <div *ngIf="degree_certificate_document == true && degree_certificate_lock == false">
-                <button nbButton  status="info" (click)="downloadDoc('Degree_Certificate',this.educationalForm.controls.DegreeCertificateDocument.value)">Download Degree Certificate <i class="fas fa-download"></i></button>
+                <button nbButton  status="info" (click)="downloadDoc('Degree_Certificate',this.educationalForm.controls.DegreeCertificateDocument.value)">Download <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.DegreeCertificateDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.DegreeCertificateDocument.errors.required">Degree Certificate required</div>
@@ -601,8 +603,8 @@
             </div>
           </div>
 
-          <div class=" form-group row mt-4" style="margin-left: 5px">
-            <div class="col-xl-2 mt-0">
+          <div class=" form-group row">
+            <div class="col-xl-2">
               <b>
                 <h4>Master's Details</h4>
               </b>
@@ -658,6 +660,8 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="master_document == true && master_lock == false">
+                  <i class="fa fa-info-circle" style="text-align:center;font-size: large;" nbPopover="Club Marksheets of all the years in a single pdf document."
+                  nbPopoverMode="hover"></i> 
                 <button nbButton  status="info" (click)="downloadDoc('Master',this.educationalForm.controls.MasterDocument.value)">Download <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.MasterDocument.errors" class="error_class">
@@ -683,7 +687,7 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="master_certificate_document == true && master_certificate_lock == false">
-                <button nbButton  status="info" (click)="downloadDoc('Master_Certificate',this.educationalForm.controls.MasterCertificateDocument.value)">Download Master Certificate <i class="fas fa-download"></i></button>
+                <button nbButton  status="info" (click)="downloadDoc('Master_Certificate',this.educationalForm.controls.MasterCertificateDocument.value)">Download <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.MasterCertificateDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.MasterCertificateDocument.errors.required">Master's Certificate required</div>
@@ -691,8 +695,8 @@
             </div>
           </div>
 
-          <div class=" form-group row mt-4" style="margin-left: 5px">
-            <div class="col-xl-2 mt-0">
+          <div class=" form-group row">
+            <div class="col-xl-2">
               <b>
                 <h4>Ph.D's Details</h4>
               </b>
@@ -754,10 +758,10 @@
             </div>
           </div>
 
-          <div class=" form-group row mt-4" style="margin-left: 5px">
-            <div class="col-xl-3 mt-0">
+          <div class=" form-group row">
+            <div class="col-xl-2">
               <b>
-                <h4>Passport and Visa Details</h4>
+                <h4>Passport Details</h4>
               </b>
             </div>
             <div class="col-xl-2">
@@ -785,44 +789,52 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="passport_document == true && passport_lock == false">
-                <button nbButton  status="info" (click)="downloadDoc('Passport',this.educationalForm.controls.PassportDocument.value)">Download Passport <i class="fas fa-download"></i></button>
+                <button nbButton  status="info" (click)="downloadDoc('Passport',this.educationalForm.controls.PassportDocument.value)">Download <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.PassportDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.PassportDocument.errors.required">Passport Document is required</div>
               </div>
             </div>
-            <div class="col-xl-3" style="text-align: center">
-              <div *ngIf="visa_lock == true || visa_document == false " [nbSpinner]="loadingvisabutton" nbSpinnerStatus="primary">
-                <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'"
-                  mode="basic" 
-                  name="file" 
-                  url={{transVisaUrl}}
-                  accept="image/*" 
-                  ngDefaultControl [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" 
-                  maxFileSize="5000000"
-                  auto="true"
-                  chooseLabel="Upload Visa"
-                  formControlName="VisaDocument"
-                  (onSelect)="onSelect('Visa');"
-                  (onUpload)="onUpload($event)"
-                  (onError)="onErrorFileUpload($event)">
-                </p-fileUpload>
-              </div>
-              <div *ngIf="visa_document == true && visa_lock == false">
-                <button nbButton  status="info" (click)="downloadDoc('Visa',this.educationalForm.controls.VisaDocument.value)">Download Visa <i class="fas fa-download"></i></button>
-              </div>
-              <div *ngIf="form_submitted && educationalForm.controls.VisaDocument.errors" class="error_class">
-                <div *ngIf="educationalForm.controls.VisaDocument.errors.required">Visa Document is required</div>
-              </div>
-            </div>
           </div>
 
-          <div class=" form-group row" style="margin-left: 5px">
-            <div class="col-xl-3">
+          <div class=" form-group row">
+              <div class="col-xl-2">
+                <b>
+                  <h4>Visa Details</h4>
+                </b>
+              </div>
+              <div class="col-xl-3" style="text-align: center">
+                <div *ngIf="visa_lock == true || visa_document == false " [nbSpinner]="loadingvisabutton" nbSpinnerStatus="primary">
+                  <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'"
+                    mode="basic" 
+                    name="file" 
+                    url={{transVisaUrl}}
+                    accept="image/*" 
+                    ngDefaultControl [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" 
+                    maxFileSize="5000000"
+                    auto="true"
+                    chooseLabel="Upload Visa"
+                    formControlName="VisaDocument"
+                    (onSelect)="onSelect('Visa');"
+                    (onUpload)="onUpload($event)"
+                    (onError)="onErrorFileUpload($event)">
+                  </p-fileUpload>
+                </div>
+                <div *ngIf="visa_document == true && visa_lock == false">
+                  <button nbButton  status="info" (click)="downloadDoc('Visa',this.educationalForm.controls.VisaDocument.value)">Download <i class="fas fa-download"></i></button>
+                </div>
+                <div *ngIf="form_submitted && educationalForm.controls.VisaDocument.errors" class="error_class">
+                  <div *ngIf="educationalForm.controls.VisaDocument.errors.required">Visa Document is required</div>
+                </div>
+              </div>
+            </div>
+
+          <div class=" form-group row">
+            <div class="col-xl-2">
               <b>
                 <h4>
                   Course Duration Letter
-                  <span style="color:red;">*</span><i class="fa fa-info-circle" nbPopover="A letter from the University stating therein the period of your full time studies on the campus of the degree
+                  <i class="fa fa-info-circle" nbPopover="A letter from the University stating therein the period of your full time studies on the campus of the degree
                   awarding university i.e. date of start of course and completion, thereof."
                   nbPopoverMode="hover"></i>
                 </h4>
@@ -847,7 +859,7 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="course_letter_document == true && course_letter_lock == false">
-                <button nbButton  status="info" (click)="downloadDoc('Course_Letter',this.educationalForm.controls.CourseLetterDocument.value)">Download Course Duration Letter <i class="fas fa-download"></i></button>
+                <button nbButton  status="info" (click)="downloadDoc('Course_Letter',this.educationalForm.controls.CourseLetterDocument.value)">Download <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.CourseLetterDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.CourseLetterDocument.errors.required">Course Duration Letter required</div>
@@ -855,12 +867,12 @@
             </div>
           </div>
 
-          <div class=" form-group row" style="margin-left: 5px">
-            <div class="col-xl-3">
+          <div class=" form-group row">
+            <div class="col-xl-2">
               <b>
                 <h4>
                   Offer Letter
-                  <span style="color:red;">*</span><i class="fa fa-info-circle" nbPopover="Copy of Offer Letter issued by the degree awarding university."
+                  <i class="fa fa-info-circle" nbPopover="Copy of Offer Letter issued by the degree awarding university."
                   nbPopoverMode="hover"></i>
                 </h4>
               </b>
@@ -884,7 +896,7 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="offer_letter_document == true && offer_letter_lock == false">
-                <button nbButton  status="info" (click)="downloadDoc('Offer_Letter',this.educationalForm.controls.OfferLetterDocument.value)">Download Offer Letter <i class="fas fa-download"></i></button>
+                <button nbButton  status="info" (click)="downloadDoc('Offer_Letter',this.educationalForm.controls.OfferLetterDocument.value)">Download <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.OfferLetterDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.OfferLetterDocument.errors.required">Offer Letter required</div>
@@ -896,7 +908,6 @@
             <div class="col-xl-4">
             </div>
             <div class="col-xl-4" style="text-align: center">
-              <!-- <button nbButton type='button' size="medium" (click)="onSubmit()" hero status="info">SUBMIT</button> -->
               <button nbButton nbStepperNext (click)="onSubmit()">SUBMIT</button>
             </div>
             <div class="col-xl-4">

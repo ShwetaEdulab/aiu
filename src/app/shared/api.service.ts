@@ -637,6 +637,14 @@ private messages = [];
     }
   }
 
+  getCertificateDetails(){
+    try{
+      return this.httpClient.get(`${this.baseUrl}/api/attestation/getCertificateDetails`);     
+    }catch(error){
+      this.handleError('getAllPayments: ' + JSON.stringify(error));
+    }
+  }
+
   private handleError(error){
     console.error(error);
   }

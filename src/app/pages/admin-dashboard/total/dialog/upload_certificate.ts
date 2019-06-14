@@ -9,7 +9,7 @@ import { NbAuthService, NbAuthJWTToken } from '@nebular/auth';
 @Component({
   selector: 'nb-dialog',
   template: `
-  <nb-card [style.width.px]="600"  [style.height.px]="700" status="success">
+  <nb-card [style.width.px]="400"  [style.height.px]="400" status="success">
     <nb-card-header>
     <div class="row">
       <div class="col-md-11" style="text-align:center;">
@@ -21,22 +21,31 @@ import { NbAuthService, NbAuthJWTToken } from '@nebular/auth';
     </div>
     </nb-card-header>
     <nb-card-body>
+      <div class="row" *ngIf="aiu_certificate!=null">
+        <div class="col-xl-12" style="color:red;">
+          You have uploaded Certificate.
+        </div>
+      </div>
+      <br>
+      <br>
       <div class="row" [nbSpinner]="loading" nbSpinnerStatus="primary">
-        <div class="col-xl-3">
-          <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'"
+        <div class="col-xl-4"></div>
+        <div class="col-xl-4">
+          <p-fileUpload ngDefaultControl [accept]="'.pdf,.PDF'"
             mode="basic" 
             name="file" 
             url="{{serverUrl}}/api/attestation/upload_certificate?user_id={{user_id}}&uploadtype=true&app_id={{application_id}}"
             chooseLabel="Upload Marksheet"
             accept="image/*" 
-            ngDefaultControl [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" 
+            ngDefaultControl
             maxFileSize="5000000"
             auto="true"
-            (onSelect)="onSelect('Ph.D');"
+            (onSelect)="onSelect($event,'Ph.D');"
             (onUpload)="onUpload($event)"
             (onError)="onErrorFileUpload($event)">
           </p-fileUpload>
         </div>
+        <div class="col-xl-4"></div>
       </div>
     </nb-card-body>
     <nb-card-footer>
@@ -54,6 +63,7 @@ export class UploadCertificateComponent implements OnInit {
   @Input() user_id ;
   @Input() email ;
   @Input() application_id ;
+  @Input() aiu_certificate;
   loading = false;
   index: number;
   currenttoken: NbAuthJWTToken;
@@ -68,17 +78,7 @@ export class UploadCertificateComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("this.user_idthis.user_idthis.user_id========>"+this.user_id);
-    // this.api.getTranscriptDetails(this.user_id).subscribe( data => {
-    //   if(data['status'] == 200){
-
-    //     //this.ssc = data['data']['ssc'][0];
-       
-    //   }else if(data['status'] == 400){
-    //     this.ref.close();
-    //     alert('There is an issue in application.No Trascript found!!!');
-    //   }
-    // });
+    //console.log("this.user_idthis.user_idthis.user_id========>"+this.user_id,this.aiu_certificate);
   }
 
   download(filename){
@@ -93,8 +93,20 @@ export class UploadCertificateComponent implements OnInit {
     this.ref.close();
   }
 
-  onSelect(value): void {
+  onSelect($event,value): void {
     this.loading = true;
+    var maxFileSize =  5000000;
+		var imgArr = $event.files[0].name.split('.');
+		var extension = imgArr[imgArr.length - 1].trim();
+		if ($event.files[0].size > maxFileSize) {
+      alert("Invalid File Size.Maximum file size should be 5 MB.");
+      this.loading = false;
+		}
+
+		if( extension!='pdf' && extension!='PDF'  ) {
+      alert("Invalid File Type. Please upload document in pdf format.");
+      this.loading = false;
+		}
   }
 
   onUpload(event: any) {
