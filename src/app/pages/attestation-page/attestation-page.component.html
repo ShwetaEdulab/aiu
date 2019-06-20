@@ -314,7 +314,7 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="ssc_document == true && ssc_lock == false">
-                <button nbButton  status="info" (click)="downloadDoc('SSC',this.educationalForm.controls.SSCDocument.value)">Download <i class="fas fa-download"></i></button>
+                <button nbButton  status="info" (click)="downloadDoc('SSC',this.educationalForm.controls.SSCDocument.value)">Preview <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.SSCDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.SSCDocument.errors.required">Grade Xth Marksheet required</div>
@@ -338,7 +338,7 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="ssc_passing_document == true && ssc_passing_lock == false">
-                <button nbButton  status="info" (click)="downloadDoc('SSC_Passing',this.educationalForm.controls.SSCPassingDocument.value)">Download <i class="fas fa-download"></i></button>
+                <button nbButton  status="info" (click)="downloadDoc('SSC_Passing',this.educationalForm.controls.SSCPassingDocument.value)">Preview <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.SSCPassingDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.SSCPassingDocument.errors.required">Grade Xth Passing Certificate required</div>
@@ -407,7 +407,7 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="fyjc_document == true && fyjc_lock == false">
-                <button nbButton  status="info" (click)="downloadDoc('FYJC',this.educationalForm.controls.FYJCDocument.value)">Download <i class="fas fa-download"></i></button>
+                <button nbButton  status="info" (click)="downloadDoc('FYJC',this.educationalForm.controls.FYJCDocument.value)">Preview <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.FYJCDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.FYJCDocument.errors.required">Grade XIth Marksheet required</div>
@@ -477,7 +477,7 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="hsc_document == true && hsc_lock == false">
-                <button nbButton  status="info" (click)="downloadDoc('HSC',this.educationalForm.controls.HSCDocument.value)">Download <i class="fas fa-download"></i></button>
+                <button nbButton  status="info" (click)="downloadDoc('HSC',this.educationalForm.controls.HSCDocument.value)">Preview <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.HSCDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.HSCDocument.errors.required">Grade XII Marksheet required</div>
@@ -501,7 +501,7 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="hsc_passing_document == true && hsc_passing_lock == false">
-                <button nbButton  status="info" (click)="downloadDoc('HSC_Passing',this.educationalForm.controls.HSCPassingDocument.value)">Download <i class="fas fa-download"></i></button>
+                <button nbButton  status="info" (click)="downloadDoc('HSC_Passing',this.educationalForm.controls.HSCPassingDocument.value)">Preview <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.HSCPassingDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.HSCPassingDocument.errors.required">Grade XII Passing Certificate required</div>
@@ -569,7 +569,7 @@
               <div *ngIf="degree_document == true && degree_lock == false">
                   <i class="fa fa-info-circle" style="text-align:center;font-size: large;" nbPopover="Club Marksheets of all the years in a single pdf document."
                   nbPopoverMode="hover"></i> 
-                <button nbButton  status="info" (click)="downloadDoc('Graduation',this.educationalForm.controls.GraduationDocument.value)">Download <i class="fas fa-download"></i></button>
+                <button nbButton  status="info" (click)="downloadDoc('Graduation',this.educationalForm.controls.GraduationDocument.value)">Preview <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.GraduationDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.GraduationDocument.errors.required">Degree Marksheet required</div>
@@ -595,7 +595,7 @@
               </div>
               
               <div *ngIf="degree_certificate_document == true && degree_certificate_lock == false">
-                <button nbButton  status="info" (click)="downloadDoc('Degree_Certificate',this.educationalForm.controls.DegreeCertificateDocument.value)">Download <i class="fas fa-download"></i></button>
+                <button nbButton  status="info" (click)="downloadDoc('Degree_Certificate',this.educationalForm.controls.DegreeCertificateDocument.value)">Preview <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.DegreeCertificateDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.DegreeCertificateDocument.errors.required">Degree Certificate required</div>
@@ -662,7 +662,7 @@
               <div *ngIf="master_document == true && master_lock == false">
                   <i class="fa fa-info-circle" style="text-align:center;font-size: large;" nbPopover="Club Marksheets of all the years in a single pdf document."
                   nbPopoverMode="hover"></i> 
-                <button nbButton  status="info" (click)="downloadDoc('Master',this.educationalForm.controls.MasterDocument.value)">Download <i class="fas fa-download"></i></button>
+                <button nbButton  status="info" (click)="downloadDoc('Master',this.educationalForm.controls.MasterDocument.value)">Preview <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.MasterDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.MasterDocument.errors.required">Master's Marksheet required</div>
@@ -687,7 +687,7 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="master_certificate_document == true && master_certificate_lock == false">
-                <button nbButton  status="info" (click)="downloadDoc('Master_Certificate',this.educationalForm.controls.MasterCertificateDocument.value)">Download <i class="fas fa-download"></i></button>
+                <button nbButton  status="info" (click)="downloadDoc('Master_Certificate',this.educationalForm.controls.MasterCertificateDocument.value)">Preview <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.MasterCertificateDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.MasterCertificateDocument.errors.required">Master's Certificate required</div>
@@ -750,7 +750,7 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="phd_document == true && phd_lock == false">
-                <button nbButton  status="info" (click)="downloadDoc('Ph.D',this.educationalForm.controls.phdDocument.value)">Download <i class="fas fa-download"></i></button>
+                <button nbButton  status="info" (click)="downloadDoc('Ph.D',this.educationalForm.controls.phdDocument.value)">Preview <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.phdDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.phdDocument.errors.required">Ph.D's Marksheet required</div>
@@ -789,7 +789,7 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="passport_document == true && passport_lock == false">
-                <button nbButton  status="info" (click)="downloadDoc('Passport',this.educationalForm.controls.PassportDocument.value)">Download <i class="fas fa-download"></i></button>
+                <button nbButton  status="info" (click)="downloadDoc('Passport',this.educationalForm.controls.PassportDocument.value)">Preview <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.PassportDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.PassportDocument.errors.required">Passport Document is required</div>
@@ -821,7 +821,7 @@
                   </p-fileUpload>
                 </div>
                 <div *ngIf="visa_document == true && visa_lock == false">
-                  <button nbButton  status="info" (click)="downloadDoc('Visa',this.educationalForm.controls.VisaDocument.value)">Download <i class="fas fa-download"></i></button>
+                  <button nbButton  status="info" (click)="downloadDoc('Visa',this.educationalForm.controls.VisaDocument.value)">Preview <i class="fas fa-download"></i></button>
                 </div>
                 <div *ngIf="form_submitted && educationalForm.controls.VisaDocument.errors" class="error_class">
                   <div *ngIf="educationalForm.controls.VisaDocument.errors.required">Visa Document is required</div>
@@ -859,7 +859,7 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="course_letter_document == true && course_letter_lock == false">
-                <button nbButton  status="info" (click)="downloadDoc('Course_Letter',this.educationalForm.controls.CourseLetterDocument.value)">Download <i class="fas fa-download"></i></button>
+                <button nbButton  status="info" (click)="downloadDoc('Course_Letter',this.educationalForm.controls.CourseLetterDocument.value)">Preview <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.CourseLetterDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.CourseLetterDocument.errors.required">Course Duration Letter required</div>
@@ -896,7 +896,7 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="offer_letter_document == true && offer_letter_lock == false">
-                <button nbButton  status="info" (click)="downloadDoc('Offer_Letter',this.educationalForm.controls.OfferLetterDocument.value)">Download <i class="fas fa-download"></i></button>
+                <button nbButton  status="info" (click)="downloadDoc('Offer_Letter',this.educationalForm.controls.OfferLetterDocument.value)">Preview <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.OfferLetterDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.OfferLetterDocument.errors.required">Offer Letter required</div>
