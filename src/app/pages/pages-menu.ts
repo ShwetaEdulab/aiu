@@ -12,7 +12,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     },
   },
   {
-    title: 'Profile',
+    title: 'Application Form',
     icon: 'fas fa-user-circle',
     link: '/pages/dashboard/attestation_page',
     //link: '/pages/profile',

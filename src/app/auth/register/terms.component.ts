@@ -12,20 +12,12 @@ import { RegisteredComponent } from './registered.component';
            <nb-card-body>
         <nb-alert status="danger" closable (close)="onClose()" *ngIf="messagealertflag == 1">
                 Email Already Exists !!!!
-        </nb-alert> 
-        <div class="row">
-            <div class="col-lg-1"></div>
-            <div class="col-lg-11">
-                <nb-checkbox status="success" value="true">        
-                    The colleges that I am considering for application may communicate with me by mail, email, phone or text message prior to submission of my application (you can change this response later within your account settings).
-                </nb-checkbox>
-            </div>
-        </div><br>
+        </nb-alert>
         <div class="row">
             <div class="col-lg-1"></div>
             <div class="col-lg-11">
                 <nb-checkbox status="success" value="true">
-                The Mumbai University may communicate with me by mail, email, phone or text message about my account and other information relevant to the admission application process (you can change this response later within your account settings).
+                The Get AIU Certificate may communicate with me by mail, email, phone or text message about my account and other information relevant to the admission application process (you can change this response later within your account settings).
                 </nb-checkbox>
             </div>
         </div><br>
@@ -44,7 +36,7 @@ import { RegisteredComponent } from './registered.component';
             <div class="col-lg-1"></div>
             <div class="col-lg-11">
                 <nb-checkbox status="success">
-                    The Mumbai University website uses small files stored on your computer, known as cookies, that help us remember your settings and ensure the website works properly. By continuing, I am agreeing to The Mumbai University's use of cookies.
+                    The Get AIU certificate website uses small files stored on your computer, known as cookies, that help us remember your settings and ensure the website works properly. By continuing, I am agreeing to The Get AIU certificate's use of cookies.
                 </nb-checkbox>
             </div>
 		</div> 		
