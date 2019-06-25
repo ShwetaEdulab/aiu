@@ -109,7 +109,7 @@ export const NB_CORE_PROVIDERS = [
        view:['SubAdminDashboard'],
       },
       admin: {
-       view:['adminDashboard'],
+       view:['adminDashboard','studentManagement','paymentDetails'],
       },
     },
   }).providers,

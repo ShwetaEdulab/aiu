@@ -20,6 +20,9 @@ import { ErrataComponent } from './errata/errata.component';
 import { SettingsComponent } from './settings/settings.component';
 import { paymentDetailsComponent } from './paymentDetails/paymentDetails.component';
 import { DownloadComponent } from './download/download.component';
+import { StudentManagementComponent } from './student-management/student-management.component';
+import { PaymentDetailsAdminComponent } from '../admin/payment-details/payment-details.component'
+import { AdminViewComponent } from '../admin/view/view.component';
 
 const routes: Routes = [{
   path: '',
@@ -76,6 +79,11 @@ const routes: Routes = [{
     // } 
   },
   {
+    path: 'studentManagement',
+    component: StudentManagementComponent,
+
+  },
+  {
     path: 'sub-admin-dashboard',
     component: SubAdminDashboardComponent,
     canActivate: [AuthGuard] 
@@ -89,7 +97,18 @@ const routes: Routes = [{
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
-  }, {
+  },
+  {
+    path: 'paymentDetails',
+    component: PaymentDetailsAdminComponent,
+
+  },
+  {
+    path: 'adminView',
+    component: AdminViewComponent,
+
+  }, 
+  {
     path: '**',
     component: NotFoundComponent,
   }],

@@ -1,0 +1,360 @@
+<nb-actions size="large">
+   <nb-action icon="ion-arrow-left-c"  (click)="Back()"></nb-action>
+</nb-actions>
+<nb-card size="large">
+   <nb-card-body>
+      <nb-stepper orientation="horizontal">
+         <nb-step label="Personal" [completed]="true">
+            <h3>Personal Information</h3>
+               <nb-card>
+                  <table class="" border="1" bordercolor="#c4c4c4" style="width:100%">
+                     <thead >
+                        <tr>
+                           <th class="tableHead">Full Name</th>
+                           <td class="tableData">{{studentData?.personal_info.name}}</td>
+                        </tr>
+                        <tr>
+                           <th class="tableHead">Email ID</th>
+                           <td class="tableData">{{studentData?.personal_info.email}}</td>
+                        </tr>
+                        <tr>
+                           <th class="tableHead">Mobile No</th>
+                           <td class="tableData">+{{studentData?.personal_info.countryCode}}-{{studentData?.personal_info.mobile}}</td>
+                        </tr>
+                        <tr>
+                           <th class="tableHead">Date of Birth</th>
+                           <td class="tableData">{{studentData?.personal_info.dob}}</td>
+                        </tr>
+                        <tr>
+                           <th class="tableHead">Gender</th>
+                           <td class="tableData">{{studentData?.personal_info.gender}}</td>
+                        </tr>
+                        <tr>
+                           <th class="tableHead">City</th>
+                           <td class="tableData">{{studentData?.personal_info.city}}</td>
+                        </tr>
+                        <!-- <tr>
+                           <th class="tableHead">State</th>
+                           <td class="tableData">{{studentData?.personal_info.state}}</td>
+                        </tr> -->
+                        <tr>
+                           <th class="tableHead">Country</th>
+                           <td class="tableData">{{studentData?.personal_info.country}}</td>
+                        </tr>
+                     </thead>
+                  </table>
+               </nb-card>
+         </nb-step>
+         <!-- <nb-step label="Nationality" [completed]="true">
+            <h3>Nationality Information</h3>
+            <nb-card>
+               <table class="" border="1" bordercolor="#c4c4c4" style="width:100%">
+                  <thead >
+                     <tr>
+                        <th class="tableHead">Address Line 1</th>
+                        <td class="tableData">{{studentData?.nationality_info.address1}}</td>
+                     </tr>
+                     <tr>
+                        <th class="tableHead">Address Line 2</th>
+                        <td class="tableData">{{studentData?.nationality_info.address2}}</td>
+                     </tr>
+                     <tr>
+                        <th class="tableHead">Country of Birth</th>
+                        <td class="tableData">{{studentData?.nationality_info.countryOfBirth}}</td>
+                     </tr>
+                     <tr>
+                        <th class="tableHead">Citizenship</th>
+                        <td class="tableData">{{studentData?.nationality_info.citizenship}}</td>
+                     </tr>
+                     <tr>
+                        <th class="tableHead">State</th>
+                        <td class="tableData">{{studentData?.nationality_info.state}}</td>
+                     </tr>
+                     <tr>
+                        <th class="tableHead">City</th>
+                        <td class="tableData">{{studentData?.nationality_info.city}}</td>
+                     </tr>
+                     <tr>
+                        <th class="tableHead">State</th>
+                        <td class="tableData">{{studentData?.nationality_info.state}}</td>
+                     </tr>
+                     <tr>
+                        <th class="tableHead">Postal Code</th>
+                        <td class="tableData">{{studentData?.nationality_info.postalCode}}</td>
+                     </tr>
+                  </thead>
+               </table><br>
+            </nb-card>
+            <nb-card>
+               <h3>Passport Details</h3>
+               <table class="" border="1" bordercolor="#c4c4c4" style="width:100%">
+                  <thead >
+                     <tr>
+                        <th class="tableHead">Passport No</th>
+                        <td class="tableData">{{studentData?.nationality_info.passportNo}}</td>
+                     </tr>
+                     <tr>
+                        <th class="tableHead">Date of issuance</th>
+                        <td class="tableData">{{studentData?.nationality_info.dateOfIssuance}}</td>
+                     </tr>
+                     <tr>
+                        <th class="tableHead">Country of Issuance</th>
+                        <td class="tableData">{{studentData?.nationality_info.countryOfIssuance}}</td>
+                     </tr>
+                     <tr>
+                        <th class="tableHead">Expiry date</th>
+                        <td class="tableData">{{studentData?.nationality_info.passportExpDate}}</td>
+                     </tr>
+                  </thead>
+               </table>
+            </nb-card>
+         </nb-step>
+         <nb-step label="Guardian" [completed]="true">
+            <h3>Guardian Information</h3>
+            <nb-card>
+               <table class="" border="1" bordercolor="#c4c4c4" style="width:100%">
+                  <thead >
+                     <tr>
+                        <th class="tableHead">Full Name</th>
+                        <td class="tableData">{{studentData?.guardian_info.name}}</td>
+                     </tr>
+                     <tr>
+                        <th class="tableHead">Email ID</th>
+                        <td class="tableData">{{studentData?.guardian_info.email}}</td>
+                     </tr>
+                     <tr>
+                        <th class="tableHead">Mobile No</th>
+                        <td class="tableData">+{{studentData?.guardian_info.countryCode}}-{{studentData?.guardian_info.mobile}}</td>
+                     </tr>
+                     <tr>
+                        <th class="tableHead">Date of Birth</th>
+                        <td class="tableData">{{studentData?.guardian_info.dob}}</td>
+                     </tr>
+                     <tr>
+                        <th class="tableHead">Country</th>
+                        <td class="tableData">{{studentData?.guardian_info.country}}</td>
+                     </tr>
+                     <tr>
+                        <th class="tableHead">State</th>
+                        <td class="tableData">{{studentData?.guardian_info.state}}</td>
+                     </tr>
+                     <tr>
+                        <th class="tableHead">Postal Code</th>
+                        <td class="tableData">{{studentData?.guardian_info.postalCode}}</td>
+                     </tr>
+                     <tr>
+                        <th class="tableHead">Citizenship</th>
+                        <td class="tableData">{{studentData?.guardian_info.citizenship}}</td>
+                     </tr>
+                  </thead>
+               </table>
+            </nb-card>
+         </nb-step> -->
+         <nb-step label="Educational" [completed]="true">
+            <h3>Educational Information</h3>
+            <h2>Particulars of Examination passed by the candidate</h2>
+            <nb-card>
+               <table class="" border="1" bordercolor="#c4c4c4" style="width:100%">
+                  <thead>
+                     <tr *ngIf="studentData?.user_education.ssc_name!=null">
+                        <th class="tableHead"> Grade Xth University Name</th>
+                        <td class="tableData">{{studentData?.user_education.ssc_name}}</td>
+                     </tr>
+                     <tr *ngIf="studentData?.user_education.ssc_name!=null">
+                        <th class="tableHead">Grade Xth School Name</th>
+                        <td class="tableData">{{studentData?.user_education.school_name}}</td>
+                     </tr>
+                     
+                     <tr *ngIf="studentData?.user_education.ssc_name!=null">
+                        <th class="tableHead">Grade Xth Out of Marks/Total Marks</th>
+                        <td class="tableData">{{studentData?.user_education.totalmarks}} / {{studentData?.user_education.outofmarks}}</td>
+                     </tr>
+                     <tr *ngIf="studentData?.user_education.ssc_name!=null">
+                        <th class="tableHead"></th>
+                        <td class="tableData"></td>
+                     </tr>
+                     <tr *ngIf="studentData?.user_education.fyjc_name!=null">
+                        <th class="tableHead"> Grade XIth University Name</th>
+                        <td class="tableData">{{studentData?.user_education.fyjc_name}}</td>
+                     </tr>
+                     <tr *ngIf="studentData?.user_education.fyjc_name!=null">
+                        <th class="tableHead">Grade XIth College Name</th>
+                        <td class="tableData">{{studentData?.user_education.fyjc_school_name}}</td>
+                     </tr>
+                     
+                     <tr *ngIf="studentData?.user_education.fyjc_name!=null">
+                        <th class="tableHead">Grade XIth Out of Marks/Total Marks</th>
+                        <td class="tableData">{{studentData?.user_education.fyjc_totalmarks}} / {{studentData?.user_education.fyjc_outofmarks}}</td>
+                     </tr>
+                     <tr *ngIf="studentData?.user_education.fyjc_name!=null">
+                        <th class="tableHead"></th>
+                        <td class="tableData"></td>
+                     </tr>
+                     <tr *ngIf="studentData?.user_education.hscname!=null">
+                        <th class="tableHead"> Grade XIIth University Name</th>
+                        <td class="tableData">{{studentData?.user_education.hscname}}</td>
+                     </tr>
+                     <tr *ngIf="studentData?.user_education.hscname!=null">
+                        <th class="tableHead">Grade XIIth College Name</th>
+                        <td class="tableData">{{studentData?.user_education.hsc_school_name}}</td>
+                     </tr>
+                     
+                     <tr *ngIf="studentData?.user_education.hscname!=null">
+                        <th class="tableHead">Grade XIIth Out of Marks/Total Marks</th>
+                        <td class="tableData">{{studentData?.user_education.hsc_totalmarks}} / {{studentData?.user_education.hsc_outofmarks}}</td>
+                     </tr>
+                     <tr *ngIf="studentData?.user_education.hscname!=null">
+                        <th class="tableHead"></th>
+                        <td class="tableData"></td>
+                     </tr>
+                     <tr *ngIf="studentData?.user_education.gradname!=null">
+                        <th class="tableHead"> Graduation University Name</th>
+                        <td class="tableData">{{studentData?.user_education.gradname}}</td>
+                     </tr>
+                     <tr *ngIf="studentData?.user_education.gradname!=null">
+                        <th class="tableHead">Graduation College Name</th>
+                        <td class="tableData">{{studentData?.user_education.grad_school_name}}</td>
+                     </tr>
+                     
+                     <tr *ngIf="studentData?.user_education.gradname!=null">
+                        <th class="tableHead">Graduation Out of Marks/Total Marks</th>
+                        <td class="tableData">{{studentData?.user_education.grad_totalmarks}} / {{studentData?.user_education.grad_outofmarks}}</td>
+                     </tr>
+                     <tr *ngIf="studentData?.user_education.gradname!=null">
+                        <th class="tableHead"></th>
+                        <td class="tableData"></td>
+                     </tr>
+                     <tr *ngIf="studentData?.user_education.mastername!=null">
+                        <th class="tableHead"> Master's University Name</th>
+                        <td class="tableData">{{studentData?.user_education.mastername}}</td>
+                     </tr>
+                     <tr *ngIf="studentData?.user_education.mastername!=null">
+                        <th class="tableHead">Master's College Name</th>
+                        <td class="tableData">{{studentData?.user_education.master_school_name}}</td>
+                     </tr>
+                     
+                     <tr *ngIf="studentData?.user_education.mastername!=null">
+                        <th class="tableHead">Master's Out of Marks/Total Marks</th>
+                        <td class="tableData">{{studentData?.user_education.master_totalmarks}} / {{studentData?.user_education.master_outofmarks}}</td>
+                     </tr>
+                     <tr *ngIf="studentData?.user_education.mastername!=null">
+                        <th class="tableHead"></th>
+                        <td class="tableData"></td>
+                     </tr>
+                     <tr *ngIf="studentData?.user_education.phdname!=null">
+                        <th class="tableHead"> Ph.D's University Name</th>
+                        <td class="tableData">{{studentData?.user_education.phdname}}</td>
+                     </tr>
+                     <tr *ngIf="studentData?.user_education.phdname!=null">
+                        <th class="tableHead">Ph.D's College Name</th>
+                        <td class="tableData">{{studentData?.user_education.phd_school_name}}</td>
+                     </tr>
+                     <tr *ngIf="studentData?.user_education.phdname!=null">
+                        <th class="tableHead">Ph.D's Out of Marks/Total Marks</th>
+                        <td class="tableData">{{studentData?.user_education.phd_totalmarks}} / {{studentData?.user_education.phd_outofmarks}}</td>
+                     </tr>
+                  </thead>
+               </table>
+            </nb-card>
+         </nb-step>
+         <!-- <nb-step label="Employment Details" [completed]="true">
+            <h3>Employment Details</h3>
+            <nb-card>
+               <table class="" border="1" bordercolor="#c4c4c4" style="width:100%">
+                  <thead >
+                     <tr>
+                        <th class="tableHead">Company Name</th>
+                        <td class="tableData">{{studentData?.userEmployments.companyName}}</td>
+                     </tr>
+                     <tr>
+                        <th class="tableHead">Years</th>
+                        <td class="tableData">{{studentData?.userEmployments.workExpYears}}</td>
+                     </tr>
+                     <tr>
+                        <th class="tableHead">Months</th>
+                        <td class="tableData">{{studentData?.userEmployments.workExpMonths}}</td>
+                     </tr>
+                     <tr>
+                        <th class="tableHead">Designation</th>
+                        <td class="tableData">{{studentData?.userEmployments.workTitle}}</td>
+                     </tr>
+                     <tr>
+                        <th class="tableHead">Type of Work</th>
+                        <td class="tableData">{{studentData?.userEmployments.typeOfWork}}</td>
+                     </tr>
+                     <tr>
+                        <th class="tableHead">Work description</th>
+                        <td class="tableData">{{studentData?.userEmployments.workDescription}}</td>
+                     </tr>
+                  </thead>
+               </table>
+            </nb-card>
+         </nb-step> -->
+         <nb-step label="User Transcript" [completed]="true">
+            <h3>User Transcript</h3><br>
+            <input type="hidden" id="userId" value="{{studentData?.personal_info.user_id}}"/>
+            <input type="hidden" id="Id" value="{{studentData?.personal_info.id}}"/>
+            <input type="hidden" id="courseId" value="{{studentData?.personal_info.courseId}}"/>
+           
+            
+            <div class="row">
+               <div class="col-md-3">
+                  <div>
+                     <nb-card status="success" size="small">
+                        <nb-card-body>
+                           <img class="viewMoreImg img-responsive" src="{{serverUrl}}/front_assets/img/pdf1.png" (click)="preview(category)"/>
+                        </nb-card-body>
+                        <nb-card-footer>
+                              <h5>Download Preview Letter</h5>
+                        </nb-card-footer>
+                     </nb-card>
+                  </div>
+               </div>
+               <div class="col-md-3" *ngFor = "let data of userTranscripts">
+                  <div>
+                     <nb-card status="success" size="small">
+                        <nb-card-header >{{data?.name}}</nb-card-header>
+                        <nb-card-body>
+                           <!-- <img class="img-responsive viewMoreImg" src="{{data?.image}}"/> -->
+                           <div *ngIf="data?.extension=='pdf'">
+                              <img src="{{serverUrl}}/front_assets/img/pdf1.png"  style="height:150px; width:150px;">
+                           </div>
+                           <div *ngIf="data?.extension != 'pdf'">
+                              <img class="img-responsive viewMoreImg" src="{{data?.image}}"/>
+                           </div>
+                        </nb-card-body>
+                        <nb-card-footer>
+                           <button size="x-small" status="info" (click)="DownloadTranscript(data?.file_path,data?.file_name,data?.user_id);" nbButton>Download</button>
+                        </nb-card-footer>
+                     </nb-card> 
+                  </div>
+               </div>
+            </div>
+         </nb-step>
+         <nb-step label="Payment Details" [completed]="true" *ngIf="category==='application' || category==='eligibility'">
+            <h3>Payment Details</h3><br>
+            <h4><b>Payment Mode :</b>{{studentData?.payment_detail.paymentMode}}</h4>
+            <table class="" border="1" bordercolor="#c4c4c4" style="width:100%">
+               <thead >
+                  <tr>
+                     <th class="tableHead">Date of Payment</th>
+                     <td class="tableData">{{studentData?.payment_detail.dateOfPaymebnt}}</td>
+                  </tr>
+                  <tr>
+                     <th class="tableHead">Order ID</th>
+                     <td class="tableData">{{studentData?.payment_detail.orderId}}</td>
+                  </tr>
+                  <tr>
+                     <th class="tableHead">Currency</th>
+                     <td class="tableData">{{studentData?.payment_detail.currency}}</td>
+                  </tr>
+                  <tr>
+                     <th class="tableHead">Total Amount</th>
+                     <td class="tableData">{{studentData?.payment_detail.totalAppAmount}}</td>
+                  </tr>
+               </thead>
+            </table>            
+         </nb-step>
+      </nb-stepper>
+   </nb-card-body>
+</nb-card>

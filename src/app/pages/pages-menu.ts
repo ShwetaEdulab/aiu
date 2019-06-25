@@ -62,6 +62,24 @@ export const MENU_ITEMS: NbMenuItem[] = [
     },
   },
   {
+    title: 'Student Management',
+    icon: 'fas fa-user-graduate',
+    link: '/pages/studentManagement',
+    data: {
+      permission: 'view',
+      resource: 'studentManagement'
+    },
+  },
+  {
+    title: 'Payment Details',
+    icon: 'fas fa-wallet',
+    link: '/pages/paymentDetails',
+    data: {
+      permission: 'view',
+      resource: 'paymentDetails'
+    },
+  },
+  {
     title: 'Sub-Admin Application',
     icon: 'ion-filing',
     link: '/pages/sub-admin-dashboard',

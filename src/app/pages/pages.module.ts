@@ -102,7 +102,10 @@ import { ErrataModule } from './errata/errata.module';
 import { SettingsComponent } from './settings/settings.component';
 import { DownloadModule } from './download/download.module';
 import { NbSpinnerModule } from '@nebular/theme';
-import {FileUploadModule} from 'primeng/fileupload'; 
+import {FileUploadModule} from 'primeng/fileupload';
+import { StudentMgmtModule } from './student-management/student-management.module';
+import { PaymentDetailsAdminModule } from '../admin/payment-details/payment-details.module';
+import { AdminViewModule } from '../admin/view/view.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -141,6 +144,9 @@ const PAGES_COMPONENTS = [
     DownloadModule,
     NbSpinnerModule,
     FileUploadModule,
+    StudentMgmtModule,
+    PaymentDetailsAdminModule,
+    AdminViewModule
   ],
   exports: [
     MatFormFieldModule

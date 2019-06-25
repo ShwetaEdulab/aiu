@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
-import {Observable, Subject} from 'rxjs/Rx';
+import {Observable, Subject, Subscriber} from 'rxjs/Rx';
 import { NbAuthService } from '@nebular/auth';
 import { NbThemeService } from '@nebular/theme';
 import { config } from '../../../config';
@@ -16,6 +16,27 @@ export class ApiService {
   constructor(private httpClient : HttpClient,
     public authService : NbAuthService,
     public themeService : NbThemeService) { }
+
+    get(url: string): Observable<any> {
+      return new Observable((observer: Subscriber<any>) => {
+          let objectUrl: string = null;
+          this.httpClient
+              .get(url, {
+                  responseType: 'blob'
+              })
+              .subscribe(m => {
+                  objectUrl = URL.createObjectURL(m);
+                  observer.next(objectUrl);
+              });
+  
+          return () => {
+              if (objectUrl) {
+                  URL.revokeObjectURL(objectUrl);
+                  objectUrl = null;
+              }
+          };
+      });
+  }
 
     login(email,password){
       try{
@@ -642,6 +663,59 @@ private messages = [];
       return this.httpClient.get(`${this.baseUrl}/api/attestation/getCertificateDetails`);     
     }catch(error){
       this.handleError('getAllPayments: ' + JSON.stringify(error));
+    }
+  }
+
+  //student management
+
+  getallstudents(){
+    try{
+        return this.httpClient.get(`${this.baseUrl}/api/admin/students`);
+    }catch(error) {
+        this.handleError("getallstudents : "+JSON.stringify(error));
+      }
+  }
+  
+  getallstudentstypewise(stu_type){
+    try{
+        return this.httpClient.get(`${this.baseUrl}/api/admin/students?stu_type=`+stu_type);
+    }catch(error) {
+        this.handleError("getallstudents : "+JSON.stringify(error));
+      }
+  }
+  
+  
+  status(status,userId){
+    try{
+      return this.httpClient.put(`${this.baseUrl}/api/admin/status`,{"status":status,"userId": userId});
+    }catch(error) {
+      this.handleError("status : "+JSON.stringify(error));
+    }
+  }
+
+  async getAllStudentData(userId){
+    try{
+        return await this.httpClient.get(`${this.baseUrl}/api/admin/View/studentview?userId=`+userId).toPromise();
+    }catch(error) {
+    this.handleError("getAllUserData : "+error);
+    }
+  }
+
+  preview(userId,courseId,id){
+    try{
+      return this.httpClient.post(`${this.baseUrl}/admin_api/Application/preview`,{userId:userId,courseId:courseId,id:id});
+    }catch(error) {
+      this.handleError("preview : "+JSON.stringify(error));
+    }
+  }
+
+  //payment tab
+
+  getPaymentDetails(order_no){
+    try{
+      return this.httpClient.get(`${this.baseUrl}/api/admin/paymentDetails/getPaymentDetails?order_no=`+order_no);
+    }catch(error) {
+        this.handleError("getPaymentDetails : "+JSON.stringify(error));
     }
   }
 
