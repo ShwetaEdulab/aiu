@@ -719,6 +719,38 @@ private messages = [];
     }
   }
 
+  getCountryDetails(){
+    try{
+      return this.httpClient.get(`${this.baseUrl}/api/admin/checkEligibility/getCountryDetails`); 
+    }catch(error){
+      this.handleError('getCountryDetails: ' + JSON.stringify(error));
+    }
+  }
+
+  getAllUniversities(countryName){
+    try{
+      return this.httpClient.post(`${this.baseUrl}/api/admin/checkEligibility/getUniversities`,{"countryName":countryName});
+    }catch(error) {
+      this.handleError("getAllUniversities : "+error);
+    }
+  }
+
+  getCollegeName(countryName,universityName){
+    try{
+      return this.httpClient.post(`${this.baseUrl}/api/admin/checkEligibility/getCollegeName`,{"countryName":countryName,"universityName":universityName});
+    }catch(error) {
+      this.handleError("getCollegeName : "+error);
+    }
+  }
+
+  checkEligibility(countryName,universityName,collegeName){
+    try{
+      return this.httpClient.post(`${this.baseUrl}/api/admin/checkEligibility/checkEligibility`,{"countryName":countryName,"universityName":universityName,"collegeName":collegeName});
+    }catch(error) {
+      this.handleError("checkEligibility : "+error);
+    }
+  }
+
   private handleError(error){
     console.error(error);
   }

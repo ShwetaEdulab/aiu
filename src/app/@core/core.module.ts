@@ -106,10 +106,10 @@ export const NB_CORE_PROVIDERS = [
         view: ['dashboard','profile','myapplications','download'],
       },
       "sub-admin": {
-       view:['SubAdminDashboard'],
+       view:['SubAdminDashboard','checkEligibility'],
       },
       admin: {
-       view:['adminDashboard','studentManagement','paymentDetails'],
+       view:['adminDashboard','studentManagement','paymentDetails','checkEligibility'],
       },
     },
   }).providers,

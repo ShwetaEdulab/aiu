@@ -106,6 +106,7 @@ import {FileUploadModule} from 'primeng/fileupload';
 import { StudentMgmtModule } from './student-management/student-management.module';
 import { PaymentDetailsAdminModule } from '../admin/payment-details/payment-details.module';
 import { AdminViewModule } from '../admin/view/view.module';
+import { CheckEligibilityModule } from './check-eligibility/check-eligibility.module'
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -146,7 +147,8 @@ const PAGES_COMPONENTS = [
     FileUploadModule,
     StudentMgmtModule,
     PaymentDetailsAdminModule,
-    AdminViewModule
+    AdminViewModule,
+    CheckEligibilityModule
   ],
   exports: [
     MatFormFieldModule

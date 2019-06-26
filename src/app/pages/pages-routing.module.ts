@@ -23,6 +23,7 @@ import { DownloadComponent } from './download/download.component';
 import { StudentManagementComponent } from './student-management/student-management.component';
 import { PaymentDetailsAdminComponent } from '../admin/payment-details/payment-details.component'
 import { AdminViewComponent } from '../admin/view/view.component';
+import { CheckEligibilityComponent } from './check-eligibility/check-eligibility.component';
 
 const routes: Routes = [{
   path: '',
@@ -77,6 +78,11 @@ const routes: Routes = [{
     // data: { 
     //   expectedRole: 'admin'
     // } 
+  },
+  {
+    path : 'check-eligibility',
+    component : CheckEligibilityComponent,
+    canActivate : [AuthGuard]
   },
   {
     path: 'studentManagement',

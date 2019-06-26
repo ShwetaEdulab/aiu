@@ -80,6 +80,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
     },
   },
   {
+    title: 'Check Eligibility',
+    icon: 'ion-checkmark-circled',
+    link: '/pages/check-eligibility',
+    data: {
+      permission: 'view',
+      resource: 'checkEligibility'
+    },
+  },
+  {
     title: 'Sub-Admin Application',
     icon: 'ion-filing',
     link: '/pages/sub-admin-dashboard',
