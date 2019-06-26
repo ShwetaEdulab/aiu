@@ -87,6 +87,20 @@ export class PaymentSuccessComponent implements OnInit {
         this.user_id = data['data']['user_id'];
       }
     )
+
+    var generatereceipt = await this.api.OnlinePaymentChallan(this.transaction_id,this.payment_amount,this.payment_status,this.application_id,this.payment_date_time,this.user_id);
+    generatereceipt.subscribe(
+      data => {
+        var value = data['data'].split('/').pop();
+        this.api.downloadFiles(value)
+          .subscribe(data => {
+            saveAs(data, value);
+          });
+      },
+      error => {
+          console.error("Error", error);
+      }
+    ); 
     
   }
 

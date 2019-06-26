@@ -28,7 +28,7 @@ export class DownloadComponent implements OnInit {
   }
 
   DownloadReceipt(application_id){
-    var value = application_id+"_Attestation_Payment_Challan.pdf"
+    var value = application_id+"_AIU_Payment_Challan.pdf"
     this.api.downloadReceipt(application_id).subscribe((data)=>{
       saveAs(data, value);
     })
