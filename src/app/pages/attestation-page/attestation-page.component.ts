@@ -18,6 +18,9 @@ import {
 	paymentOptionsDialog
 } from './dialog/paymentOptionsDialog';
 import { HeaderComponent } from '../../@theme/components/header/header.component';
+import {
+  TranscriptDialogComponent
+} from './dialog/transcriptdialogcomponent';
 
 @Component({
   selector: 'ngx-attestation-page',
@@ -80,6 +83,7 @@ export class AttestationPageComponent implements OnInit {
     },
   };
   user_id;
+  sign_lock;
   ssc_lock;
   ssc_passing_lock;
   fyjc_lock;
@@ -96,6 +100,7 @@ export class AttestationPageComponent implements OnInit {
   visa_lock;
   master_upload = false;
   phd_upload = false;
+  transSIGNUrl = config.transUploadUrl+"?user_id=" + this.giveUSER_Id() + "&transcript_name=SIGN_Document&hiddentype=SIGN";
   transSSCUrl = config.transUploadUrl+"?user_id=" + this.giveUSER_Id() + "&transcript_name=SSC_Document&hiddentype=SSC";
   transFYJCUrl = config.transUploadUrl+"?user_id=" + this.giveUSER_Id() + "&transcript_name=FYJC_Document&hiddentype=FYJC";
   transSSCPassingUrl = config.transUploadUrl+"?user_id=" + this.giveUSER_Id() + "&transcript_name=SSC_Passing_Document&hiddentype=SSC_Passing";
@@ -165,6 +170,7 @@ export class AttestationPageComponent implements OnInit {
     phd_outofmarks :'',
   }
 
+  sign_document : boolean = false;
   ssc_document : boolean = false;
   ssc_passing_document : boolean = false;
   fyjc_document : boolean = false;
@@ -188,6 +194,7 @@ export class AttestationPageComponent implements OnInit {
   user: any;
   index: number;
 
+  loadingsignbutton = false;
   loadingsscbutton = false;
   loadingsscpassingbutton = false;
   loadingfyjcbutton = false;
@@ -218,6 +225,7 @@ export class AttestationPageComponent implements OnInit {
   show_payment_button : boolean = false ;
   payment_data: any;
   application_id: any;
+  moreDocs: any;
 
   constructor(protected api : ApiService,
     private route: ActivatedRoute, 
@@ -451,6 +459,8 @@ export class AttestationPageComponent implements OnInit {
 
   private educationalStep() : void{
     this.educationalForm = this.fb.group({
+      SIGNDocument: [null, Validators.required],
+
       ssc_Univ_name: ['', [Validators.required, Validators.maxLength(200), Validators.minLength(3)]],
       ssc_SscName: ['', [Validators.required, Validators.maxLength(200), Validators.minLength(3)]],
       ssc_InputMarks: ['', [Validators.pattern(this.marksValidate), Validators.required, Validators.maxLength(3), Validators.minLength(2)]],
@@ -580,6 +590,15 @@ export class AttestationPageComponent implements OnInit {
 
     this.api.getDocumentDetails().subscribe(data =>{
       if(data['status'] == 200){
+        this.moreDocs = data['moreDocs'];
+        console.log("this.moreDocs======>"+JSON.stringify(this.moreDocs));
+
+        if(data['data'][0]['sign_document_exists'] == 'exists'){
+          this.sign_document = true;
+          this.sign_lock=data['data'][0]['sign_lock']
+          this.educationalForm.controls.SIGNDocument.patchValue(data['data'][0]['sign_document']);
+        }
+
         if(data['data'][0]['ssc_document_exists'] == 'exists'){
           this.ssc_document = true;
           this.ssc_lock=data['data'][0]['ssc_lock']
@@ -777,36 +796,44 @@ export class AttestationPageComponent implements OnInit {
     }
   }
 
-  onSelect(value): void {
-    if(value == "SSC"){
-      this.loadingsscbutton = true;
-    }else if(value == "SSC_Passing"){
-      this.loadingsscpassingbutton = true;
-    }else if(value == "FYJC"){
-      this.loadingfyjcbutton = true;
-    }else if(value == "HSC"){
-      this.loadinghscbutton = true;
-    }else if(value == "HSC_Passing"){
-      this.loadinghscpassingbutton = false;
-    }else if(value == "Graduation"){
-      this.loadingdegreebutton = true;
-    }else if(value == "Degree_Certificate"){
-      this.loadingdegreecertificatebutton= true;
-    }else if(value == "Master"){
-      this.loadingmasterbutton = true;
-    }else if(value == "Master_Certificate"){
-      this.loadingmastercertificatebutton = true;
-    }else if(value == "Ph.D"){
-      this.loadingphdbutton = true;
-    }else if(value == "Course_Letter"){
-      this.loadingcourseletterbutton = true;
-    }else if(value == "Offer_Letter"){
-      this.loadingofferletterbutton = true;
-    }else if(value == "Passport"){
-      this.loadingpassportbutton = true;
-    }else if(value == "Visa"){
-      this.loadingvisabutton = true;
-    }
+  onSelect($event,value): void {
+    var maxFileSize =  5000000;
+		var imgArr = $event.files[0].name.split('.');
+		var extension = imgArr[imgArr.length - 1].trim();
+    if ($event.files[0].size > maxFileSize) {
+			this.confirmationService.confirm({
+				message: 'Maximum file size should be 5 MB.',
+				header: 'Invalid File Size',
+				icon: 'pi pi-info-circle',
+				rejectVisible : false,
+        acceptLabel: 'Ok',
+        accept: () => {
+
+        },reject: () => {
+          
+        }
+			});
+		}
+
+		if(value=='SIGN' && (extension!='jpg' && extension!='jpeg' && extension!='png' && extension!='JPG' && extension!='JPEG' && extension!='PNG' ) ) {
+			this.confirmationService.confirm({
+				message: 'Please upload your transcript in .jpeg or .jpg or .png formats',
+				header: 'Invalid File Type',
+				icon: 'pi pi-info-circle',
+				rejectVisible : false,
+				acceptLabel: 'Ok'
+			});
+		}
+
+		if(value!='SIGN' && (extension!='jpg' && extension!='jpeg' && extension!='png' && extension!='pdf' && extension!='JPG' && extension!='JPEG' && extension!='PNG' && extension!='PDF' )){
+			this.confirmationService.confirm({
+				message: 'Please upload your transcript in .jpeg or .jpg or .png or .pdf formats',
+				header: 'Invalid File Type',
+				icon: 'pi pi-info-circle',
+				rejectVisible : false,
+				acceptLabel: 'Ok'
+			});
+		}
 
   }
 
@@ -824,7 +851,11 @@ export class AttestationPageComponent implements OnInit {
       var yourMessage = json.message;
       
       if (yourStatus == 200) {
-        if(yourData == "SSC"){
+        if(yourData == "SIGN"){
+          this.sign_document = true;
+          this.sign_lock = false;
+          this.loadingsignbutton = false;
+        }else if(yourData == "SSC"){
           this.ssc_document = true;
           this.ssc_lock = false;
           this.loadingsscbutton = false;
@@ -908,7 +939,38 @@ export class AttestationPageComponent implements OnInit {
     }
   }
 
-  onBeforeSend(event) {
+  onBeforeSend(event,value) {
+    if(value == "SIGN"){
+      this.loadingsignbutton = true;
+    }else if(value == "SSC"){
+      this.loadingsscbutton = true;
+    }else if(value == "SSC_Passing"){
+      this.loadingsscpassingbutton = true;
+    }else if(value == "FYJC"){
+      this.loadingfyjcbutton = true;
+    }else if(value == "HSC"){
+      this.loadinghscbutton = true;
+    }else if(value == "HSC_Passing"){
+      this.loadinghscpassingbutton = false;
+    }else if(value == "Graduation"){
+      this.loadingdegreebutton = true;
+    }else if(value == "Degree_Certificate"){
+      this.loadingdegreecertificatebutton= true;
+    }else if(value == "Master"){
+      this.loadingmasterbutton = true;
+    }else if(value == "Master_Certificate"){
+      this.loadingmastercertificatebutton = true;
+    }else if(value == "Ph.D"){
+      this.loadingphdbutton = true;
+    }else if(value == "Course_Letter"){
+      this.loadingcourseletterbutton = true;
+    }else if(value == "Offer_Letter"){
+      this.loadingofferletterbutton = true;
+    }else if(value == "Passport"){
+      this.loadingpassportbutton = true;
+    }else if(value == "Visa"){
+      this.loadingvisabutton = true;
+    }
     this.authService.onTokenChange().subscribe((token: NbAuthJWTToken) => {
       if (token.isValid()) {
         this.currenttoken = token;
@@ -919,7 +981,7 @@ export class AttestationPageComponent implements OnInit {
 
   downloadDoc(type,value){
     value = value.split('/').pop();
-
+console.log("value=========>"+value);
     this.api.downloadFiles(value)
     .subscribe(data => {
       saveAs(data, value);
@@ -1279,6 +1341,32 @@ export class AttestationPageComponent implements OnInit {
           console.error("Error", error);
       }
     ); 
+  }
+
+  open(EducationalDialogNo) {
+    if (EducationalDialogNo == 1) {
+      this.dialogService.open(TranscriptDialogComponent).onClose
+        .subscribe(
+          (data: any) => {
+            if (data !== undefined) {
+              this.moreTranscript();
+            }
+            err => console.error(err)
+          })
+    } else {
+      console.error("Function Open () : invalid number ");
+    }
+  }
+
+  moreTranscript(){
+    this.api.getDocumentDetails().subscribe(data =>{
+      if(data['status'] == 200){
+        this.moreDocs = data['moreDocs'];
+        //console.log("this.moreDocs======>"+JSON.stringify(this.moreDocs));
+      }else{
+      }
+    });
+
   }
 }
 

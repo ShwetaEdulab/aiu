@@ -24,11 +24,13 @@ import {
   MatSelectModule
 } from '@angular/material';
 import { paymentOptionsDialog } from './dialog/paymentOptionsDialog';
+import { TranscriptDialogComponent } from './dialog/transcriptdialogcomponent';
 
 @NgModule({
   declarations: [
     AttestationPageComponent,
-    paymentOptionsDialog
+    paymentOptionsDialog,
+    TranscriptDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -55,7 +57,8 @@ import { paymentOptionsDialog } from './dialog/paymentOptionsDialog';
     NbActionsModule
   ],
   entryComponents: [
-    paymentOptionsDialog
+    paymentOptionsDialog,
+    TranscriptDialogComponent,
   ]
 })
 export class AttestationPageModule { }

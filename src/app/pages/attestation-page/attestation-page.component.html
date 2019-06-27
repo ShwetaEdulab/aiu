@@ -233,6 +233,43 @@
       </nb-step>
       <nb-step label="Educational Details" [stepControl]="educationalForm">
         <form [formGroup]="educationalForm">
+            <div class=" form-group row">
+              <div class="col-xl-2">
+                <b>
+                  <h4>
+                    Student Signature
+                    <span style="color:red;">*</span>
+                  </h4>
+                </b>
+              </div>
+              <div class="col-xl-2" style="text-align: center">
+                  <div *ngIf="sign_lock ==true || sign_document == false"  [nbSpinner]="loadingsignbutton" nbSpinnerStatus="primary">
+                    <p-fileUpload ngDefaultControl
+                      mode="basic" 
+                      name="file"
+                      chooseLabel="Upload"
+                      url={{transSIGNUrl}}
+                      accept="image/*" 
+                      ngDefaultControl [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" 
+                      maxFileSize="5000000"
+                      auto="true"
+                      formControlName="SIGNDocument"
+                      (onSelect)="onSelect($event,'SIGN');"
+                      (onUpload)="onUpload($event)"
+                      (onError)="onErrorFileUpload($event)"
+                      (onBeforeSend)="onBeforeSend($event,'SIGN')">
+                    </p-fileUpload>
+                  </div>
+                  <div *ngIf="sign_document == true && sign_lock == false">
+                    <button nbButton  status="info" (click)="downloadDoc('SIGN',this.educationalForm.controls.SIGNDocument.value)">Preview <i class="fas fa-download"></i></button>
+                  </div>
+                  <div *ngIf="form_submitted && educationalForm.controls.SIGNDocument.errors" class="error_class">
+                    <div *ngIf="educationalForm.controls.SIGNDocument.errors.required">Sign is required</div>
+                  </div>
+                </div>
+
+            </div>
+
           <div class="row" style="text-align: center">
             <div class="col-xl-2">
             </div>
@@ -308,9 +345,10 @@
                   maxFileSize="5000000"
                   auto="true"
                   formControlName="SSCDocument"
-                  (onSelect)="onSelect('SSC');"
+                  (onSelect)="onSelect($event,'SSC');"
                   (onUpload)="onUpload($event)"
-                  (onError)="onErrorFileUpload($event)">
+                  (onError)="onErrorFileUpload($event)"
+                  (onBeforeSend)="onBeforeSend($event,'SSC')">
                 </p-fileUpload>
               </div>
               <div *ngIf="ssc_document == true && ssc_lock == false">
@@ -332,9 +370,10 @@
                   maxFileSize="5000000"
                   auto="true"
                   formControlName="SSCPassingDocument"
-                  (onSelect)="onSelect('SSC_Passing');"
+                  (onSelect)="onSelect($event,'SSC_Passing');"
                   (onUpload)="onUpload($event)"
-                  (onError)="onErrorFileUpload($event)">
+                  (onError)="onErrorFileUpload($event)"
+                  (onBeforeSend)="onBeforeSend($event,'SSC_Passing')">
                 </p-fileUpload>
               </div>
               <div *ngIf="ssc_passing_document == true && ssc_passing_lock == false">
@@ -401,9 +440,10 @@
                   maxFileSize="5000000"
                   auto="true"
                   formControlName="FYJCDocument"
-                  (onSelect)="onSelect('FYJC');"
+                  (onSelect)="onSelect($event,'FYJC');"
                   (onUpload)="onUpload($event)"
-                  (onError)="onErrorFileUpload($event)">
+                  (onError)="onErrorFileUpload($event)"
+                  (onBeforeSend)="onBeforeSend($event,'FYJC')">
                 </p-fileUpload>
               </div>
               <div *ngIf="fyjc_document == true && fyjc_lock == false">
@@ -471,9 +511,10 @@
                   auto="true"
                   chooseLabel="Upload Marksheet"
                   formControlName="HSCDocument"
-                  (onSelect)="onSelect('HSC');"
+                  (onSelect)="onSelect($event,'HSC');"
                   (onUpload)="onUpload($event)"
-                  (onError)="onErrorFileUpload($event)">
+                  (onError)="onErrorFileUpload($event)"
+                  (onBeforeSend)="onBeforeSend($event,'HSC')">
                 </p-fileUpload>
               </div>
               <div *ngIf="hsc_document == true && hsc_lock == false">
@@ -495,9 +536,10 @@
                   maxFileSize="5000000"
                   auto="true"
                   formControlName="HSCPassingDocument"
-                  (onSelect)="onSelect('HSC_Passing');"
+                  (onSelect)="onSelect($event,'HSC_Passing');"
                   (onUpload)="onUpload($event)"
-                  (onError)="onErrorFileUpload($event)">
+                  (onError)="onErrorFileUpload($event)"
+                  (onBeforeSend)="onBeforeSend($event,'HSC_Passing')">
                 </p-fileUpload>
               </div>
               <div *ngIf="hsc_passing_document == true && hsc_passing_lock == false">
@@ -560,9 +602,10 @@
                   auto="true"
                   [disabled]="master_upload"
                   formControlName="GraduationDocument"
-                  (onSelect)="onSelect('Graduation');"
+                  (onSelect)="onSelect($event,'Graduation');"
                   (onUpload)="onUpload($event)"
-                  (onError)="onErrorFileUpload($event)">
+                  (onError)="onErrorFileUpload($event)"
+                  (onBeforeSend)="onBeforeSend($event,'Graduation')">
                 </p-fileUpload>
               </div>
               
@@ -588,9 +631,10 @@
                   auto="true"
                   [disabled]="master_upload"
                   formControlName="DegreeCertificateDocument"
-                  (onSelect)="onSelect('Degree_Certificate');"
+                  (onSelect)="onSelect($event,'Degree_Certificate');"
                   (onUpload)="onUpload($event)"
-                  (onError)="onErrorFileUpload($event)">
+                  (onError)="onErrorFileUpload($event)"
+                  (onBeforeSend)="onBeforeSend($event,'Degree_Certificate')">
                 </p-fileUpload>
               </div>
               
@@ -654,9 +698,10 @@
                   auto="true"
                   chooseLabel="Upload Marksheet"
                   formControlName="MasterDocument"
-                  (onSelect)="onSelect('Master');"
+                  (onSelect)="onSelect($event,'Master');"
                   (onUpload)="onUpload($event)"
-                  (onError)="onErrorFileUpload($event)">
+                  (onError)="onErrorFileUpload($event)"
+                  (onBeforeSend)="onBeforeSend($event,'Master')">
                 </p-fileUpload>
               </div>
               <div *ngIf="master_document == true && master_lock == false">
@@ -681,9 +726,10 @@
                   auto="true"
                   chooseLabel="Upload Master's Certificate"
                   formControlName="MasterCertificateDocument"
-                  (onSelect)="onSelect('Master_Certificate');"
+                  (onSelect)="onSelect($event,'Master_Certificate');"
                   (onUpload)="onUpload($event)"
-                  (onError)="onErrorFileUpload($event)">
+                  (onError)="onErrorFileUpload($event)"
+                  (onBeforeSend)="onBeforeSend($event,'Master_Certificate')">
                 </p-fileUpload>
               </div>
               <div *ngIf="master_certificate_document == true && master_certificate_lock == false">
@@ -744,9 +790,10 @@
                   maxFileSize="5000000"
                   auto="true"
                   formControlName="phdDocument"
-                  (onSelect)="onSelect('Ph.D');"
+                  (onSelect)="onSelect($event,'Ph.D');"
                   (onUpload)="onUpload($event)"
-                  (onError)="onErrorFileUpload($event)">
+                  (onError)="onErrorFileUpload($event)"
+                  (onBeforeSend)="onBeforeSend($event,'Ph.D')">
                 </p-fileUpload>
               </div>
               <div *ngIf="phd_document == true && phd_lock == false">
@@ -783,9 +830,10 @@
                   auto="true"
                   chooseLabel="Upload Passport"
                   formControlName="PassportDocument"
-                  (onSelect)="onSelect('Passport');"
+                  (onSelect)="onSelect($event,'Passport');"
                   (onUpload)="onUpload($event)"
-                  (onError)="onErrorFileUpload($event)">
+                  (onError)="onErrorFileUpload($event)"
+                  (onBeforeSend)="onBeforeSend($event,'Passport')">
                 </p-fileUpload>
               </div>
               <div *ngIf="passport_document == true && passport_lock == false">
@@ -815,9 +863,10 @@
                     auto="true"
                     chooseLabel="Upload Visa"
                     formControlName="VisaDocument"
-                    (onSelect)="onSelect('Visa');"
+                    (onSelect)="onSelect($event,'Visa');"
                     (onUpload)="onUpload($event)"
-                    (onError)="onErrorFileUpload($event)">
+                    (onError)="onErrorFileUpload($event)"
+                    (onBeforeSend)="onBeforeSend($event,'Visa')">
                   </p-fileUpload>
                 </div>
                 <div *ngIf="visa_document == true && visa_lock == false">
@@ -853,9 +902,10 @@
                   [disabled]="master_upload"
                   auto="true"
                   formControlName="CourseLetterDocument"
-                  (onSelect)="onSelect('Course_Letter');"
+                  (onSelect)="onSelect($event,'Course_Letter');"
                   (onUpload)="onUpload($event)"
-                  (onError)="onErrorFileUpload($event)">
+                  (onError)="onErrorFileUpload($event)"
+                  (onBeforeSend)="onBeforeSend($event,'Course_Letter')">
                 </p-fileUpload>
               </div>
               <div *ngIf="course_letter_document == true && course_letter_lock == false">
@@ -890,9 +940,10 @@
                   maxFileSize="5000000"
                   auto="true"
                   formControlName="OfferLetterDocument"
-                  (onSelect)="onSelect('Offer_Letter');"
+                  (onSelect)="onSelect($event,'Offer_Letter');"
                   (onUpload)="onUpload($event)"
-                  (onError)="onErrorFileUpload($event)">
+                  (onError)="onErrorFileUpload($event)"
+                  (onBeforeSend)="onBeforeSend($event,'Offer_Letter')">
                 </p-fileUpload>
               </div>
               <div *ngIf="offer_letter_document == true && offer_letter_lock == false">
@@ -901,6 +952,33 @@
               <div *ngIf="form_submitted && educationalForm.controls.OfferLetterDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.OfferLetterDocument.errors.required">Offer Letter required</div>
               </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-xl-3">
+              <h4>Upload More Transcript</h4>
+            </div>
+            <div class="col-xl-4">
+              <button nbButton (click)="open(1)" shape="rectangle" status="info">+ Add more</button>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div *ngFor="let moreDoc of moreDocs">
+              <nb-card status="success" class="col-md-12">
+                <nb-card-header>{{moreDoc?.name}}</nb-card-header>
+                <nb-card-body>
+                  <div class="col-md-12 col-sm-12 col-xs-12" *ngIf="moreDoc?.lock_transcript== false">
+                    <button type='button' nbButton shape="round" size="small" (click)="downloadDoc('', moreDoc?.image)"
+                      status="info">Download</button>
+                  </div>
+                  <div class="col-md-12 col-sm-12 col-xs-12" *ngIf="moreDoc?.lock_transcript == true">
+                    <button nbButton (click)="open(1)" shape="rectangle" hero status="primary">ReUpload
+                      Transcript</button>
+                  </div>
+                </nb-card-body>
+              </nb-card>
             </div>
           </div>
 
