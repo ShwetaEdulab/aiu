@@ -591,7 +591,7 @@ export class AttestationPageComponent implements OnInit {
     this.api.getDocumentDetails().subscribe(data =>{
       if(data['status'] == 200){
         this.moreDocs = data['moreDocs'];
-        console.log("this.moreDocs======>"+JSON.stringify(this.moreDocs));
+        //console.log("this.moreDocs======>"+JSON.stringify(this.moreDocs));
 
         if(data['data'][0]['sign_document_exists'] == 'exists'){
           this.sign_document = true;

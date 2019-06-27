@@ -23,6 +23,45 @@ import { Router, ActivatedRoute } from '@angular/router';
           <i class="fa ion-android-lock" style="font-size: 180%;color:red" nbPopover="Errata:If any transcript blur or password protected then click on this button." nbPopoverMode="hover" (click)="errata()"></i>
         </h6>
       </div>
+      <div *ngIf="sign != undefined" style="text-align:center;">
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <h1>
+              <b>
+                {{ sign?.type }}
+              </b>
+            </h1>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+        <div *ngIf='sign?.file_ext == "pdf"' class="row" style="text-align:center;">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <button nbButton (click)="download(sign?.file_name)" status='info'>DOWNLOAD</button>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+        <div *ngIf='sign?.file_ext != "pdf"'>
+          <div class="row" style='color:red'>
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+              Note :- Click on image to download
+            </div>
+            <div class="col-md-1"></div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-4">
+              <img class="img-responsive" style= "width: 200px; height:200px;" [src]="sign?.file_name" (click)="download(sign?.file_name)"/>
+            </div>
+            <div class="col-md-5"></div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
       <div *ngIf="ssc != undefined" style="text-align:center;">
         <div class="row">
           <div class="col-md-4"></div>
@@ -564,7 +603,42 @@ import { Router, ActivatedRoute } from '@angular/router';
             <div class="col-md-5"></div>
           </div>
         </div>
+        <div *ngFor="let moreDoc of moreDocs">
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <h1>
+              <b>{{ moreDoc?.name }}</b>
+            </h1>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+        <div *ngIf='moreDoc?.file_ext == "pdf"' class="row" style="text-align:center;">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <button nbButton (click)="download(moreDoc?.file_name)" status='info'>DOWNLOAD</button>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+        <div *ngIf='moreDoc?.file_ext != "pdf"'>
+          <div class="row" style='color:red'>
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+              Note :- Click on image to download
+            </div>
+            <div class="col-md-1"></div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-4">
+              <img class="img-responsive" style= "width: 200px; height:200px;" [src]="moreDoc?.file_name" (click)="download(moreDoc?.file_name)"/>
+            </div>
+            <div class="col-md-5"></div>
+          </div>
+        </div>
       </div>
+    </div>
     </nb-card-body>
     <nb-card-footer>
     <div style="text-align:center;font-size: 150%;">
@@ -578,6 +652,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ShowTranscriptComponent implements OnInit {
   @Input() user_id ;
+  sign  = {
+    type:'',
+    file_name:'',
+    file_ext: ''
+  }
   ssc  = {
     type:'',
     file_name:'',
@@ -648,6 +727,7 @@ export class ShowTranscriptComponent implements OnInit {
     file_name:'',
     file_ext: ''
   }
+  moreDocs: any;
   constructor(protected ref: NbDialogRef<ShowTranscriptComponent>,
     protected api : ApiService,
     private router : Router,
@@ -656,6 +736,7 @@ export class ShowTranscriptComponent implements OnInit {
   ngOnInit() {
     this.api.getTranscriptDetails(this.user_id).subscribe( data => {
       if(data['status'] == 200){
+        this.sign = data['data']['sign'][0];
         this.ssc = data['data']['ssc'][0];
         this.ssc_passing = data['data']['ssc_passing'][0];
         this.fyjc = data['data']['fyjc'][0];
@@ -670,6 +751,7 @@ export class ShowTranscriptComponent implements OnInit {
         this.offer_letter = data['data']['offer_letter'][0];
         this.passport = data['data']['passport'][0];
         this.visa = data['data']['visa'][0];
+        this.moreDocs = data['data']['moreDocs'];
       }else if(data['status'] == 400){
         this.ref.close();
         alert('There is an issue in application.No Trascript found!!!');
