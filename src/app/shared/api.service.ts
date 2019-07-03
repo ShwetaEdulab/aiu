@@ -751,6 +751,14 @@ private messages = [];
     }
   }
 
+  saveEligibilityData(countryName,universityName,collegeName){
+    try{
+      return this.httpClient.post(`${this.baseUrl}/api/admin/checkEligibility/saveEligibilityData`,{"countryName":countryName,"universityName":universityName,"collegeName":collegeName});
+    }catch(error) {
+      this.handleError("checkEligibility : "+error);
+    }
+  }
+
   private handleError(error){
     console.error(error);
   }

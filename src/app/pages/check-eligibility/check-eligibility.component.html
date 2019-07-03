@@ -1,76 +1,125 @@
-<nb-card status="success" [nbSpinner]="loading" nbSpinnerStatus="primary" nbSpinnerSize="xlarge">
-  <nb-card-header><h3 style="font:normal 25px 'Cabin', serif"><b>CHECK ELIGIBILITY</b></h3></nb-card-header>
-  <nb-card-body>
-    <form [formGroup]="checkEligibility">
-      <div class="row">
-        <mat-form-field class="col-lg-12">
-          <mat-select placeholder="Select Country Name" [(ngModel)]="countryName" name="countryName" formControlName="countryNameCtrl"
-            (ngModelChange)="getUniversities($event)">
-            <mat-option *ngFor="let country of Countries;" [value]="country.name">
-              {{country.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="row">
-        <mat-form-field class="col-lg-12">
-          <mat-select placeholder="Nomenclature Of Certificate / University or Board Name" [(ngModel)]="universityName" name="universityName"
-            formControlName="universityNameCtrl" (ngModelChange)="getColleges($event)">
-            <mat-option *ngFor="let University of Universities" [value]="University.university_name">
-              {{University.university_name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="row">
-        <mat-form-field class="col-lg-12">
-          <mat-select placeholder="Awarding Authority / College or School Name" [(ngModel)]="collegeName" name="collegeName"
-            formControlName="collegeNameCtrl" (ngModelChange)="selectedCollege($event)">
-            <mat-option *ngFor="let college of Colleges" [value]="college.college_name">
-              {{college.college_name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <!-- <div class="row">
-        <div class="col-xl-4">
-
-        </div>
-        <div class="col-xl-4">
-          <button nbButton hero status="primary">CHECK</button>
-        </div>
-        <div class="col-xl-4">
-
-        </div>
-      </div> -->
-    </form>
-  </nb-card-body>
-  <nb-card-footer>
-    <div class="row">
-      <div class="offset-lg-4"></div><button nbButton status="info" (click)="check()" class="col-lg-4">CHECK</button>
-    </div>
-  </nb-card-footer>
-</nb-card>
-<nb-card status="success" *ngIf="AIU == true">
-  <nb-card-header><h4 style="font:normal 20px 'Cabin', serif"><b>AIU Eligibility</b></h4></nb-card-header>
-  <nb-card-body>
-    <h5 style="color:green">Congratulations!!!!!!!!!! You are eligible</h5>
-  </nb-card-body>
-</nb-card>
-<nb-card status="success" *ngIf="MU == true">
-  <nb-card-header><h4 style="font:normal 20px 'Cabin', serif"><b>Mumbai University Eligible Students</b></h4></nb-card-header>
-  <nb-card-body>
-    <h4 style="color:green">Following Students are eligible from MU :- </h4>
-    <p *ngFor="let course_data_mumbai of finalData">
-      <b>Student Name :- </b> {{ course_data_mumbai.stu_name }}
-      <b>Email :- </b>{{course_data_mumbai.stu_email}}
-      <b>Course Name :- </b>{{course_data_mumbai.specialization}} in {{course_data_mumbai.course_name}} 
-    </p>
-  </nb-card-body>
-</nb-card>
-<nb-card status="danger" *ngIf="NotEligible == true">
-  <nb-card-header><h4 style="font:normal 20px 'Cabin', serif"><b>Mumbai University Eligible Students</b></h4></nb-card-header>
-  <nb-card-body>
-    <h5 style="color:red">NO Records Found!!!!!!!!</h5>
-  </nb-card-body>
+<nb-card [nbSpinner]="loading" nbSpinnerStatus="primary" nbSpinnerSize="xlarge">
+  <p-tabView (onChange)="tab($event)">
+    <p-tabPanel header="CHECK ELIGIBILITY">
+      <nb-card status="success">
+        <nb-card-header><h3 style="font:normal 25px 'Cabin', serif"><b>CHECK ELIGIBILITY</b></h3></nb-card-header>
+        <nb-card-body>
+          <form [formGroup]="checkEligibility">
+            <div class="row">
+              <mat-form-field class="col-lg-12">
+                <mat-select placeholder="Select Country Name" [(ngModel)]="countryName" name="countryName" formControlName="countryNameCtrl"
+                  (ngModelChange)="getUniversities($event)">
+                  <mat-option *ngFor="let country of Countries;" [value]="country.name">
+                    {{country.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <br>
+            <div class="row">
+              <mat-form-field class="col-lg-12">
+                <mat-select placeholder="Select Nomenclature Of Certificate / University or Board Name" [(ngModel)]="universityName" name="universityName"
+                  formControlName="universityNameCtrl" (ngModelChange)="getColleges($event)">
+                  <mat-option *ngFor="let University of Universities" [value]="University.university_name">
+                    {{University.university_name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <br>
+            <div class="row">
+              <mat-form-field class="col-lg-12">
+                <mat-select placeholder="Select Awarding Authority / College or School Name" [(ngModel)]="collegeName" name="collegeName"
+                  formControlName="collegeNameCtrl" (ngModelChange)="selectedCollege($event)">
+                  <mat-option *ngFor="let college of Colleges" [value]="college.college_name">
+                    {{college.college_name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <br>
+          </form>
+        </nb-card-body>
+        <nb-card-footer>
+          <div class="row" *ngIf="showError == true">
+            <div class="offset-lg-5">
+              <h5 style="color:red">please select all details !!!</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="offset-lg-4"></div><button nbButton status="info" (click)="check()" class="col-lg-4">CHECK</button>
+          </div>
+        </nb-card-footer>
+      </nb-card>
+      <nb-card status="success" *ngIf="AIU == true">
+        <nb-card-header><h4 style="font:normal 20px 'Cabin', serif"><b>AIU Eligibility</b></h4></nb-card-header>
+        <nb-card-body>
+          <h5 style="color:green">Congratulations!!!!!!!!!! You are eligible</h5>
+        </nb-card-body>
+      </nb-card>
+      <nb-card status="success" *ngIf="MU == true">
+        <nb-card-header><h4 style="font:normal 20px 'Cabin', serif"><b>Mumbai University Eligible Students</b></h4></nb-card-header>
+        <nb-card-body>
+          <h4 style="color:green">Following Students are eligible from MU :- </h4>
+          <p *ngFor="let course_data_mumbai of finalData">
+            <b>Student Name :- </b> {{ course_data_mumbai.stu_name }}
+            <b>Email :- </b>{{course_data_mumbai.stu_email}}
+            <b>Course Name :- </b>{{course_data_mumbai.specialization}} in {{course_data_mumbai.course_name}} 
+          </p>
+        </nb-card-body>
+      </nb-card>
+      <nb-card status="danger" *ngIf="NotEligible == true">
+        <nb-card-header><h4 style="font:normal 20px 'Cabin', serif"><b>Mumbai University Eligible Students</b></h4></nb-card-header>
+        <nb-card-body>
+          <h5 style="color:red">NO Records Found!!!!!!!!</h5>
+        </nb-card-body>
+      </nb-card>
+    </p-tabPanel>
+    <p-tabPanel header="ADD DATA">
+      <nb-card status="success">
+        <nb-card-header><h3 style="font:normal 25px 'Cabin', serif"><b>ADD ELIGIBILITY DATA</b></h3></nb-card-header>
+        <nb-card-body>
+          <nb-alert status="success" *ngIf="successAlert == true">
+            Eligibility data have been successfully saved !
+          </nb-alert>
+          <nb-alert status="danger" *ngIf="dangerAlert == true">
+            Error while saving Eligibility data !
+          </nb-alert>
+          <form [formGroup]="insertEligibilityData">
+            <div class="row">
+              <mat-form-field class="col-lg-12">
+                <mat-select placeholder="Select Country Name" name="saveCountry" formControlName="saveCountryCtrl" (ngModelChange)="saveCountryChange($event)">
+                  <mat-option *ngFor="let country of Countries;" [value]="country.name">
+                    {{country.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <br>
+            <div class="row">
+              <mat-form-field class="col-lg-12">
+                <input matInput placeholder="Enter Nomenclature Of Certificate / University or Board Name" name="saveUniversity" formControlName="saveUniversityCtrl">
+              </mat-form-field>
+            </div>
+            <br>
+            <div class="row">
+              <mat-form-field class="col-lg-12">
+                <input matInput placeholder="Enter Name Of Awarding Authority / College or School Name" name="saveCollege" formControlName="saveCollegeCtrl">
+              </mat-form-field>
+            </div>
+          </form>
+        </nb-card-body>
+        <nb-card-footer>
+          <div class="row" *ngIf="showSaveError == true">
+            <div class="offset-lg-5">
+              <h5 style="color:red">please input all details !!!</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="offset-lg-4"></div><button nbButton status="info" (click)="saveEligibilityData()" class="col-lg-4">SAVE</button>
+          </div>
+        </nb-card-footer>
+      </nb-card>
+    </p-tabPanel>
+  </p-tabView>
 </nb-card>
