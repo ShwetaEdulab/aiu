@@ -111,7 +111,6 @@ export class TotalComponent implements AfterViewInit {
   //  }
 
   handleClick(user_id) {
-    console.log("userid : "+user_id);
     this.dialogService.open(ShowTranscriptComponent, {
 			context: {
         user_id : user_id

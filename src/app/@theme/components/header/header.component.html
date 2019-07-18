@@ -41,7 +41,11 @@
       <nb-action icon="ion-ios-cart" class="toggle-layout" (click)="toggleSettings()"></nb-action>
     </nb-actions>
   <div ngbDropdown>
-    <nb-action *ngIf="user?.role == 'student'" (click)="notify()" class="control-item dropdown-toggle" id="msg-dd1" ngbDropdownToggle>
+    <nb-action *ngIf="user?.role == 'student'" (click)="notify(user?.role)" class="control-item dropdown-toggle" id="msg-dd1" ngbDropdownToggle>
+      <mat-icon matBadge="{{notification_no}}" matBadgeColor="warn">notification_important</mat-icon>
+    </nb-action>
+
+    <nb-action *ngIf="user?.role == 'admin' || user?.role == 'sub_admin'" (click)="notify(user?.role)" class="control-item dropdown-toggle" id="msg-dd1" ngbDropdownToggle>
       <mat-icon matBadge="{{notification_no}}" matBadgeColor="warn">notification_important</mat-icon>
     </nb-action>
 
@@ -51,7 +55,7 @@
   
         <div class="header clearfix">
           <b style="color:red; font-size: 100%;">Notifications</b>
-          <a href="#" *ngIf="deleteShow == true" (click)="deleteNotification()">Clear All Notifications</a>
+          <a href="#" *ngIf="deleteShow == true" (click)="deleteNotification(null,user?.role)">Clear All Notifications</a>
           <a *ngIf="deleteShow == false">No Notification</a>
         </div>
         <div class="msg-list">
@@ -59,8 +63,8 @@
             <div class="img-area"><img src="http://www.getaiucertificate.in:5000/upload/profile_pic/eligibility-icon.png"></div>
             <!-- <div class="img-area"><i class="nb-paper-plane"></i></div> -->
             <div class="msg-area">
-              <span><a (click)="deleteNotification(msg.id)" href="#" style="color:red; font-size: 200%;">×</a></span>
-              <div><b>{{msg.message}}</b></div>
+              <span><a (click)="deleteNotification(msg?.id,user?.role)" href="#" style="color:red; font-size: 200%;">×</a></span>
+              <div><b>{{msg.notification_data}}</b></div>
               <!-- <a href="#">Clear</a> -->
               <!-- <span>{{msg.read}}</span> -->
               <span><b>{{msg.created_at}}</b></span>

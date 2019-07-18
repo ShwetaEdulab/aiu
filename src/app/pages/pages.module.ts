@@ -107,6 +107,7 @@ import { StudentMgmtModule } from './student-management/student-management.modul
 import { PaymentDetailsAdminModule } from '../admin/payment-details/payment-details.module';
 import { AdminViewModule } from '../admin/view/view.module';
 import { CheckEligibilityModule } from './check-eligibility/check-eligibility.module'
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -148,7 +149,8 @@ const PAGES_COMPONENTS = [
     StudentMgmtModule,
     PaymentDetailsAdminModule,
     AdminViewModule,
-    CheckEligibilityModule
+    CheckEligibilityModule,
+    ConfirmDialogModule,
   ],
   exports: [
     MatFormFieldModule

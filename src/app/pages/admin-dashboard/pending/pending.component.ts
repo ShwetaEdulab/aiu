@@ -16,11 +16,13 @@ import {
 } from '../total/dialog/upload_certificate';
 import { config } from '../../../../../config';
 import * as io from 'socket.io-client';
+import {ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'ngx-pending',
   templateUrl: './pending.component.html',
-  styleUrls: ['./pending.component.scss']
+  styleUrls: ['./pending.component.scss'],
+  providers:[ConfirmationService],
 })
 export class pendingComponent implements AfterViewInit {
 
@@ -45,7 +47,8 @@ export class pendingComponent implements AfterViewInit {
     public dialog: MatDialog,
     private userService: UserService,
     private dialogService: NbDialogService,
-    private changeDetectorRefs: ChangeDetectorRef) {
+    private changeDetectorRefs: ChangeDetectorRef,
+    private confirmationService: ConfirmationService,) {
       this.userService.onUserChange()
       .subscribe((user: any) => this.user = user);
       // if(this.user['role'] == 'sub-admin'){
@@ -54,8 +57,6 @@ export class pendingComponent implements AfterViewInit {
     
       this.socket = io(config.socketioUrl);
       this.socket.on('verifyClient',servermsg => {
-        
-        console.log(servermsg);
         //update dataset here
         this.refresh();
       })
@@ -111,13 +112,12 @@ export class pendingComponent implements AfterViewInit {
       this.isAllSelected() ?
           this.selection.clear() :
           this.dataSource.data.forEach(row => this.selection.select(row));
-          console.log("all clicked ");
     }
   
     onSelection(e, row){
      length = this.selection.isSelected.length -1;
       //console.log("this.selection.selected "+ JSON.stringify(this.selection.selected[length]['id']));
-      console.log(this.selection.selected[length]['id']);
+      //console.log(this.selection.selected[length]['id']);
      
      }
 
@@ -133,7 +133,6 @@ export class pendingComponent implements AfterViewInit {
     this.isAllSelectedverify() ?
         this.selectionverify.clear() :
         this.dataSource.data.forEach(row => this.selectionverify.select(row));
-        console.log("all clicked ");
   }
 
   onSelectionverify(e, row){
@@ -149,11 +148,11 @@ export class pendingComponent implements AfterViewInit {
     if(this.selectionverify.selected.length != 0){
     this.api.updateVerifiedBy(this.user['email'], this.selectionverify.selected[this.selectionverify.selected.length-1]['id'])
       .subscribe(result =>{ 
-          console.log(JSON.stringify(result));
+         // console.log(JSON.stringify(result));
     });
     this.api.sendNotifications(this.selectionverify.selected[this.selectionverify.selected.length-1]['id'])
     .subscribe(result =>{
-        console.log(result);
+       // console.log(result);
     });
     
   }
@@ -206,8 +205,7 @@ export class pendingComponent implements AfterViewInit {
   downloadApplicationLetter(email,user_id) {
     this.loading = true;
     this.api.downloadApplicationLetter(email, user_id)
-      .subscribe(result =>{ 
-          console.log(JSON.stringify(result));
+      .subscribe(result =>{
           if(result['status'] == 200){
             var filename = 'Preview_data.pdf'
             this.api.downloadFilesAdmin(filename,user_id)
@@ -251,8 +249,24 @@ export class pendingComponent implements AfterViewInit {
 		)
   }
 
+  verifyCertificate(email,user_id,application_id,aiu_certificate){
+    this.confirmationService.confirm({
+      message: 'Do you want to proceed?',
+      header: 'Confirmation',
+      icon: 'pi pi-check',
+      accept: () => {
+        this.api.verifyCertificate(email,user_id,application_id,aiu_certificate)
+        .subscribe(data => {
+          this.ngAfterViewInit();
+        });
+      },
+      reject:()=>{
+      }    
+    });
+    
+  }
+
   downloadCertificate(email,user_id,id,certificate_name){
-    console.log("certificate_name========>"+certificate_name);
     if(certificate_name==null){
       alert("You Have Not uploaded Certificate.");
     }else{

@@ -173,16 +173,20 @@
                            <div class="col-lg-12">
                              <label for="inputOption">PROGRAMME OF STUDIES TO BE PURSUED :<span style="color:red;">*</span></label>
                              <div class="input-group">
-                               <div class="col-lg-6">
+                               <div class="col-lg-12">
                                  <!-- <nb-radio-group formControlName="user_OptionCtrl">
                                    <nb-radio value="Degree">Degree</nb-radio>
                                    <nb-radio value="Masters">Masters</nb-radio>
                                    <nb-radio value="Ph.D">Ph.D</nb-radio>
                                  </nb-radio-group> -->
                                     <label class="radio-inline">
+                                      <input id="rdb1" type="radio" [(ngModel)]="testradio" name="user_OptionCtrl" value="4" (click)="checkradio(4)"
+                                        formControlName="user_OptionCtrl" /> Diploma
+                                    </label><br>
+                                    <label class="radio-inline">
                                       <input id="rdb2" type="radio" [(ngModel)]="testradio" name="user_OptionCtrl" value="1" (click)="checkradio(1)"
                                         formControlName="user_OptionCtrl" /> Degree
-                                    </label>
+                                    </label><br>
                                     <label class="radio-inline">
                                       <input id="rdb3" type="radio" [(ngModel)]="testradio" name="user_OptionCtrl" value="2" (click)="checkradio(2)"
                                         formControlName="user_OptionCtrl" /> Masters
@@ -190,6 +194,10 @@
                                     <label class="radio-inline">
                                       <input id="rdb4" type="radio" [(ngModel)]="testradio" name="user_OptionCtrl" value="3" (click)="checkradio(3)"
                                         formControlName="user_OptionCtrl" /> Ph.D
+                                    </label><br>
+                                    <label class="radio-inline">
+                                      <input id="rdb5" type="radio" [(ngModel)]="testradio" name="user_OptionCtrl" value="5" (click)="checkradio(5)"
+                                        formControlName="user_OptionCtrl" /> Doctral Studies ( Ph.D )
                                     </label><br>
                                     <span *ngIf="programDataerror== true " style="color:red">{{program_error_message}}</span>
                                </div>
@@ -335,13 +343,14 @@
             </div>
             <div class="col-xl-2" style="text-align: center">
               <div *ngIf="ssc_lock ==true || ssc_document == false"  [nbSpinner]="loadingsscbutton" nbSpinnerStatus="primary">
+                <i class="fa fa-info-circle" style="text-align:center;font-size: large;" nbPopover="Score Card/ Marksheet/ Grade Card of (Grade 10, O level)"
+                  nbPopoverMode="hover"></i> 
                 <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'"
                   mode="basic" 
                   name="file"
-                  chooseLabel="Upload Marksheet"
+                  chooseLabel="Upload"
                   url={{transSSCUrl}}
                   accept="image/*" 
-                  ngDefaultControl [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" 
                   maxFileSize="5000000"
                   auto="true"
                   formControlName="SSCDocument"
@@ -352,6 +361,8 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="ssc_document == true && ssc_lock == false">
+                  <i class="fa fa-info-circle" style="text-align:center;font-size: large;" nbPopover="Score Card/ Marksheet/ Grade Card of (Grade 10, O level)"
+                  nbPopoverMode="hover"></i>
                 <button nbButton  status="info" (click)="downloadDoc('SSC',this.educationalForm.controls.SSCDocument.value)">Preview <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.SSCDocument.errors" class="error_class">
@@ -360,13 +371,15 @@
             </div>
             <div class="col-xl-2" style="text-align: center">
               <div *ngIf="ssc_passing_lock ==true || ssc_passing_document == false"  [nbSpinner]="loadingsscpassingbutton" nbSpinnerStatus="primary">
+                  <i class="fa fa-info-circle" style="text-align:center;font-size: large;" nbPopover="Passing Certificate of Grade 10"
+                  nbPopoverMode="hover"></i> 
                 <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'"
                   mode="basic" 
                   name="file"
-                  chooseLabel="Upload Passing Certificate"
+                  chooseLabel="Upload"
                   url={{transSSCPassingUrl}}
                   accept="image/*" 
-                  ngDefaultControl [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" 
+                  ngDefaultControl
                   maxFileSize="5000000"
                   auto="true"
                   formControlName="SSCPassingDocument"
@@ -377,15 +390,41 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="ssc_passing_document == true && ssc_passing_lock == false">
+                  <i class="fa fa-info-circle" style="text-align:center;font-size: large;" nbPopover="Passing Certificate of Grade 10"
+                  nbPopoverMode="hover"></i> 
                 <button nbButton  status="info" (click)="downloadDoc('SSC_Passing',this.educationalForm.controls.SSCPassingDocument.value)">Preview <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.SSCPassingDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.SSCPassingDocument.errors.required">Grade Xth Passing Certificate required</div>
               </div>
             </div>
+            <!-- <div class="col-xl-1" style="text-align: center">
+              <div *ngIf="ssc_grade_card_lock ==true || ssc_grade_card_document == false"  [nbSpinner]="loadingsscgradecardbutton" nbSpinnerStatus="primary">
+                <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'"
+                  mode="basic" 
+                  name="file"
+                  chooseLabel="Upload Grade Card"
+                  url={{transSSCGradeCardUrl}}
+                  accept="image/*"
+                  maxFileSize="5000000"
+                  auto="true"
+                  formControlName="SSCGradeCardDocument"
+                  (onSelect)="onSelect($event,'SSC_Grade_Card');"
+                  (onUpload)="onUpload($event)"
+                  (onError)="onErrorFileUpload($event)"
+                  (onBeforeSend)="onBeforeSend($event,'SSC_Grade_Card')">
+                </p-fileUpload>
+              </div>
+              <div *ngIf="ssc_grade_card_document == true && ssc_grade_card_lock == false">
+                <button nbButton  status="info" (click)="downloadDoc('SSC_Grade_Card',this.educationalForm.controls.SSCGradeCardDocument.value)">Preview <i class="fas fa-download"></i></button>
+              </div>
+              <div *ngIf="form_submitted && educationalForm.controls.SSCGradeCardDocument.errors" class="error_class">
+                <div *ngIf="educationalForm.controls.SSCGradeCardDocument.errors.required">Grade Xth Grade Card required</div>
+              </div>
+            </div> -->
           </div>
 
-          <div class=" form-group row">
+          <div class=" form-group row" *ngIf="applying_for == 'Degree' || applying_for == 'Masters' || applying_for == 'Ph.D' || applying_for == 'Doctral Studies'">
             <div class="col-xl-2">
               <b>
                 <h4>
@@ -430,16 +469,18 @@
             </div>
             <div class="col-xl-2" style="text-align: center">
               <div *ngIf="fyjc_lock ==true || fyjc_document == false"  [nbSpinner]="loadingfyjcbutton" nbSpinnerStatus="primary">
+                <i class="fa fa-info-circle" style="text-align:center;font-size: large;" nbPopover="Marksheet of Grade XI"
+                  nbPopoverMode="hover"></i> 
                 <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'"
                   mode="basic" 
                   name="file"
-                  chooseLabel="Upload Marksheet"
+                  chooseLabel="Upload"
                   url={{transFYJCUrl}}
-                  accept="image/*" 
-                  ngDefaultControl [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" 
+                  accept="image/*"
                   maxFileSize="5000000"
                   auto="true"
                   formControlName="FYJCDocument"
+                  [disabled]="bachelor_upload"
                   (onSelect)="onSelect($event,'FYJC');"
                   (onUpload)="onUpload($event)"
                   (onError)="onErrorFileUpload($event)"
@@ -447,6 +488,8 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="fyjc_document == true && fyjc_lock == false">
+                  <i class="fa fa-info-circle" style="text-align:center;font-size: large;" nbPopover="Marksheet of Grade XI"
+                  nbPopoverMode="hover"></i> 
                 <button nbButton  status="info" (click)="downloadDoc('FYJC',this.educationalForm.controls.FYJCDocument.value)">Preview <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.FYJCDocument.errors" class="error_class">
@@ -455,7 +498,7 @@
             </div>
           </div>
           
-          <div class=" form-group row">
+          <div class=" form-group row" *ngIf="applying_for == 'Degree' || applying_for == 'Masters' || applying_for == 'Ph.D' || applying_for == 'Doctral Studies'">
             <div class="col-xl-2">
               <b>
                 <h4>
@@ -501,15 +544,17 @@
             </div>
             <div class="col-xl-2" style="text-align: center">
               <div *ngIf="hsc_lock == true || hsc_document == false" [nbSpinner]="loadinghscbutton" nbSpinnerStatus="primary">
+                  <i class="fa fa-info-circle" style="text-align:center;font-size: large;" nbPopover="Score Card/ Marksheet/ Grade Card of (Grade 12, A level)"
+                  nbPopoverMode="hover"></i> 
                 <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'"
                   mode="basic" 
                   name="file" 
                   url={{transHSCUrl}}
-                  accept="image/*" 
-                  ngDefaultControl [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" 
+                  accept="image/*"
                   maxFileSize="5000000"
                   auto="true"
-                  chooseLabel="Upload Marksheet"
+                  [disabled]="bachelor_upload"
+                  chooseLabel="Upload"
                   formControlName="HSCDocument"
                   (onSelect)="onSelect($event,'HSC');"
                   (onUpload)="onUpload($event)"
@@ -518,6 +563,8 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="hsc_document == true && hsc_lock == false">
+                  <i class="fa fa-info-circle" style="text-align:center;font-size: large;" nbPopover="Score Card/ Marksheet/ Grade Card of (Grade 12, A level)"
+                  nbPopoverMode="hover"></i> 
                 <button nbButton  status="info" (click)="downloadDoc('HSC',this.educationalForm.controls.HSCDocument.value)">Preview <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.HSCDocument.errors" class="error_class">
@@ -526,15 +573,17 @@
             </div>
             <div class="col-xl-2" style="text-align: center">
               <div *ngIf="hsc_passing_lock == true || hsc_passing_document == false" [nbSpinner]="loadinghscpassingbutton" nbSpinnerStatus="primary">
+                <i class="fa fa-info-circle" style="text-align:center;font-size: large;" nbPopover="Passing Certificate of Grade 12"
+                  nbPopoverMode="hover"></i> 
                 <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'"
                   mode="basic" 
                   name="file" 
                   url={{transHSCPassingUrl}}
                   accept="image/*"
-                  chooseLabel="Upload Passing Certificate"
-                  ngDefaultControl [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" 
+                  chooseLabel="Upload"
                   maxFileSize="5000000"
                   auto="true"
+                  [disabled]="bachelor_upload"
                   formControlName="HSCPassingDocument"
                   (onSelect)="onSelect($event,'HSC_Passing');"
                   (onUpload)="onUpload($event)"
@@ -543,18 +592,44 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="hsc_passing_document == true && hsc_passing_lock == false">
+                  <i class="fa fa-info-circle" style="text-align:center;font-size: large;" nbPopover="Passing Certificate of Grade 12"
+                  nbPopoverMode="hover"></i> 
                 <button nbButton  status="info" (click)="downloadDoc('HSC_Passing',this.educationalForm.controls.HSCPassingDocument.value)">Preview <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.HSCPassingDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.HSCPassingDocument.errors.required">Grade XII Passing Certificate required</div>
               </div>
             </div>
+            <!-- <div class="col-xl-1" style="text-align: center">
+              <div *ngIf="hsc_grade_card_lock ==true || hsc_grade_card_document == false"  [nbSpinner]="loadinghscgradecardbutton" nbSpinnerStatus="primary">
+                <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'"
+                  mode="basic" 
+                  name="file"
+                  chooseLabel="Upload Grade Card"
+                  url={{transHSCGradeCardUrl}}
+                  accept="image/*"
+                  maxFileSize="5000000"
+                  auto="true"
+                  formControlName="HSCGradeCardDocument"
+                  (onSelect)="onSelect($event,'HSC_Grade_Card');"
+                  (onUpload)="onUpload($event)"
+                  (onError)="onErrorFileUpload($event)"
+                  (onBeforeSend)="onBeforeSend($event,'HSC_Grade_Card')">
+                </p-fileUpload>
+              </div>
+              <div *ngIf="hsc_grade_card_document == true && hsc_grade_card_lock == false">
+                <button nbButton  status="info" (click)="downloadDoc('HSC_Grade_Card',this.educationalForm.controls.HSCGradeCardDocument.value)">Preview <i class="fas fa-download"></i></button>
+              </div>
+              <div *ngIf="form_submitted && educationalForm.controls.HSCGradeCardDocument.errors" class="error_class">
+                <div *ngIf="educationalForm.controls.HSCGradeCardDocument.errors.required">Grade XIIth Grade Card required</div>
+              </div>
+            </div> -->
           </div>
 
-          <div class=" form-group row">
+          <div class=" form-group row" *ngIf="applying_for == 'Masters' || applying_for == 'Ph.D' || applying_for == 'Doctral Studies'">
             <div class="col-xl-2">
               <b>
-                <h4>Graduation Details</h4>
+                <h4>Graduation Details<span style="color:red;">*</span></h4>
               </b>
             </div>
             <div class="col-xl-2">
@@ -594,10 +669,9 @@
                 <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'"
                   mode="basic" 
                   name="file"
-                  chooseLabel="Upload Marksheet"
+                  chooseLabel="Upload"
                   url={{transDegreeUrl}}
-                  accept="image/*" 
-                  ngDefaultControl [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" 
+                  accept="image/*"
                   maxFileSize="5000000"
                   auto="true"
                   [disabled]="master_upload"
@@ -620,13 +694,14 @@
             </div>
             <div class="col-xl-2" style="text-align: center">
               <div *ngIf="degree_certificate_lock == true || degree_certificate_document == false" [nbSpinner]="loadingdegreecertificatebutton" nbSpinnerStatus="primary">
+                <i class="fa fa-info-circle" style="text-align:center;font-size: large;" nbPopover="Copy of Bachelor degree"
+                  nbPopoverMode="hover"></i> 
                 <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'"
                   mode="basic" 
                   name="file"
-                  chooseLabel="Upload Degree Certificate"
+                  chooseLabel="Upload"
                   url={{transDegreeCertificateUrl}}
-                  accept="image/*" 
-                  ngDefaultControl [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" 
+                  accept="image/*"
                   maxFileSize="5000000"
                   auto="true"
                   [disabled]="master_upload"
@@ -639,6 +714,8 @@
               </div>
               
               <div *ngIf="degree_certificate_document == true && degree_certificate_lock == false">
+                  <i class="fa fa-info-circle" style="text-align:center;font-size: large;" nbPopover="Copy of Bachelor degree"
+                  nbPopoverMode="hover"></i> 
                 <button nbButton  status="info" (click)="downloadDoc('Degree_Certificate',this.educationalForm.controls.DegreeCertificateDocument.value)">Preview <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.DegreeCertificateDocument.errors" class="error_class">
@@ -647,10 +724,10 @@
             </div>
           </div>
 
-          <div class=" form-group row">
+          <div class=" form-group row" *ngIf="applying_for == 'Ph.D' || applying_for == 'Doctral Studies'">
             <div class="col-xl-2">
               <b>
-                <h4>Master's Details</h4>
+                <h4>Master's Details<span style="color:red;">*</span></h4>
               </b>
             </div>
             <div class="col-xl-2">
@@ -693,10 +770,9 @@
                   url={{transMastersUrl}}
                   [disabled]="master_upload"
                   accept="image/*" 
-                  ngDefaultControl [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" 
                   maxFileSize="5000000"
                   auto="true"
-                  chooseLabel="Upload Marksheet"
+                  chooseLabel="Upload"
                   formControlName="MasterDocument"
                   (onSelect)="onSelect($event,'Master');"
                   (onUpload)="onUpload($event)"
@@ -715,16 +791,17 @@
             </div>
             <div class="col-xl-2" style="text-align: center">
               <div *ngIf="master_certificate_lock == true || master_certificate_document == false " [nbSpinner]="loadingmastercertificatebutton" nbSpinnerStatus="primary">
+                <i class="fa fa-info-circle" style="text-align:center;font-size: large;" nbPopover="Copy of Master degree"
+                  nbPopoverMode="hover"></i> 
                 <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'"
                   mode="basic" 
                   name="file" 
                   url={{transMasterCertificateUrl}}
                   [disabled]="master_upload"
-                  accept="image/*" 
-                  ngDefaultControl [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" 
+                  accept="image/*"
                   maxFileSize="5000000"
                   auto="true"
-                  chooseLabel="Upload Master's Certificate"
+                  chooseLabel="Upload"
                   formControlName="MasterCertificateDocument"
                   (onSelect)="onSelect($event,'Master_Certificate');"
                   (onUpload)="onUpload($event)"
@@ -733,6 +810,8 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="master_certificate_document == true && master_certificate_lock == false">
+                  <i class="fa fa-info-circle" style="text-align:center;font-size: large;" nbPopover="Copy of Master degree"
+                  nbPopoverMode="hover"></i>
                 <button nbButton  status="info" (click)="downloadDoc('Master_Certificate',this.educationalForm.controls.MasterCertificateDocument.value)">Preview <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.MasterCertificateDocument.errors" class="error_class">
@@ -741,10 +820,10 @@
             </div>
           </div>
 
-          <div class=" form-group row">
+          <div class=" form-group row" *ngIf="applying_for == 'Doctral Studies'">
             <div class="col-xl-2">
               <b>
-                <h4>Ph.D's Details</h4>
+                <h4>Ph.D's Details<span style="color:red;">*</span></h4>
               </b>
             </div>
             <div class="col-xl-2">
@@ -779,14 +858,15 @@
             </div>
             <div class="col-xl-2" style="text-align: center">
               <div *ngIf="phd_lock == true || phd_document == false " [nbSpinner]="loadingphdbutton" nbSpinnerStatus="primary">
+                <i class="fa fa-info-circle" style="text-align:center;font-size: large;" nbPopover="Club Marksheets of all the years in a single pdf document."
+                  nbPopoverMode="hover"></i>
                 <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'"
                   mode="basic" 
                   name="file" 
                   url={{transPhDUrl}}
                   [disabled]="phd_upload"
-                  chooseLabel="Upload Marksheet"
-                  accept="image/*" 
-                  ngDefaultControl [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" 
+                  chooseLabel="Upload"
+                  accept="image/*"
                   maxFileSize="5000000"
                   auto="true"
                   formControlName="phdDocument"
@@ -797,18 +877,49 @@
                 </p-fileUpload>
               </div>
               <div *ngIf="phd_document == true && phd_lock == false">
+                  <i class="fa fa-info-circle" style="text-align:center;font-size: large;" nbPopover="Club Marksheets of all the years in a single pdf document."
+                  nbPopoverMode="hover"></i>
                 <button nbButton  status="info" (click)="downloadDoc('Ph.D',this.educationalForm.controls.phdDocument.value)">Preview <i class="fas fa-download"></i></button>
               </div>
               <div *ngIf="form_submitted && educationalForm.controls.phdDocument.errors" class="error_class">
                 <div *ngIf="educationalForm.controls.phdDocument.errors.required">Ph.D's Marksheet required</div>
               </div>
             </div>
+            <div class="col-xl-2" style="text-align: center">
+                <div *ngIf="phd_certificate_lock == true || phd_certificate_document == false " [nbSpinner]="loadingphdcertificatebutton" nbSpinnerStatus="primary">
+                  <i class="fa fa-info-circle" style="text-align:center;font-size: large;" nbPopover="Copy of Ph.D Degree"
+                    nbPopoverMode="hover"></i> 
+                  <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'"
+                    mode="basic" 
+                    name="file" 
+                    url={{transPhdCertificateUrl}}
+                    [disabled]="master_upload"
+                    accept="image/*"
+                    maxFileSize="5000000"
+                    auto="true"
+                    chooseLabel="Upload"
+                    formControlName="PhdCertificateDocument"
+                    (onSelect)="onSelect($event,'Phd_Certificate');"
+                    (onUpload)="onUpload($event)"
+                    (onError)="onErrorFileUpload($event)"
+                    (onBeforeSend)="onBeforeSend($event,'Phd_Certificate')">
+                  </p-fileUpload>
+                </div>
+                <div *ngIf="phd_certificate_document == true && phd_certificate_lock == false">
+                    <i class="fa fa-info-circle" style="text-align:center;font-size: large;" nbPopover="Copy of Ph.D Degree"
+                    nbPopoverMode="hover"></i>
+                  <button nbButton  status="info" (click)="downloadDoc('Phd_Certificate',this.educationalForm.controls.PhdCertificateDocument.value)">Preview <i class="fas fa-download"></i></button>
+                </div>
+                <div *ngIf="form_submitted && educationalForm.controls.PhdCertificateDocument.errors" class="error_class">
+                  <div *ngIf="educationalForm.controls.PhdCertificateDocument.errors.required">Phd Certificate required</div>
+                </div>
+              </div>
           </div>
 
           <div class=" form-group row">
             <div class="col-xl-2">
               <b>
-                <h4>Passport Details</h4>
+                <h4>Passport Details<span style="color:red;">*</span></h4>
               </b>
             </div>
             <div class="col-xl-2">
@@ -824,11 +935,10 @@
                   mode="basic" 
                   name="file" 
                   url={{transPassportUrl}}
-                  accept="image/*" 
-                  ngDefaultControl [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" 
+                  accept="image/*"
                   maxFileSize="5000000"
                   auto="true"
-                  chooseLabel="Upload Passport"
+                  chooseLabel="Upload"
                   formControlName="PassportDocument"
                   (onSelect)="onSelect($event,'Passport');"
                   (onUpload)="onUpload($event)"
@@ -846,47 +956,10 @@
           </div>
 
           <div class=" form-group row">
-              <div class="col-xl-2">
-                <b>
-                  <h4>Visa Details</h4>
-                </b>
-              </div>
-              <div class="col-xl-3" style="text-align: center">
-                <div *ngIf="visa_lock == true || visa_document == false " [nbSpinner]="loadingvisabutton" nbSpinnerStatus="primary">
-                  <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'"
-                    mode="basic" 
-                    name="file" 
-                    url={{transVisaUrl}}
-                    accept="image/*" 
-                    ngDefaultControl [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" 
-                    maxFileSize="5000000"
-                    auto="true"
-                    chooseLabel="Upload Visa"
-                    formControlName="VisaDocument"
-                    (onSelect)="onSelect($event,'Visa');"
-                    (onUpload)="onUpload($event)"
-                    (onError)="onErrorFileUpload($event)"
-                    (onBeforeSend)="onBeforeSend($event,'Visa')">
-                  </p-fileUpload>
-                </div>
-                <div *ngIf="visa_document == true && visa_lock == false">
-                  <button nbButton  status="info" (click)="downloadDoc('Visa',this.educationalForm.controls.VisaDocument.value)">Preview <i class="fas fa-download"></i></button>
-                </div>
-                <div *ngIf="form_submitted && educationalForm.controls.VisaDocument.errors" class="error_class">
-                  <div *ngIf="educationalForm.controls.VisaDocument.errors.required">Visa Document is required</div>
-                </div>
-              </div>
-            </div>
-
-          <div class=" form-group row">
             <div class="col-xl-2">
               <b>
-                <h4>
-                  Course Duration Letter
-                  <i class="fa fa-info-circle" nbPopover="A letter from the University stating therein the period of your full time studies on the campus of the degree
-                  awarding university i.e. date of start of course and completion, thereof."
-                  nbPopoverMode="hover"></i>
-                </h4>
+                <h4>Course Duration Letter<div *ngIf="applying_for == 'Degree' || applying_for == 'Diploma'">/School Leaving Certificate</div><i class="fa fa-info-circle" nbPopover="Course Duration Letter is a letter from the School/College/University stating therein the period of your full time studies on the campus of the degree
+                awarding university i.e. date of start of course and completion, thereof." nbPopoverMode="hover"></i><span style="color:red;">*</span></h4>
               </b>
             </div>
             <div class="col-xl-3" style="text-align: center">
@@ -896,10 +969,8 @@
                   name="file"
                   url={{transCourseLetterUrl}}
                   accept="image/*"
-                  chooseLabel="Upload Course Duration Letter"
-                  ngDefaultControl [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" 
+                  chooseLabel="Upload"
                   maxFileSize="5000000"
-                  [disabled]="master_upload"
                   auto="true"
                   formControlName="CourseLetterDocument"
                   (onSelect)="onSelect($event,'Course_Letter');"
@@ -918,6 +989,38 @@
           </div>
 
           <div class=" form-group row">
+              <div class="col-xl-2">
+                <b>
+                  <h4>Visa Details</h4>
+                </b>
+              </div>
+              <div class="col-xl-3" style="text-align: center">
+                <div *ngIf="visa_lock == true || visa_document == false " [nbSpinner]="loadingvisabutton" nbSpinnerStatus="primary">
+                  <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'"
+                    mode="basic" 
+                    name="file" 
+                    url={{transVisaUrl}}
+                    accept="image/*" 
+                    maxFileSize="5000000"
+                    auto="true"
+                    chooseLabel="Upload"
+                    formControlName="VisaDocument"
+                    (onSelect)="onSelect($event,'Visa');"
+                    (onUpload)="onUpload($event)"
+                    (onError)="onErrorFileUpload($event)"
+                    (onBeforeSend)="onBeforeSend($event,'Visa')">
+                  </p-fileUpload>
+                </div>
+                <div *ngIf="visa_document == true && visa_lock == false">
+                  <button nbButton  status="info" (click)="downloadDoc('Visa',this.educationalForm.controls.VisaDocument.value)">Preview <i class="fas fa-download"></i></button>
+                </div>
+                <!-- <div *ngIf="form_submitted && educationalForm.controls.VisaDocument.errors" class="error_class">
+                  <div *ngIf="educationalForm.controls.VisaDocument.errors.required">Visa Document is required</div>
+                </div> -->
+              </div>
+            </div>
+
+          <div class=" form-group row" *ngIf="applying_for == 'Doctral Studies' || applying_for == 'Ph.D' || applying_for == 'Masters'">
             <div class="col-xl-2">
               <b>
                 <h4>
@@ -934,9 +1037,8 @@
                   name="file"
                   url={{transOfferLetterUrl}}
                   accept="image/*"
-                  chooseLabel="Upload Offer Letter"
-                  [disabled]="master_upload"
-                  ngDefaultControl [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" 
+                  chooseLabel="Upload"
+                  [disabled]="master_upload" 
                   maxFileSize="5000000"
                   auto="true"
                   formControlName="OfferLetterDocument"

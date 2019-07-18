@@ -450,6 +450,45 @@ import { Router, ActivatedRoute } from '@angular/router';
       </div>
       <br>
       <br>
+      <div *ngIf="phd_certificate != undefined" style="text-align:center;">
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <h1>
+              <b>
+                {{ phd_certificate?.type }}
+              </b>
+            </h1>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+        <div *ngIf='phd_certificate?.file_ext == "pdf"' class="row" style="text-align:center;">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <button nbButton (click)="download(phd_certificate?.file_name)" status='info'>DOWNLOAD</button>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+        <div *ngIf='phd_certificate?.file_ext != "pdf"'>
+          <div class="row" style='color:red'>
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+              Note :- Click on image to download
+            </div>
+            <div class="col-md-1"></div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-4">
+              <img class="img-responsive" style= "width: 200px; height:200px;" [src]="phd_certificate?.file_name" (click)="download(phd_certificate?.file_name)"/>
+            </div>
+            <div class="col-md-5"></div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
       <div *ngIf="course_letter != undefined" style="text-align:center;">
         <div class="row">
           <div class="col-md-4"></div>
@@ -727,6 +766,11 @@ export class ShowTranscriptComponent implements OnInit {
     file_name:'',
     file_ext: ''
   }
+  phd_certificate= {
+    type:'',
+    file_name:'',
+    file_ext: ''
+  }
   moreDocs: any;
   constructor(protected ref: NbDialogRef<ShowTranscriptComponent>,
     protected api : ApiService,
@@ -752,6 +796,7 @@ export class ShowTranscriptComponent implements OnInit {
         this.passport = data['data']['passport'][0];
         this.visa = data['data']['visa'][0];
         this.moreDocs = data['data']['moreDocs'];
+        this.phd_certificate = data['data']['phd_certificate'][0]; 
       }else if(data['status'] == 400){
         this.ref.close();
         alert('There is an issue in application.No Trascript found!!!');

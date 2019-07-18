@@ -86,24 +86,30 @@ export class AttestationPageComponent implements OnInit {
   sign_lock;
   ssc_lock;
   ssc_passing_lock;
+  ssc_grade_card_lock;
   fyjc_lock;
   hsc_lock;
   hsc_passing_lock;
+  hsc_grade_card_lock;
   degree_lock;
   degree_certificate_lock;
   master_lock;
   master_certificate_lock;
+  phd_certificate_lock;
   phd_lock;
   course_letter_lock;
   offer_letter_lock;
   passport_lock;
   visa_lock;
+  bachelor_upload = false;
   master_upload = false;
   phd_upload = false;
   transSIGNUrl = config.transUploadUrl+"?user_id=" + this.giveUSER_Id() + "&transcript_name=SIGN_Document&hiddentype=SIGN";
   transSSCUrl = config.transUploadUrl+"?user_id=" + this.giveUSER_Id() + "&transcript_name=SSC_Document&hiddentype=SSC";
   transFYJCUrl = config.transUploadUrl+"?user_id=" + this.giveUSER_Id() + "&transcript_name=FYJC_Document&hiddentype=FYJC";
   transSSCPassingUrl = config.transUploadUrl+"?user_id=" + this.giveUSER_Id() + "&transcript_name=SSC_Passing_Document&hiddentype=SSC_Passing";
+  /*NEW*/transSSCGradeCardUrl = config.transUploadUrl+"?user_id=" + this.giveUSER_Id() + "&transcript_name=SSC_Grade_Card_Document&hiddentype=SSC_Grade_Card";
+  transHSCGradeCardUrl = config.transUploadUrl+"?user_id=" + this.giveUSER_Id() + "&transcript_name=HSC_Grade_Card_Document&hiddentype=HSC_Grade_Card";
   transHSCUrl = config.transUploadUrl+"?user_id=" + this.giveUSER_Id() + "&transcript_name=HSC_Document&hiddentype=HSC";
   transHSCPassingUrl = config.transUploadUrl+"?user_id=" + this.giveUSER_Id() + "&transcript_name=HSC_Passing_Document&hiddentype=HSC_Passing";
   transDegreeUrl = config.transUploadUrl+"?user_id=" + this.giveUSER_Id() + "&transcript_name=DEGREE_Document&hiddentype=Graduation";
@@ -111,6 +117,7 @@ export class AttestationPageComponent implements OnInit {
   transMastersUrl = config.transUploadUrl+"?user_id=" + this.giveUSER_Id() + "&transcript_name=MASTER_Document&hiddentype=Master";
   transMasterCertificateUrl = config.transUploadUrl+"?user_id=" + this.giveUSER_Id() + "&transcript_name=MASTER_Certificate_Document&hiddentype=Master_Certificate";
   transPhDUrl = config.transUploadUrl+"?user_id=" + this.giveUSER_Id() + "&transcript_name=Ph.D_Document&hiddentype=Ph.D";
+  transPhdCertificateUrl = config.transUploadUrl+"?user_id=" + this.giveUSER_Id() + "&transcript_name=Ph.D_Certificate_Document&hiddentype=Phd_Certificate";
   transCourseLetterUrl = config.transUploadUrl+"?user_id=" + this.giveUSER_Id() + "&transcript_name=Course_Duration_Document&hiddentype=Course_Letter";
   transOfferLetterUrl = config.transUploadUrl+"?user_id=" + this.giveUSER_Id() + "&transcript_name=Offer_Letter_Document&hiddentype=Offer_Letter";
   transPassportUrl = config.transUploadUrl+"?user_id=" + this.giveUSER_Id() + "&transcript_name=Passport_Document&hiddentype=Passport";
@@ -173,6 +180,8 @@ export class AttestationPageComponent implements OnInit {
   sign_document : boolean = false;
   ssc_document : boolean = false;
   ssc_passing_document : boolean = false;
+  ssc_grade_card_document : boolean = false;
+  hsc_grade_card_document : boolean = false;
   fyjc_document : boolean = false;
   hsc_document : boolean = false;
   hsc_passing_document : boolean = false;
@@ -181,6 +190,7 @@ export class AttestationPageComponent implements OnInit {
   master_document : boolean = false;
   master_certificate_document : boolean = false;
   phd_document : boolean = false;
+  phd_certificate_document : boolean = false;
   course_letter_document : boolean = false;
   offer_letter_document : boolean = false;
   passport_document : boolean = false;
@@ -197,14 +207,17 @@ export class AttestationPageComponent implements OnInit {
   loadingsignbutton = false;
   loadingsscbutton = false;
   loadingsscpassingbutton = false;
+  loadingsscgradecardbutton = false;
   loadingfyjcbutton = false;
   loadinghscbutton = false;
   loadinghscpassingbutton = false;
+  loadinghscgradecardbutton = false;
   loadingdegreebutton = false;
   loadingdegreecertificatebutton = false;
   loadingmasterbutton = false;
   loadingmastercertificatebutton = false;
   loadingphdbutton= false;
+  loadingphdcertificatebutton= false;
   loadingcourseletterbutton = false;
   loadingofferletterbutton = false;
   loadingpassportbutton = false;
@@ -416,6 +429,14 @@ export class AttestationPageComponent implements OnInit {
           }else if(data['data']['profile']['applying_for'] == "Ph.D"){
             this.master_upload = false;
             this.phd_upload = true;
+          }else if(data['data']['profile']['applying_for'] == "Diploma"){
+            this.bachelor_upload = true;
+            this.master_upload = true;
+            this.phd_upload = true;
+          }else if(data['data']['profile']['applying_for'] == "Doctral Studies"){
+            this.bachelor_upload = false;
+            this.master_upload = false;
+            this.phd_upload = false;
           }
 
           this.profile = data['data']['profile'];
@@ -441,6 +462,12 @@ export class AttestationPageComponent implements OnInit {
           }else if(this.profile.applying_for == "Ph.D"){
             this.testradio = "" + 3;
             this.Dropdownvar = 3;
+          }else if(this.profile.applying_for == "Diploma"){
+            this.testradio = "" + 4;
+            this.Dropdownvar = 4;
+          }else if(this.profile.applying_for == "Doctral Studies"){
+            this.testradio = "" + 5;
+            this.Dropdownvar = 5;
           }
            
            this.mobile_country_code = data['data']['profile']['mobile_country_code'];
@@ -467,6 +494,7 @@ export class AttestationPageComponent implements OnInit {
       ssc_OutofMarks: ['', [Validators.pattern(this.marksValidate), Validators.required, Validators.maxLength(3), Validators.minLength(2)]],
       SSCDocument : [null, Validators.required],
       SSCPassingDocument: [null, Validators.required],
+      //SSCGradeCardDocument: [null, Validators.required],
 
       fyjc_Univ_name:['', [Validators.required, Validators.maxLength(200), Validators.minLength(3)]],
       fyjc_SscName: ['', [Validators.required, Validators.maxLength(200), Validators.minLength(3)]],
@@ -480,6 +508,7 @@ export class AttestationPageComponent implements OnInit {
       hsc_OutofMarks: ['', [Validators.pattern(this.marksValidate), Validators.required, Validators.maxLength(3), Validators.minLength(2)]],
       HSCDocument : [null, Validators.required],
       HSCPassingDocument: [null, Validators.required],
+     // HSCGradeCardDocument: [null, Validators.required],
 
       grad_UnivName: ['', [Validators.required, Validators.maxLength(200), Validators.minLength(3)]],
       grad_inputSchool: ['', [Validators.required, Validators.maxLength(200), Validators.minLength(3)]],
@@ -500,12 +529,14 @@ export class AttestationPageComponent implements OnInit {
       phd_InputMarks: ['', [Validators.pattern(this.marksValidate), Validators.required, Validators.maxLength(3), Validators.minLength(2)]],
       phd_OutofMarks: ['', [Validators.pattern(this.marksValidate), Validators.required, Validators.maxLength(3), Validators.minLength(2)]],
       phdDocument : [null, Validators.required],
+      PhdCertificateDocument: [null, Validators.required],
 
       CourseLetterDocument : [null, Validators.required],
       OfferLetterDocument : [null, Validators.required],
 
       passport_no_ctrl: ['', [Validators.pattern(this.passportValidate), Validators.required, Validators.maxLength(15)]],
-      VisaDocument : [null, Validators.required],
+      // VisaDocument : [null, Validators.required],
+      VisaDocument : [''],
       PassportDocument : [null, Validators.required],
 
     }
@@ -513,12 +544,15 @@ export class AttestationPageComponent implements OnInit {
 
     this.api.getApplyingEducation().subscribe(data => {
       this.applying_for = data['data']['applying_for'];
-      if(this.applying_for == "Ph.D"){
+      if(this.applying_for == "Doctral Studies"){
+        
+      }else if(this.applying_for == "Ph.D"){
         this.educationalForm.get('phd_UnivName').disable();
         this.educationalForm.get('phd_InputSchool').disable();
         this.educationalForm.get('phd_InputMarks').disable();
         this.educationalForm.get('phd_OutofMarks').disable();  
         this.educationalForm.get('phdDocument').disable();
+        this.educationalForm.get('PhdCertificateDocument').disable();
 
       }else if(this.applying_for == "Masters"){ 
         this.educationalForm.get('phd_UnivName').disable();
@@ -526,6 +560,7 @@ export class AttestationPageComponent implements OnInit {
         this.educationalForm.get('phd_InputMarks').disable();
         this.educationalForm.get('phd_OutofMarks').disable();  
         this.educationalForm.get('phdDocument').disable();
+        this.educationalForm.get('PhdCertificateDocument').disable();
 
         this.educationalForm.get('master_UnivName').disable();
         this.educationalForm.get('master_InputSchool').disable();
@@ -548,6 +583,7 @@ export class AttestationPageComponent implements OnInit {
         this.educationalForm.get('phd_InputMarks').disable();
         this.educationalForm.get('phd_OutofMarks').disable();  
         this.educationalForm.get('phdDocument').disable();
+        this.educationalForm.get('PhdCertificateDocument').disable();
 
         this.educationalForm.get('master_UnivName').disable();
         this.educationalForm.get('master_InputSchool').disable();
@@ -556,10 +592,45 @@ export class AttestationPageComponent implements OnInit {
         this.educationalForm.get('MasterDocument').disable(); 
         this.educationalForm.get('MasterCertificateDocument').disable();
 
-        this.educationalForm.get('CourseLetterDocument').disable();
+        //this.educationalForm.get('CourseLetterDocument').disable();
         this.educationalForm.get('OfferLetterDocument').disable();
-      
+      }else if(this.applying_for == "Diploma"){
+        this.educationalForm.get('fyjc_Univ_name').disable();
+        this.educationalForm.get('fyjc_SscName').disable();
+        this.educationalForm.get('fyjc_InputMarks').disable();
+        this.educationalForm.get('fyjc_OutofMarks').disable();
+        this.educationalForm.get('FYJCDocument').disable();
 
+        this.educationalForm.get('inputHscUniv_name').disable();
+        this.educationalForm.get('hsc_inputSchool').disable();
+        this.educationalForm.get('hsc_InputMarks').disable();
+        this.educationalForm.get('hsc_OutofMarks').disable();
+        this.educationalForm.get('HSCDocument').disable();
+        this.educationalForm.get('HSCPassingDocument').disable();
+
+        this.educationalForm.get('grad_UnivName').disable();
+        this.educationalForm.get('grad_inputSchool').disable();
+        this.educationalForm.get('grad_InputMarks').disable();
+        this.educationalForm.get('grad_OutofMarks').disable(); 
+        this.educationalForm.get('GraduationDocument').disable();
+        this.educationalForm.get('DegreeCertificateDocument').disable();
+
+        this.educationalForm.get('master_UnivName').disable();
+        this.educationalForm.get('master_InputSchool').disable();
+        this.educationalForm.get('master_InputMarks').disable();
+        this.educationalForm.get('master_OutofMarks').disable();  
+        this.educationalForm.get('MasterDocument').disable(); 
+        this.educationalForm.get('MasterCertificateDocument').disable();
+
+        this.educationalForm.get('phd_UnivName').disable();
+        this.educationalForm.get('phd_InputSchool').disable();
+        this.educationalForm.get('phd_InputMarks').disable();
+        this.educationalForm.get('phd_OutofMarks').disable();  
+        this.educationalForm.get('phdDocument').disable();
+        this.educationalForm.get('PhdCertificateDocument').disable();
+
+        //this.educationalForm.get('CourseLetterDocument').disable();
+        this.educationalForm.get('OfferLetterDocument').disable();
       }else{ 
         this.educationalForm.get('grad_UnivName').disable();
         this.educationalForm.get('grad_inputSchool').disable();
@@ -580,8 +651,9 @@ export class AttestationPageComponent implements OnInit {
         this.educationalForm.get('phd_InputMarks').disable();
         this.educationalForm.get('phd_OutofMarks').disable();  
         this.educationalForm.get('phdDocument').disable();
+        this.educationalForm.get('PhdCertificateDocument').disable();
 
-        this.educationalForm.get('CourseLetterDocument').disable();
+        //this.educationalForm.get('CourseLetterDocument').disable();
         this.educationalForm.get('OfferLetterDocument').disable();
 
 
@@ -592,13 +664,11 @@ export class AttestationPageComponent implements OnInit {
       if(data['status'] == 200){
         this.moreDocs = data['moreDocs'];
         //console.log("this.moreDocs======>"+JSON.stringify(this.moreDocs));
-
         if(data['data'][0]['sign_document_exists'] == 'exists'){
           this.sign_document = true;
           this.sign_lock=data['data'][0]['sign_lock']
           this.educationalForm.controls.SIGNDocument.patchValue(data['data'][0]['sign_document']);
         }
-
         if(data['data'][0]['ssc_document_exists'] == 'exists'){
           this.ssc_document = true;
           this.ssc_lock=data['data'][0]['ssc_lock']
@@ -649,6 +719,11 @@ export class AttestationPageComponent implements OnInit {
           this.phd_lock=data['data'][0]['phd_lock']
           this.educationalForm.controls.phdDocument.patchValue(data['data'][0]['phd_document']);
         }
+        if(data['data'][0]['phd_certifiate_document_exists'] == 'exists'){
+          this.phd_certificate_document = true;
+          this.phd_certificate_lock = data['data'][0]['phd_certificate_lock']
+          this.educationalForm.controls.PhdCertificateDocument.patchValue(data['data'][0]['phd_certificate_document']);
+        }
         if(data['data'][0]['course_letter_document_exists'] == 'exists'){
           this.course_letter_document = true;
           this.course_letter_lock=data['data'][0]['course_letter_lock']
@@ -670,7 +745,16 @@ export class AttestationPageComponent implements OnInit {
           this.visa_lock=data['data'][0]['visa_lock']
           this.educationalForm.controls.VisaDocument.patchValue(data['data'][0]['visa_document']);
         }
-        
+        if(data['data'][0]['ssc_grade_card_document_exists'] == 'exists'){
+          this.ssc_grade_card_document = true;
+          this.ssc_grade_card_lock=data['data'][0]['ssc_grade_card_lock']
+          this.educationalForm.controls.SSCGradeCardDocument.patchValue(data['data'][0]['ssc_grade_card_document']);
+        }//ssc_grade_card_lock
+        if(data['data'][0]['hsc_grade_card_document_exists'] == 'exists'){
+          this.hsc_grade_card_document = true;
+          this.hsc_grade_card_lock=data['data'][0]['hsc_grade_card_lock']
+          this.educationalForm.controls.HSCGradeCardDocument.patchValue(data['data'][0]['hsc_grade_card_document']);
+        }
       }else{
       }
     });
@@ -863,6 +947,10 @@ export class AttestationPageComponent implements OnInit {
           this.ssc_passing_document = true;
           this.ssc_passing_lock = false;
           this.loadingsscpassingbutton = false;
+        }else if(yourData == "SSC_Grade_Card"){
+          this.ssc_grade_card_document = true;
+          this.ssc_grade_card_lock = false;
+          this.loadingsscgradecardbutton = false;
         }else if(yourData == "FYJC"){
           this.fyjc_document = true;
           this.fyjc_lock = false;
@@ -875,6 +963,10 @@ export class AttestationPageComponent implements OnInit {
           this.hsc_passing_document = true;
           this.hsc_passing_lock = false;
           this.loadinghscpassingbutton = false;
+        }else if(yourData == "HSC_Grade_Card"){
+          this.hsc_grade_card_document = true;
+          this.hsc_grade_card_lock = false;
+          this.loadinghscgradecardbutton = false;
         }else if(yourData == "Graduation"){
           this.degree_document = true;
           this.degree_lock=false;
@@ -895,6 +987,10 @@ export class AttestationPageComponent implements OnInit {
           this.phd_document = true;
           this.phd_lock =false;
           this.loadingphdbutton = false;
+        }else if(yourData == "Phd_Certificate"){
+          this.phd_certificate_document = true;
+          this.phd_certificate_lock =false;
+          this.loadingphdcertificatebutton = false;
         }else if(yourData == "Course_Letter"){
           this.course_letter_document = true;
           this.course_letter_lock =false;
@@ -946,12 +1042,16 @@ export class AttestationPageComponent implements OnInit {
       this.loadingsscbutton = true;
     }else if(value == "SSC_Passing"){
       this.loadingsscpassingbutton = true;
+    }else if(value == "SSC_Grade_Card"){
+      this.loadingsscgradecardbutton = true;
     }else if(value == "FYJC"){
       this.loadingfyjcbutton = true;
     }else if(value == "HSC"){
       this.loadinghscbutton = true;
     }else if(value == "HSC_Passing"){
       this.loadinghscpassingbutton = false;
+    }else if(value == "HSC_Grade_Card"){
+      this.loadinghscgradecardbutton = true;
     }else if(value == "Graduation"){
       this.loadingdegreebutton = true;
     }else if(value == "Degree_Certificate"){
@@ -962,6 +1062,8 @@ export class AttestationPageComponent implements OnInit {
       this.loadingmastercertificatebutton = true;
     }else if(value == "Ph.D"){
       this.loadingphdbutton = true;
+    }else if(value == "Phd_Certificate"){
+      this.loadingphdcertificatebutton = true;
     }else if(value == "Course_Letter"){
       this.loadingcourseletterbutton = true;
     }else if(value == "Offer_Letter"){
@@ -981,7 +1083,7 @@ export class AttestationPageComponent implements OnInit {
 
   downloadDoc(type,value){
     value = value.split('/').pop();
-console.log("value=========>"+value);
+    //console.log("value=========>"+value);
     this.api.downloadFiles(value)
     .subscribe(data => {
       saveAs(data, value);
@@ -1220,11 +1322,20 @@ console.log("value=========>"+value);
       }
 
       if (this.testradio == '1') {
-        this.program_value = 'Degree'
+        this.program_value = 'Degree';
+        this.applying_for = 'Degree';
       }else if (this.testradio == '2') {
         this.program_value = 'Masters'
+        this.applying_for = 'Masters';
       }else if (this.testradio == '3') {
         this.program_value = 'Ph.D'
+        this.applying_for = 'Ph.D';
+      }else if (this.testradio == '4') {
+        this.program_value = 'Diploma'
+        this.applying_for = 'Diploma';
+      }else if(this.testradio == '5'){
+        this.program_value = 'Doctral Studies'
+        this.applying_for = 'Doctral Studies';
       }
 
       if(this.profileForm.controls.user_OptionCtrl.value=='' || this.profileForm.controls.user_OptionCtrl.value==undefined || this.profileForm.controls.user_OptionCtrl.value==null){
@@ -1277,6 +1388,10 @@ console.log("value=========>"+value);
       this.testradio = '2';
     }else if (this.Dropdownvar == '3') {
       this.testradio = '3';
+    }else if (this.Dropdownvar == '4') {
+      this.testradio = '4';
+    }else if (this.Dropdownvar == '5') {
+      this.testradio = '5';
     }
   }
 

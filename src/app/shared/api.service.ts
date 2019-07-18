@@ -283,7 +283,7 @@ getInstituteStatus(){
   try{
     return this.httpClient.get(`${this.baseUrl}/api/attestation/getInstituteStatus`);
   }catch(error) {
-      this.handleError("getDocumentStatus : "+JSON.stringify(error));
+      this.handleError("getInstituteStatus : "+JSON.stringify(error));
   }
 }
 
@@ -525,8 +525,8 @@ private messages = [];
     }
   }
 
-  receiveNotifications(userId){
-    return this.httpClient.post(`${this.baseUrl}/api/admin/adminDashboard/receiveNotification`, {"id":userId}).subscribe(notifications=>{
+  receiveNotifications(userId,type){
+    return this.httpClient.post(`${this.baseUrl}/api/admin/adminDashboard/receiveNotification`, {"id":userId,"type":type}).subscribe(notifications=>{
       this.messages = notifications['data'];
       this.notification_no = notifications['notification_no'];
       if(notifications['data'].length == 0){
@@ -557,9 +557,9 @@ private messages = [];
     }
   }
 
-  deleteNotification(userId,noti_id){
+  deleteNotification(userId,noti_id,type){
     try{
-      return this.httpClient.post(`${this.baseUrl}/api/admin/adminDashboard/deleteNotification`,{"id":userId,"noti_id":noti_id});
+      return this.httpClient.post(`${this.baseUrl}/api/admin/adminDashboard/deleteNotification`,{"id":userId,"noti_id":noti_id,"type":type});
     }catch(error) {
       this.handleError("deleteNotification : "+error);
     }
@@ -754,6 +754,14 @@ private messages = [];
   saveEligibilityData(countryName,universityName,collegeName){
     try{
       return this.httpClient.post(`${this.baseUrl}/api/admin/checkEligibility/saveEligibilityData`,{"countryName":countryName,"universityName":universityName,"collegeName":collegeName});
+    }catch(error) {
+      this.handleError("checkEligibility : "+error);
+    }
+  }
+
+  verifyCertificate(email,user_id,application_id,aiu_certificate){
+    try{
+      return this.httpClient.post(`${this.baseUrl}/api/admin/saveAsVerify`,{"email":email,"user_id":user_id,"application_id":application_id,"aiu_certificate":aiu_certificate});
     }catch(error) {
       this.handleError("checkEligibility : "+error);
     }

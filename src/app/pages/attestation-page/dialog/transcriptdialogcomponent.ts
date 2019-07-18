@@ -125,7 +125,7 @@ constructor(
    }
 
    onSearchChange(searchValue : string ) {
-    if(searchValue.length > 20){
+    if(searchValue.length > 20 && (this.transcript_name!=undefined && this.transcript_name!='')){
       this.showUpload = true;
     }else{
       this.showUpload = false;

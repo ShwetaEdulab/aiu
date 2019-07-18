@@ -36,9 +36,10 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule, MatExpansionModule } from '@angular/material';
 import { HomeComponent } from './home/home.component';
 import { AdminOtpComponent } from './pages/admin-dashboard/admin-otp/admin-otp.component';
-import {StatementComponent} from './pages/errata/statement.component'
+import {StatementComponent} from './pages/errata/statement.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
-
+const socketconfig: SocketIoConfig = { url: 'http://93.104.211.51:2', options: {} };
 
 @NgModule({
   declarations: [AppComponent,
@@ -75,7 +76,8 @@ import {StatementComponent} from './pages/errata/statement.component'
    MatIconModule,
    MatListModule,
    MatCardModule,
-   MatExpansionModule
+   MatExpansionModule,
+   SocketIoModule.forRoot(socketconfig),
   ],
   bootstrap: [AppComponent],
   providers: [

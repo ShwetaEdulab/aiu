@@ -49,12 +49,15 @@ export class HeaderComponent implements OnInit {
               private changeDetectorRefs: ChangeDetectorRef) {
                 this.userService.onUserChange()
                 .subscribe((user: any) => this.user = user);
-                this.api.receiveNotifications(this.user.id);
+                //this.api.receiveNotifications(this.user.id);
+                if(this.user.role === 'student' || this.user.role == 'dte'){
+                  this.api.receiveNotifications(this.user.id,'student');
+                }else if(this.user.role === 'admin' || this.user.role === 'sub_admin'){
+                  this.api.receiveNotifications(this.user.id,'admin');
+                }
                 
                 this.socket = io(config.socketioUrl);
                 this.socket.on('new_msg',servermsg => {
-        
-                  console.log(servermsg);
                   //update dataset here
                   this.refresh();
                 })
@@ -66,10 +69,8 @@ export class HeaderComponent implements OnInit {
     if(this.user.role == 'student'){
         this.api.socketNotificationNo.subscribe(no =>{
           if(no==""){
-            console.log("if(no==")
             //do nothing
           }else{
-            console.log("")
             this.notification_no = no;
           }
         });
@@ -91,7 +92,28 @@ export class HeaderComponent implements OnInit {
         // this.socket.on('goodbye', function(){  
         //  console.log('goodbye goodbye goodbye goodbye goodbye');
         // });
-       }
+       }else if(this.user.role == 'admin' || this.user.role == 'sub_admin'){
+        this.api.socketNotificationNo.subscribe(nn =>{
+          if(nn==""){
+            //do nothing
+          }else{
+            this.notification_no = nn;
+          }
+        });
+  
+        this.api.socketmessage.subscribe(notification_data =>{
+          if(notification_data==""){
+            this.deleteShow = false;
+            this.notification = notification_data;
+          }else{
+            this.deleteShow = true;
+            this.notification = notification_data;
+          }
+        });
+        // this.mainsocket.on('sp',(data) =>{
+        //   this.ReloadNotification('admin');
+        // });
+      }
   }
 
   help(){
@@ -99,13 +121,10 @@ export class HeaderComponent implements OnInit {
   }
 
   notify(){
-    console.log("notify");
     if(this.notification_no > 0){
-      //console.log("this.notification_no > 0 ");
       this.api.makeReadNotification(this.user.id)
       .subscribe(
         (data: any) => {
-          //console.log("Upadted data==========>");
           this.notification_no = '';
         },
         error => {
@@ -114,18 +133,37 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  deleteNotification(id){
-   // console.log("id============>"+id);
-    this.api.deleteNotification(this.user.id,id)
-      .subscribe(
-        (data: any) => {
-         // console.log("Delete data==========>");
-          this.ReloadNotification();
-        },
-        error => {
-          console.error("Error", error);
-        });
-  }
+  deleteNotification(id,type){
+    var user_type;
+    if(type == 'sub_admin'){
+     user_type = 'admin';
+    }else if(type == 'dte'){
+     user_type = 'student';
+    }else{
+     user_type = type
+    }
+     this.api.deleteNotification(this.user.id,id,user_type)
+       .subscribe(
+         (data: any) => {
+           this.ReloadNotification();
+         },
+         error => {
+           console.error("Error", error);
+         });
+   }
+
+  // deleteNotification(id){
+  //  // console.log("id============>"+id);
+  //   this.api.deleteNotification(this.user.id,id)
+  //     .subscribe(
+  //       (data: any) => {
+  //        // console.log("Delete data==========>");
+  //         this.ReloadNotification();
+  //       },
+  //       error => {
+  //         console.error("Error", error);
+  //       });
+  // }
 
   ReloadNotification(){
     this.notification=[];

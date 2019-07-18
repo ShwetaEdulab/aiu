@@ -31,25 +31,31 @@
       <td mat-cell *matCellDef="let row" [style.color]="row.color">  
          <button (click)="handleClick(row.user_id)"  mat-icon-button>
           <mat-icon color="primary">visibility</mat-icon>
-        </button> </td>
+        </button> 
+      </td>
     </ng-container>
 
     <!-- Download Column -->
     <ng-container matColumnDef="Download">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Download Application Letter</th>
       <td mat-cell *matCellDef="let row" [style.color]="row.color">  
-        <button (click)="downloadApplicationLetter(row.email,row.user_id)"  mat-icon-button>
+        <button (click)="downloadApplicationLetter(row.email,row.user_id)" mat-icon-button>
           <mat-icon color="primary">cloud_download</mat-icon>
-        </button> </td>
+        </button>
+      </td>
     </ng-container>
 
     <!-- Upload Column -->
     <ng-container matColumnDef="Upload">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Upload Certificate</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Upload Certificate Or Verify</th>
         <td mat-cell *matCellDef="let row" [style.color]="row.color">  
-            <button (click)="uploadCertificate(row.email,row.user_id,row.id,row.aiu_certificate)"  mat-icon-button>
-              <mat-icon color="primary">cloud_upload</mat-icon>
-            </button> </td>
+          <button (click)="uploadCertificate(row.email,row.user_id,row.id,row.aiu_certificate)"  mat-icon-button>
+            <mat-icon color="primary">cloud_upload</mat-icon>
+          </button>
+          <button (click)="verifyCertificate(row.email,row.user_id,row.id,row.aiu_certificate)"  mat-icon-button>
+            <mat-icon color="primary">check_circle_outline</mat-icon>
+          </button>
+        </td>
     </ng-container>
 
     <!--Download Uploaded Column -->
@@ -85,3 +91,11 @@
 
   <mat-paginator [length]="resultsLength" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<!-- <div>
+  <p-confirmDialog #cd header="Confirmation" icon="pi pi-check">
+    <p-footer>
+        <button type="button" pButton  label="OK" (click)="cd.accept()"></button>
+    </p-footer>
+  </p-confirmDialog>
+ </div> -->
