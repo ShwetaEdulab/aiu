@@ -812,12 +812,38 @@ export class AttestationPageComponent implements OnInit {
     this.educationalForm.controls.phd_InputMarks.markAsDirty();
     this.educationalForm.controls.phd_OutofMarks.markAsDirty();
 
-    this.inputSsc = ( < HTMLInputElement > document.getElementById('ssc_type')).value;
-    this.inputFyjc = ( < HTMLInputElement > document.getElementById('fyjc_type')).value;
-    this.inputHsc = ( < HTMLInputElement > document.getElementById('hsc_type')).value;
-    this.inputGradValue = ( < HTMLInputElement > document.getElementById('grad_type')).value;
-    this.inputMasterValue = ( < HTMLInputElement > document.getElementById('master_type')).value;
-    this.inputphdValue = ( < HTMLInputElement > document.getElementById('phd_type')).value;
+    if(this.applying_for == "Doctral Studies"){
+      this.inputSsc = ( < HTMLInputElement > document.getElementById('ssc_type')).value;
+      this.inputFyjc = ( < HTMLInputElement > document.getElementById('fyjc_type')).value;
+      this.inputHsc = ( < HTMLInputElement > document.getElementById('hsc_type')).value;
+      this.inputGradValue = ( < HTMLInputElement > document.getElementById('grad_type')).value;
+      this.inputMasterValue = ( < HTMLInputElement > document.getElementById('master_type')).value;
+      this.inputphdValue = ( < HTMLInputElement > document.getElementById('phd_type')).value;
+    }else if(this.applying_for == "Ph.D"){
+      this.inputSsc = ( < HTMLInputElement > document.getElementById('ssc_type')).value;
+      this.inputFyjc = ( < HTMLInputElement > document.getElementById('fyjc_type')).value;
+      this.inputHsc = ( < HTMLInputElement > document.getElementById('hsc_type')).value;
+      this.inputGradValue = ( < HTMLInputElement > document.getElementById('grad_type')).value;
+      this.inputMasterValue = ( < HTMLInputElement > document.getElementById('master_type')).value;
+    }else if(this.applying_for == "Masters"){
+      this.inputSsc = ( < HTMLInputElement > document.getElementById('ssc_type')).value;
+      this.inputFyjc = ( < HTMLInputElement > document.getElementById('fyjc_type')).value;
+      this.inputHsc = ( < HTMLInputElement > document.getElementById('hsc_type')).value;
+      this.inputGradValue = ( < HTMLInputElement > document.getElementById('grad_type')).value;
+    }else if(this.applying_for == "Degree"){
+      this.inputSsc = ( < HTMLInputElement > document.getElementById('ssc_type')).value;
+      this.inputFyjc = ( < HTMLInputElement > document.getElementById('fyjc_type')).value;
+      this.inputHsc = ( < HTMLInputElement > document.getElementById('hsc_type')).value;
+    }else if(this.applying_for == "Diploma"){
+      this.inputSsc = ( < HTMLInputElement > document.getElementById('ssc_type')).value;
+    }else{
+      this.inputSsc = ( < HTMLInputElement > document.getElementById('ssc_type')).value;
+      this.inputFyjc = ( < HTMLInputElement > document.getElementById('fyjc_type')).value;
+      this.inputHsc = ( < HTMLInputElement > document.getElementById('hsc_type')).value;
+      this.inputGradValue = ( < HTMLInputElement > document.getElementById('grad_type')).value;
+      this.inputMasterValue = ( < HTMLInputElement > document.getElementById('master_type')).value;
+      this.inputphdValue = ( < HTMLInputElement > document.getElementById('phd_type')).value;
+    }
 
     this.form_submitted = true;
     if (this.educationalForm.valid) {
