@@ -58,7 +58,7 @@
 						<td>{{student?.name}}</td>
 						<td>{{student?.email}}</td>
 						<!-- <td>{{student?.interested_courses}}</td> -->
-						<td>{{student.courses ? student.courses : 'Not applied'}}</td>
+						<td>{{student.course_year}} {{student.course_name}}</td>
 						<td>{{student.registerDate}}</td>
 						<td>
 							<i class="fa ion-person" status="info" nbPopover="View More" nbPopoverMode="hover" (click)="viewMore('studentmgmt',student.id);"></i><br>

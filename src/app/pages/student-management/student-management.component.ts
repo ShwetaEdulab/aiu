@@ -120,7 +120,7 @@ export class StudentManagementComponent implements OnInit {
   }
 
   filterstudent(data,user_id){
-    console.log("data========>"+data);
+    //console.log("data========>"+data);
   }
  
 

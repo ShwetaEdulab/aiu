@@ -82,6 +82,7 @@ export class AttestationPageComponent implements OnInit {
       },
     },
   };
+  selectedCourseYear;
   user_id;
   sign_lock;
   ssc_lock;
@@ -228,6 +229,7 @@ export class AttestationPageComponent implements OnInit {
   Dropdownvar: any;
   testradio: string;
   show_address_message = false;
+  showYearError = false;
   address_message;
   program_value: any;
   programDataerror = false;
@@ -472,6 +474,7 @@ export class AttestationPageComponent implements OnInit {
            
            this.mobile_country_code = data['data']['profile']['mobile_country_code'];
            this.Country_id_personal = data['data']['profile']['mobile_country_code'] ? data['data']['profile']['mobile_country_code'] : null;
+           this.selectedCourseYear = data['data']['profile']['course_year'];
        } else {}
    });
   }
@@ -778,6 +781,8 @@ export class AttestationPageComponent implements OnInit {
         alterAddCtrl: [''],
         alterCityCtrl: [''],
         alterPostCodeCtrl: ['', [Validators.required, Validators.pattern(this.postalValidate), Validators.maxLength(10), Validators.minLength(5)]],
+        courseYearCtrl : ['', [Validators.required]],
+        profile_course_name : ['', [Validators.required,Validators.maxLength(70), Validators.minLength(3)]],
     })
   } 
 
@@ -1214,7 +1219,7 @@ export class AttestationPageComponent implements OnInit {
       //this.profileForm.controls.countryidCtrl.markAsDirty();
       this.profileForm.controls.phonecodeCtrl.markAsDirty();
       this.profileForm.controls.phoneCtrl.markAsDirty();
-      //this.profileForm.controls.permPostCodeCtrl.markAsDirty();
+      this.profileForm.controls.profile_course_name.markAsDirty();
 
 
       if(this.profileForm.controls.permAddCtrl.value =='' || this.profileForm.controls.alterAddCtrl.value =='' || 
@@ -1377,6 +1382,12 @@ export class AttestationPageComponent implements OnInit {
         }
       }
       //console.log("invalid========>"+invalid)
+
+      if(this.profileForm.controls.courseYearCtrl.value==""){
+        this.showYearError = true;
+      }else{
+        this.showYearError = false;
+      }
       
 
      this.form_submitted = true;
@@ -1398,6 +1409,8 @@ export class AttestationPageComponent implements OnInit {
         altpostal_code: this.profileForm.controls.alterPostCodeCtrl.value,
         program : this.program_value,
         country: this.profileForm.controls.permCountryCtrl.value,
+        course_year : this.profileForm.controls.courseYearCtrl.value,
+        course_name : this.profileForm.controls.profile_course_name.value,
        }
        this.api.updateProfileValues(profile).subscribe(data => {
       });

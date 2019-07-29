@@ -22,6 +22,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
     },
   },
   {
+    title: 'Student Management',
+    icon: 'fas fa-user-graduate',
+    link: '/pages/studentManagement',
+    data: {
+      permission: 'view',
+      resource: 'studentManagement'
+    },
+  },
+  {
     title: 'Admin Dashboard',
     icon: 'ion-filing',
     children: [
@@ -59,15 +68,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     data: {
       permission: 'view',
       resource: 'adminDashboard'
-    },
-  },
-  {
-    title: 'Student Management',
-    icon: 'fas fa-user-graduate',
-    link: '/pages/studentManagement',
-    data: {
-      permission: 'view',
-      resource: 'studentManagement'
     },
   },
   {
