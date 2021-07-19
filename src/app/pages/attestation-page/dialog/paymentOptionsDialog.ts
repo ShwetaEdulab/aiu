@@ -29,7 +29,12 @@ template: `
   </div>
   </nb-card-header>
   <nb-card-body>
-    <div *ngIf="show_buttons == true">
+    <div class="row">
+      <div class="col-md-12">
+        <h4>Currently we are not accepeting any applictions.</h4>
+      </div>
+    </div>
+    <!--<div *ngIf="show_buttons == true">
       <div class="row">
         <div class="col-md-12">
           <h4>Obtain AIU Equivalence certificate</h4>
@@ -72,7 +77,7 @@ template: `
       <div class="col-md-11">
         <h4>YOU HAVE ALREADY MADE PAYMENT !!!</h4>
       </div>
-    </div>
+    </div>-->
   </nb-card-body>
 </nb-card> 
 <div>
